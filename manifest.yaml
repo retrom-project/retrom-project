@@ -23,7 +23,8 @@
         "onscripteryuri",
         "kirikiroid2-web",
         "butterscotch",
-        "tyranoscript"
+        "tyranoscript",
+        "wasm4"
       ]
     },
     {
@@ -78,6 +79,15 @@
       "gitlink": "https://github.com/retrom-project/tyranoscript.git",
       "defaultBranch": "retrom/gc8dbfd492afd",
       "submodules": false,
+      "dependsOn": []
+    },
+    {
+      "id": "wasm4",
+      "path": "project/retrom-core/wasm4",
+      "role": "core",
+      "gitlink": "https://github.com/retrom-project/wasm4.git",
+      "defaultBranch": "main",
+      "submodules": true,
       "dependsOn": []
     }
   ]
