@@ -1,0 +1,4 @@
+interface:
+  display_name: "Retrom PFB Workflow"
+  short_description: "在隔离 worktree 中开发和验证 Retrom PFB"
+  default_prompt: "使用 $retrom-pfb-workflow 在隔离的 Retrom PFB worktree 中完成这项开发并验证。"

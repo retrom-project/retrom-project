@@ -1,0 +1,15 @@
+/.worktree/
+
+# Child repositories are independent Git repositories. The management
+# repository tracks only the directory skeleton under project/.
+/project/*
+!/project/.gitkeep
+!/project/retrom-core/
+!/project/retrom-other/
+/project/retrom-core/*
+!/project/retrom-core/.gitkeep
+/project/retrom-other/*
+!/project/retrom-other/.gitkeep
+
+__pycache__/
+*.py[cod]
