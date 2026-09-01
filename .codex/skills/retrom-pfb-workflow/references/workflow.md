@@ -51,7 +51,9 @@ git -C project/retrom-runtime status --short
 
 ## 3. 准备 worktree
 
-只使用用户指定、仓库已有约定或能从任务明确推断的分支和 base ref。下面的尖括号是占位符，执行前必须替换成已确认的值。先把根目录保存为绝对路径，避免 `git -C` 导致相对路径落到错误位置：
+每个新 PFB 开发分支的基准都固定为 `manifest.yaml` 对应仓库 `defaultBranch` 的最新远端提交。`project/` 下的 checkout 仅用于管理共享 Git 仓库和 worktree；不得使用其当前分支、`HEAD` 或工作区内容作为 PFB 分支基准。
+
+下面的尖括号是占位符，执行前必须替换成 manifest 或已确认的值。先把根目录保存为绝对路径，避免 `git -C` 导致相对路径落到错误位置：
 
 ```bash
 RETROM_PROJECT_ROOT="$(pwd -P)"
@@ -59,25 +61,31 @@ PFB_WORKSPACE="$RETROM_PROJECT_ROOT/.worktree/<pfb>"
 mkdir -p "$PFB_WORKSPACE/project/retrom-core" "$PFB_WORKSPACE/project/retrom-other"
 ```
 
-为已有分支创建 worktree：
+针对每个待纳入的仓库：
+
+1. 从 manifest 找到其 `path`、`gitlink` 和 `defaultBranch`。
+2. 确认仓库中用于该 `gitlink` 的远端；通常是 `origin`，但不要仅凭名称猜测，应用 `git remote -v` 核对 URL。
+3. 显式抓取 manifest 的默认分支，并解析刚抓取到的远端 ref：
 
 ```bash
-git -C "$RETROM_PROJECT_ROOT/project/retrom" worktree add \
-  "$PFB_WORKSPACE/project/retrom" <existing-retrom-branch>
-git -C "$RETROM_PROJECT_ROOT/project/retrom-runtime" worktree add \
-  "$PFB_WORKSPACE/project/retrom-runtime" <existing-runtime-branch>
-git -C "$RETROM_PROJECT_ROOT/project/retrom-core/<core-repository>" worktree add \
-  "$PFB_WORKSPACE/project/retrom-core/<core-repository>" <existing-core-branch>
+git -C "$RETROM_PROJECT_ROOT/<manifest-path>" fetch <manifest-remote> \
+  +refs/heads/<manifest-default-branch>:refs/remotes/<manifest-remote>/<manifest-default-branch>
+git -C "$RETROM_PROJECT_ROOT/<manifest-path>" rev-parse --verify \
+  refs/remotes/<manifest-remote>/<manifest-default-branch>
 ```
 
-只有任务授权创建新分支且 base ref 已明确时，才使用：
+4. 使用符合该仓库约定的 PFB 开发分支名，从这个远端 ref 创建 worktree：
 
 ```bash
-git -C "$RETROM_PROJECT_ROOT/project/retrom" worktree add \
-  -b <new-retrom-branch> "$PFB_WORKSPACE/project/retrom" <retrom-base-ref>
+git -C "$RETROM_PROJECT_ROOT/<manifest-path>" worktree add \
+  -b <new-development-branch> \
+  "$PFB_WORKSPACE/<manifest-path>" \
+  refs/remotes/<manifest-remote>/<manifest-default-branch>
 ```
 
-其余仓库采用同样模式。core 分支还必须符合 Retrom 当前的 fork/branch policy；不要为了绕过校验临时更改策略。
+例如，manifest 中 Retrom 的 `defaultBranch` 为 `master` 时，应先抓取并从 `refs/remotes/origin/master` 创建其 PFB 开发分支；基线 `project/retrom` 当前检出了什么分支不影响结果。
+
+其余仓库采用同样模式。core 分支还必须符合当前 fork/branch policy；不要为了绕过校验临时更改策略。若目标开发分支已存在于本地或其他 worktree，先确认它确实属于同一个 PFB。恢复已有 PFB 可以继续使用其原开发分支；不要为了追随新主线而静默重建、变基或覆盖已有工作。
 
 创建后对每个目录执行：
 
@@ -88,6 +96,8 @@ git -C "$PFB_WORKSPACE/project/retrom" status --short
 ```
 
 对 runtime 和 core 重复检查，并用 `realpath` 确认所有 toplevel 都是 `.worktree/<pfb>/project/` 的子路径。不要仅依赖相似的字符串前缀。
+
+对每个新建 worktree 记录创建时的 base commit，并确认它等于创建前解析的 `refs/remotes/<manifest-remote>/<manifest-default-branch>`。这能证明 PFB 来自 manifest 主线的最新抓取结果，而不是基线 checkout 当前分支。
 
 ## 4. 阅读仓库约束
 

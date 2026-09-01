@@ -14,14 +14,16 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 目录下
 ## 开始前
 
 1. 找到包含 `manifest.yaml` 和基线 `project/retrom/`、`project/retrom-runtime/` 等仓库的 `retrom-project` 根目录。
-2. 确认 PFB 名称、涉及的仓库、各仓库目标分支或基准 ref。先运行只读的 `git worktree list --porcelain`、`git branch --show-current` 和 `git status --short` 了解现状。
-3. 若 PFB 名称、分支基准或应纳入的仓库会实质改变结果，且无法从用户请求与仓库状态可靠推断，先向用户确认。
-4. 使用已有且匹配的 `.worktree/<pfb>/project/`；不要静默复用分支错误、来源不明或带有无关改动的 worktree。
-5. 编辑每个仓库前，读取该仓库适用的 `AGENTS.md`。处理 core fork 时也读取 `retrom-fork.json` 和仓库规定的候选构建接口。
+2. 确认 PFB 名称、涉及的仓库和各仓库的开发分支名称。先运行只读的 `git worktree list --porcelain`、`git branch --show-current` 和 `git status --short` 了解现状。
+3. 从 `manifest.yaml` 读取每个仓库的 `path`、`gitlink` 和 `defaultBranch`。新建 PFB worktree 前先更新对应远端的 `defaultBranch`，并且只以它的最新远端提交作为开发分支基准；不得以 `project/` 中基线 checkout 当前所在的分支或 `HEAD` 作为基准。
+4. 若 PFB 名称、开发分支名称或应纳入的仓库会实质改变结果，且无法从用户请求与仓库约定可靠推断，先向用户确认。基准分支不需要猜测，它固定来自 manifest 的 `defaultBranch`。
+5. 使用已有且匹配的 `.worktree/<pfb>/project/`；不要静默复用分支错误、来源不明或带有无关改动的 worktree。
+6. 编辑每个仓库前，读取该仓库适用的 `AGENTS.md`。处理 core fork 时也读取 `retrom-fork.json` 和仓库规定的候选构建接口。
 
 ## 隔离原则
 
 - 进入 `.worktree/<pfb>/project/` 后再开展开发；所有待修改文件必须位于其子仓库中。
+- `project/` checkout 只作为 Git worktree 的管理入口和对象库使用，不是 PFB 开发分支的代码基准。即使它当前处于其他分支、detached HEAD 或落后于远端，也必须从 manifest `defaultBranch` 的最新远端提交创建 PFB 开发分支。
 - 在每次编辑前核对目标文件的规范化绝对路径确实位于 `.worktree/<pfb>/project/` 下。
 - 将 PFB 的 `RUNTIME_ROOT` 和 `CORE_ROOTS` 只指向该 PFB 目录里的 worktree，不要指向根目录下的基线仓库。
 - 保留基线 checkout 中已有的用户改动。必要时在开发前后对基线仓库运行只读的 `git status --short`，用结果证明没有新增工作区修改。
@@ -42,7 +44,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 目录下
 
 ## 权限与清理边界
 
-- 用户要求“使用 PFB 开发”时，可以把创建所需 worktree 和运行 PFB 命令视为正常实施步骤；但不要猜测会改变开发方向的基准分支。
+- 用户要求“使用 PFB 开发”时，可以把更新 manifest `defaultBranch`、从其最新远端提交创建所需 worktree，以及运行 PFB 命令视为正常实施步骤；不要从基线 checkout 的当前分支派生 PFB 开发分支。
 - 不要自动提交、推送、合并或删除分支，除非用户请求包含这些操作。
 - `pfb-destroy` 不会删除 Git worktree。不要用递归删除清理 worktree；只有用户明确要求清理、且已确认目标路径和工作区状态后，才使用 Git 的 worktree removal 流程。
 - 标准 `make dev` 监听 `localhost:4000`，PFB 共享网关监听 `localhost:3000`，两者可以并行运行。处理其他冲突时只停止任务范围内明确属于当前 PFB 的进程；不要擅自终止基线工程或其他 PFB。
