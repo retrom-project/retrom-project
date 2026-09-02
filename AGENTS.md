@@ -34,10 +34,11 @@ Nested Git submodules remain owned by their parent child repository. The authori
 
 - `make init` validates existing checkouts and clones only missing repositories.
 - `make check` validates every checkout and its origin.
-- `make update` runs fetch-only updates. It must not change child branches or worktrees.
+- `make update` requires every manifest checkout to be clean, fetches every manifest `defaultBranch`, switches all baseline checkouts to their declared default, and fast-forwards them. The all-repository dirty preflight must finish before any checkout is switched.
 - `make status` reports child branches, commits, and dirty state.
 - `make install-deps` installs Retrom and retrom-runtime dependencies.
 - `make dev` forwards to Retrom and serves the standard development stack at `http://localhost:4000`.
+- `make pfb-list` reports every PFB flow's Retrom branch, creation time, effective status, PFB ID, and stable URL.
 - `make pfb-<action>` forwards the corresponding PFB command to Retrom. PFB uses port 3000.
 
 Run development, PFB, and initialization commands as the current non-root user. Never use `sudo`; Retrom intentionally rejects root/sudo dev and PFB invocations.
@@ -57,6 +58,8 @@ PFB source isolation mirrors the baseline layout below `.worktree/<pfb>/project/
 Create those directories with `git worktree add` from the corresponding baseline repository. All source edits, builds, tests, and PFB inputs for the feature belong in that named worktree. Keep `RUNTIME_ROOT` and `CORE_ROOTS` pointed at repositories inside the same PFB tree.
 
 Use the `retrom-pfb-workflow` skill under `.codex/skills/` for the complete workflow. The isolation is a working-file boundary, not an access-control mechanism: a user may explicitly ask to edit a baseline checkout.
+
+Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with each initialized PFB's read-only status command; do not infer current runtime state from directory presence or the owner-local registry alone.
 
 The root Makefile can target a PFB Retrom worktree with an override, for example:
 

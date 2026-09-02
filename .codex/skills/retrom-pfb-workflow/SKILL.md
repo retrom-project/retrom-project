@@ -14,7 +14,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 目录下
 ## 开始前
 
 1. 找到包含 `manifest.yaml` 和基线 `project/retrom/`、`project/retrom-runtime/` 等仓库的 `retrom-project` 根目录。
-2. 确认 PFB 名称、涉及的仓库和各仓库的开发分支名称。先运行只读的 `git worktree list --porcelain`、`git branch --show-current` 和 `git status --short` 了解现状。
+2. 确认 PFB 名称、涉及的仓库和各仓库的开发分支名称。先从根项目运行 `make pfb-list` 盘点已有流程，再运行只读的 `git worktree list --porcelain`、`git branch --show-current` 和 `git status --short` 了解相关仓库现状。
 3. 从 `manifest.yaml` 读取每个仓库的 `path`、`gitlink` 和 `defaultBranch`。新建 PFB worktree 前先更新对应远端的 `defaultBranch`，并且只以它的最新远端提交作为开发分支基准；不得以 `project/` 中基线 checkout 当前所在的分支或 `HEAD` 作为基准。
 4. 若 PFB 名称、开发分支名称或应纳入的仓库会实质改变结果，且无法从用户请求与仓库约定可靠推断，先向用户确认。基准分支不需要猜测，它固定来自 manifest 的 `defaultBranch`。
 5. 使用已有且匹配的 `.worktree/<pfb>/project/`；不要静默复用分支错误、来源不明或带有无关改动的 worktree。
@@ -37,6 +37,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 目录下
 遵循以下默认选择：
 
 - 仅创建任务需要的仓库 worktree；Retrom 本身始终位于 `.worktree/<pfb>/project/retrom/`。
+- 需要统一刷新全部基线 checkout 时可运行根项目的 `make update`；它只在全部 manifest 仓库 clean 时执行，并会把所有基线切换、快进到各自 `defaultBranch`。只需准备单个 PFB 仓库或需要保留基线当前分支时，显式 fetch 该仓库的 manifest 默认分支，不要运行全局 update。
 - 有 core worktree 时，同时提供该 PFB 的 `.worktree/<pfb>/project/retrom-runtime/`，因为当前 PFB 规范要求 core 与 runtime 配套。
 - 默认以 `PFB_SELECT=false` 启动，使用 PFB 专属的 `http://<actual-pfb-id>.localhost:3000` 地址，避免改变裸 `localhost:3000` 当前选中的 PFB。只有用户明确需要裸地址时才选择它。
 - 源码改变后先停止正在运行的 PFB，再重新构建和启动；只在构建输入未变化时使用 restart。

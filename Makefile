@@ -10,17 +10,18 @@ PFB_TARGETS := pfb-init pfb-validate pfb-build pfb-up pfb-use pfb-restart \
 	pfb-down pfb-status pfb-logs pfb-verify pfb-prune pfb-destroy \
 	pfb-gateway-up pfb-gateway-down
 
-.PHONY: help validate init check update status install-deps dev $(PFB_TARGETS)
+.PHONY: help validate init check update status install-deps dev pfb-list $(PFB_TARGETS)
 
 help:
 	@echo 'Retrom development workspace'
 	@echo
 	@echo '  make init          clone missing repositories from manifest.yaml'
 	@echo '  make check         validate existing checkouts and origins'
-	@echo '  make update        fetch origin refs without changing child worktrees'
+	@echo '  make update        switch clean checkouts to manifest defaults and update them'
 	@echo '  make status        show child branch, commit and dirty state'
 	@echo '  make install-deps  install Retrom and retrom-runtime dependencies'
 	@echo '  make dev           run Retrom development services on localhost:4000'
+	@echo '  make pfb-list      show all PFB development flows in this workspace'
 	@echo '  make pfb-<action>  pass a PFB action through to Retrom'
 
 validate:
@@ -33,7 +34,7 @@ check: validate
 	@$(PYTHON) scripts/workspace.py check
 
 update: validate
-	@$(PYTHON) scripts/workspace.py fetch
+	@$(PYTHON) scripts/workspace.py update
 
 status: validate
 	@$(PYTHON) scripts/workspace.py status
@@ -44,6 +45,9 @@ install-deps: init
 
 dev:
 	@$(MAKE) -C "$(RETROM_DIR)" dev
+
+pfb-list:
+	@$(PYTHON) scripts/pfb_list.py
 
 $(PFB_TARGETS):
 	@$(MAKE) -C "$(RETROM_DIR)" $@

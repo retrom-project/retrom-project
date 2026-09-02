@@ -16,7 +16,9 @@ make dev
 
 Standard development is available at `http://localhost:4000`. PFB environments use the shared gateway on `http://localhost:3000` and named addresses such as `http://<pfb-id>.localhost:3000`, so both modes can run at the same time.
 
-Run `make status` to inspect every checkout. `make update` only fetches remote refs; it never checks out, pulls, merges, rebases, commits, or discards changes in child repositories.
+Run `make status` to inspect every baseline checkout. `make update` first requires all manifest repositories to be clean, then fetches each manifest `defaultBranch`, switches every baseline checkout to that branch, and fast-forwards it to the latest remote commit. If any repository is dirty, divergent, or has its default branch checked out in another worktree, the update fails before switching any checkout.
+
+Run `make pfb-list` to inspect every PFB development flow below `.worktree/`. The table includes its Retrom branch, creation time, effective status, PFB ID, and stable `http://<pfb-id>.localhost:3000` URL. Effective status is obtained from that PFB's own read-only status command, so a stale candidate is reported as `STALE` even if the owner-local registry still says `RUNNING`.
 
 ## Layout
 
@@ -34,6 +36,6 @@ retrom-project/
 └── AGENTS.md            # development workflow and ownership rules
 ```
 
-`manifest.yaml` uses JSON syntax, which is valid YAML 1.2. This lets the bootstrap script parse it with Python's standard library before any additional dependencies are installed. Its `gitlink` fields are clone URLs, not root-repository submodules.
+`manifest.yaml` uses JSON syntax, which is valid YAML 1.2. This lets the bootstrap script parse it with Python's standard library before any additional dependencies are installed. Its `gitlink` fields are SSH clone URLs, not root-repository submodules; initialize your GitHub SSH credentials before running `make init`.
 
 Do not use `root` or `sudo` for `make dev` or PFB commands. Retrom rejects those invocations to prevent root-owned generated files and containers.

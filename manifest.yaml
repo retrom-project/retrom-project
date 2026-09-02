@@ -5,7 +5,7 @@
       "id": "retrom",
       "path": "project/retrom",
       "role": "application",
-      "gitlink": "https://github.com/retrom-project/retrom.git",
+      "gitlink": "git@github.com:retrom-project/retrom.git",
       "defaultBranch": "master",
       "submodules": false,
       "dependsOn": ["retrom-runtime"]
@@ -14,7 +14,7 @@
       "id": "retrom-runtime",
       "path": "project/retrom-runtime",
       "role": "runtime",
-      "gitlink": "https://github.com/retrom-project/retrom-runtime.git",
+      "gitlink": "git@github.com:retrom-project/retrom-runtime.git",
       "defaultBranch": "master",
       "submodules": false,
       "dependsOn": [
@@ -31,7 +31,7 @@
       "id": "player",
       "path": "project/retrom-core/Player",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/Player.git",
+      "gitlink": "git@github.com:retrom-project/Player.git",
       "defaultBranch": "retrom/0.8.1.1",
       "submodules": true,
       "dependsOn": []
@@ -40,7 +40,7 @@
       "id": "mkxp-z-libretro-emscripten",
       "path": "project/retrom-core/mkxp-z-libretro-emscripten",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/mkxp-z-libretro-emscripten.git",
+      "gitlink": "git@github.com:retrom-project/mkxp-z-libretro-emscripten.git",
       "defaultBranch": "retrom/f2efc98",
       "submodules": true,
       "dependsOn": []
@@ -49,7 +49,7 @@
       "id": "onscripteryuri",
       "path": "project/retrom-core/OnscripterYuri",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/OnscripterYuri.git",
+      "gitlink": "git@github.com:retrom-project/OnscripterYuri.git",
       "defaultBranch": "retrom/0.7.7beta",
       "submodules": true,
       "dependsOn": []
@@ -58,7 +58,7 @@
       "id": "kirikiroid2-web",
       "path": "project/retrom-core/kirikiroid2-web",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/kirikiroid2-web.git",
+      "gitlink": "git@github.com:retrom-project/kirikiroid2-web.git",
       "defaultBranch": "retrom/g338d2029f169",
       "submodules": true,
       "dependsOn": []
@@ -67,7 +67,7 @@
       "id": "butterscotch",
       "path": "project/retrom-core/Butterscotch",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/Butterscotch.git",
+      "gitlink": "git@github.com:retrom-project/Butterscotch.git",
       "defaultBranch": "retrom/gae2602f1f83c",
       "submodules": false,
       "dependsOn": []
@@ -76,7 +76,7 @@
       "id": "tyranoscript",
       "path": "project/retrom-core/tyranoscript",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/tyranoscript.git",
+      "gitlink": "git@github.com:retrom-project/tyranoscript.git",
       "defaultBranch": "retrom/gc8dbfd492afd",
       "submodules": false,
       "dependsOn": []
@@ -85,7 +85,7 @@
       "id": "wasm4",
       "path": "project/retrom-core/wasm4",
       "role": "core",
-      "gitlink": "https://github.com/retrom-project/wasm4.git",
+      "gitlink": "git@github.com:retrom-project/wasm4.git",
       "defaultBranch": "main",
       "submodules": true,
       "dependsOn": []

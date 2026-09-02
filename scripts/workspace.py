@@ -172,11 +172,84 @@ def check_workspace(repositories: list[dict[str, object]]) -> None:
         print(f"ready  {repo['id']:<28} {path.relative_to(ROOT)}")
 
 
-def fetch_repositories(repositories: list[dict[str, object]]) -> None:
-    for repo in repositories:
-        path = validate_checkout(repo)
-        print(f"fetch  {repo['id']:<28} {path.relative_to(ROOT)}")
-        run_git(path, "fetch", "--prune", "origin")
+def update_repositories(repositories: list[dict[str, object]]) -> None:
+    checkouts = [(repo, validate_checkout(repo)) for repo in repositories]
+    dirty = [
+        f"{repo['id']} ({path.relative_to(ROOT)})"
+        for repo, path in checkouts
+        if run_git(path, "status", "--porcelain=v1", "-z").stdout
+    ]
+    if dirty:
+        raise WorkspaceError(
+            "make update requires every manifest checkout to be clean; dirty: "
+            + ", ".join(dirty)
+        )
+
+    for repo, path in checkouts:
+        branch = str(repo["defaultBranch"])
+        remote_ref = f"refs/remotes/origin/{branch}"
+        refspec = f"+refs/heads/{branch}:{remote_ref}"
+        print(f"fetch  {repo['id']:<28} origin/{branch}")
+        run_git(path, "fetch", "--prune", "origin", refspec)
+        run_git(path, "rev-parse", "--verify", remote_ref)
+
+    for repo, path in checkouts:
+        branch = str(repo["defaultBranch"])
+        _validate_default_branch_update(path, branch)
+
+    for repo, path in checkouts:
+        branch = str(repo["defaultBranch"])
+        remote_ref = f"refs/remotes/origin/{branch}"
+        if _local_branch_exists(path, branch):
+            run_git(path, "switch", branch)
+        else:
+            run_git(path, "switch", "--track", "-c", branch, remote_ref)
+        run_git(path, "merge", "--ff-only", remote_ref)
+        if repo["submodules"]:
+            run_git(path, "submodule", "sync", "--recursive")
+            run_git(path, "submodule", "update", "--init", "--recursive")
+        head = run_git(path, "rev-parse", "--short=10", "HEAD").stdout.strip()
+        print(f"update {repo['id']:<28} {branch} {head}")
+
+
+def _validate_default_branch_update(path: Path, branch: str) -> None:
+    if not _local_branch_exists(path, branch):
+        return
+    target_ref = f"refs/heads/{branch}"
+    for worktree, checked_out_ref in _worktree_branches(path):
+        if checked_out_ref == target_ref and worktree.resolve() != path.resolve():
+            raise WorkspaceError(
+                f"default branch {branch} is checked out in another worktree: {worktree}"
+            )
+
+    remote_ref = f"refs/remotes/origin/{branch}"
+    local_is_ancestor = run_git(
+        path, "merge-base", "--is-ancestor", target_ref, remote_ref, check=False
+    ).returncode == 0
+    remote_is_ancestor = run_git(
+        path, "merge-base", "--is-ancestor", remote_ref, target_ref, check=False
+    ).returncode == 0
+    if not local_is_ancestor and not remote_is_ancestor:
+        raise WorkspaceError(
+            f"default branch has diverged from origin/{branch}: {path.relative_to(ROOT)}"
+        )
+
+
+def _local_branch_exists(path: Path, branch: str) -> bool:
+    return run_git(
+        path, "show-ref", "--verify", "--quiet", f"refs/heads/{branch}", check=False
+    ).returncode == 0
+
+
+def _worktree_branches(path: Path) -> list[tuple[Path, str]]:
+    result: list[tuple[Path, str]] = []
+    worktree: Path | None = None
+    for line in run_git(path, "worktree", "list", "--porcelain").stdout.splitlines():
+        if line.startswith("worktree "):
+            worktree = Path(line.removeprefix("worktree "))
+        elif line.startswith("branch ") and worktree is not None:
+            result.append((worktree, line.removeprefix("branch ")))
+    return result
 
 
 def show_status(repositories: list[dict[str, object]]) -> None:
@@ -197,7 +270,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "command",
-        choices=("validate", "init", "check", "fetch", "status"),
+        choices=("validate", "init", "check", "update", "status"),
         help="operation to perform",
     )
     return parser.parse_args()
@@ -213,8 +286,8 @@ def main() -> int:
             clone_missing(repositories)
         elif args.command == "check":
             check_workspace(repositories)
-        elif args.command == "fetch":
-            fetch_repositories(repositories)
+        elif args.command == "update":
+            update_repositories(repositories)
         elif args.command == "status":
             show_status(repositories)
     except (WorkspaceError, subprocess.CalledProcessError) as error:

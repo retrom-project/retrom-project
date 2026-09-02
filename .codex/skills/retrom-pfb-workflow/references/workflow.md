@@ -29,7 +29,13 @@ retrom-project/
 
 ## 2. 只读盘点
 
-从 `retrom-project` 根目录开始，针对每个可能涉及的基线仓库检查：
+从 `retrom-project` 根目录开始，先列出当前 workspace 的全部 PFB 流程：
+
+```bash
+make pfb-list
+```
+
+输出至少包含 PFB 名称、Retrom 分支、初始化时间、有效状态、实际 PFB ID 和稳定访问 URL。状态由每个 PFB 的只读 `pfb-status` 计算，不以目录是否存在或全局 registry 的缓存状态代替；`STALE` 表示源码或候选锁已经变化。随后针对每个可能涉及的基线仓库检查：
 
 ```bash
 git -C project/retrom worktree list --porcelain
@@ -52,6 +58,8 @@ git -C project/retrom-runtime status --short
 ## 3. 准备 worktree
 
 每个新 PFB 开发分支的基准都固定为 `manifest.yaml` 对应仓库 `defaultBranch` 的最新远端提交。`project/` 下的 checkout 仅用于管理共享 Git 仓库和 worktree；不得使用其当前分支、`HEAD` 或工作区内容作为 PFB 分支基准。
+
+若明确需要统一刷新全部基线，可在所有 manifest checkout 都 clean 时运行根项目的 `make update`。该命令先完成全仓 dirty 检查，再 fetch、检查可快进性，最后把所有基线切换并快进到各自 `defaultBranch`；任一仓库 dirty 时不会切换任何仓库。若只需创建涉及少量仓库的 PFB，或需要保留其他基线当前分支，则不要运行全局 update，按下方步骤只 fetch 所需仓库。
 
 下面的尖括号是占位符，执行前必须替换成 manifest 或已确认的值。先把根目录保存为绝对路径，避免 `git -C` 导致相对路径落到错误位置：
 
