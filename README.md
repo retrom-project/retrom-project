@@ -36,6 +36,6 @@ retrom-project/
 └── AGENTS.md            # development workflow and ownership rules
 ```
 
-`manifest.yaml` uses JSON syntax, which is valid YAML 1.2. This lets the bootstrap script parse it with Python's standard library before any additional dependencies are installed. Its `gitlink` fields are SSH clone URLs, not root-repository submodules; initialize your GitHub SSH credentials before running `make init`.
+`manifest.yaml` uses JSON syntax, which is valid YAML 1.2. This lets the bootstrap script parse it with Python's standard library before any additional dependencies are installed. Its `gitlink` fields are SSH clone URLs, not root-repository submodules; initialize your GitHub SSH credentials before running `make init`. A repository may set `shallowClone` to `true` to clone its configured branch and recursive submodules with depth 1. This only affects newly created checkouts; it does not convert an existing full clone into a shallow clone.
 
 Do not use `root` or `sudo` for `make dev` or PFB commands. Retrom rejects those invocations to prevent root-owned generated files and containers.

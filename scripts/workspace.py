@@ -67,6 +67,10 @@ def validate_repositories(repositories: list[object]) -> None:
                 raise WorkspaceError(
                     f"repositories[{index}].{field} must be {expected_type.__name__}"
                 )
+        if "shallowClone" in repo and not isinstance(repo["shallowClone"], bool):
+            raise WorkspaceError(
+                f"repositories[{index}].shallowClone must be bool"
+            )
 
         repo_id = str(repo["id"])
         repo_path = str(repo["path"])
@@ -159,8 +163,12 @@ def clone_missing(repositories: list[dict[str, object]]) -> None:
             str(repo["defaultBranch"]),
             "--single-branch",
         ]
+        if repo.get("shallowClone", False):
+            command.extend(["--depth", "1"])
         if repo["submodules"]:
             command.append("--recurse-submodules")
+            if repo.get("shallowClone", False):
+                command.append("--shallow-submodules")
         command.extend([str(repo["gitlink"]), str(path)])
         print(f"clone  {repo['id']:<28} {repo['gitlink']}")
         subprocess.run(command, cwd=ROOT, check=True)
@@ -207,7 +215,10 @@ def update_repositories(repositories: list[dict[str, object]]) -> None:
         run_git(path, "merge", "--ff-only", remote_ref)
         if repo["submodules"]:
             run_git(path, "submodule", "sync", "--recursive")
-            run_git(path, "submodule", "update", "--init", "--recursive")
+            submodule_args = ["submodule", "update", "--init", "--recursive"]
+            if repo.get("shallowClone", False):
+                submodule_args.extend(["--depth", "1"])
+            run_git(path, *submodule_args)
         head = run_git(path, "rev-parse", "--short=10", "HEAD").stdout.strip()
         print(f"update {repo['id']:<28} {branch} {head}")
 

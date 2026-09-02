@@ -43,6 +43,7 @@
       "gitlink": "git@github.com:retrom-project/mkxp-z-libretro-emscripten.git",
       "defaultBranch": "retrom/f2efc98",
       "submodules": true,
+      "shallowClone": true,
       "dependsOn": []
     },
     {

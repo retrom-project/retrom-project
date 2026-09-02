@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 MODULE_PATH = Path(__file__).with_name("workspace.py")
@@ -13,6 +14,51 @@ SPEC = importlib.util.spec_from_file_location("workspace_under_test", MODULE_PAT
 assert SPEC is not None and SPEC.loader is not None
 workspace = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(workspace)
+
+
+class WorkspaceCloneTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        self.original_root = workspace.ROOT
+        workspace.ROOT = self.root
+
+    def tearDown(self) -> None:
+        workspace.ROOT = self.original_root
+        self.temporary.cleanup()
+
+    def test_shallow_clone_includes_shallow_submodules(self) -> None:
+        repository = {
+            "id": "sample",
+            "path": "project/sample",
+            "role": "core",
+            "gitlink": "git@example.invalid:sample.git",
+            "defaultBranch": "main",
+            "submodules": True,
+            "shallowClone": True,
+            "dependsOn": [],
+        }
+
+        with patch.object(workspace.subprocess, "run") as run:
+            workspace.clone_missing([repository])
+
+        run.assert_called_once_with(
+            [
+                "git",
+                "clone",
+                "--branch",
+                "main",
+                "--single-branch",
+                "--depth",
+                "1",
+                "--recurse-submodules",
+                "--shallow-submodules",
+                "git@example.invalid:sample.git",
+                str(self.root / "project/sample"),
+            ],
+            cwd=self.root,
+            check=True,
+        )
 
 
 class WorkspaceUpdateTests(unittest.TestCase):
@@ -56,6 +102,25 @@ class WorkspaceUpdateTests(unittest.TestCase):
         self.assertEqual(self._git(checkout, "branch", "--show-current"), "master")
         self.assertEqual(self._git(checkout, "rev-parse", "HEAD"), latest_remote)
         self.assertEqual(self._git(checkout, "status", "--porcelain=v1"), "")
+
+    def test_update_keeps_shallow_submodule_depth(self) -> None:
+        repo, publisher, checkout = self._create_repository("sample")
+        repo["submodules"] = True
+        repo["shallowClone"] = True
+        self._publish(publisher, "latest")
+
+        with patch.object(workspace, "run_git", wraps=workspace.run_git) as run_git:
+            workspace.update_repositories([repo])
+
+        run_git.assert_any_call(
+            checkout,
+            "submodule",
+            "update",
+            "--init",
+            "--recursive",
+            "--depth",
+            "1",
+        )
 
     def test_diverged_default_branch_fails_before_switch(self) -> None:
         repo, publisher, checkout = self._create_repository("sample")
@@ -127,6 +192,23 @@ class WorkspaceUpdateTests(unittest.TestCase):
 
 
 class ManifestTests(unittest.TestCase):
+    def test_shallow_clone_must_be_boolean(self) -> None:
+        repository = {
+            "id": "sample",
+            "path": "project/sample",
+            "role": "core",
+            "gitlink": "git@example.invalid:sample.git",
+            "defaultBranch": "main",
+            "submodules": True,
+            "shallowClone": 1,
+            "dependsOn": [],
+        }
+
+        with self.assertRaisesRegex(
+            workspace.WorkspaceError, "shallowClone must be bool"
+        ):
+            workspace.validate_repositories([repository])
+
     def test_clone_links_use_ssh(self) -> None:
         manifest_path = MODULE_PATH.parents[1] / "manifest.yaml"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
