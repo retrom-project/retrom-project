@@ -47,7 +47,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 目录下
 
 - 用户要求“使用 PFB 开发”时，可以把更新 manifest `defaultBranch`、从其最新远端提交创建所需 worktree，以及运行 PFB 命令视为正常实施步骤；不要从基线 checkout 的当前分支派生 PFB 开发分支。
 - 不要自动提交、推送、合并或删除分支，除非用户请求包含这些操作。
-- `pfb-destroy` 不会删除 Git worktree。不要用递归删除清理 worktree；只有用户明确要求清理、且已确认目标路径和工作区状态后，才使用 Git 的 worktree removal 流程。
+- `pfb-destroy` 不会删除 Git worktree。用户明确要求将 PFB 与 worktree 一并下线时，优先从根项目运行 `make pfb-remove PFB=<name>`：它会先验证全部 manifest worktree 均 clean，显示实际 ID 与精确路径，并只在交互输入 `y` 后销毁 PFB、通过 Git 移除 worktree。不得绕过其检查使用强制或递归文件删除；该命令保留 Git 分支与共享网关。
 - 标准 `make dev` 监听 `localhost:4000`，PFB 共享网关监听 `localhost:3000`，两者可以并行运行。处理其他冲突时只停止任务范围内明确属于当前 PFB 的进程；不要擅自终止基线工程或其他 PFB。
 
 ## 交付说明

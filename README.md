@@ -20,6 +20,14 @@ Run `make status` to inspect every baseline checkout. `make update` first requir
 
 Run `make pfb-list` to inspect every PFB development flow below `.worktree/`. The table includes its Retrom branch, creation time, effective status, PFB ID, and stable `http://<pfb-id>.localhost:3000` URL. Effective status is obtained from that PFB's own read-only status command, so a stale candidate is reported as `STALE` even if the owner-local registry still says `RUNNING`.
 
+To retire a PFB and remove its source worktrees in one operation, run:
+
+```bash
+make pfb-remove PFB=<name>
+```
+
+The command first validates the PFB identity and every manifest worktree below `.worktree/<name>/project/`. It stops without changing runtime state if any worktree is dirty. For a clean PFB it displays the actual PFB ID and exact removal list, then requires an interactive `y` before destroying that PFB's containers, volumes, registry/generated state and removing its Git worktrees. Local Git branches and the shared gateway are preserved.
+
 ## Layout
 
 ```text

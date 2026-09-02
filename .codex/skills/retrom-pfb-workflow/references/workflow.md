@@ -222,7 +222,17 @@ make -C .worktree/<pfb>/project/retrom pfb-destroy PFB=<pfb> CONFIRM=<actual-pfb
 
 `pfb-destroy` 清理当前 PFB 的容器、卷、注册记录和 `.pfb/` 状态，但不会移除 Git worktree 或分支。
 
-只有用户进一步要求清理源码 worktree 时才执行 Git 清理：
+用户明确要求将 PFB 和源码 worktree 一并下线时，从根项目使用统一清理入口：
+
+```bash
+make pfb-remove PFB=<pfb>
+```
+
+该命令在产生任何销毁副作用前，先验证 PFB 名称、由名称派生的实际 ID、spec 中的 source root、manifest 基线仓库归属，以及该 PFB 下全部 manifest worktree 的状态。只要任一 worktree 有 tracked、untracked 或 submodule 改动，命令就直接失败，PFB 不会被停止或销毁。全部 clean 后，命令显示实际 PFB ID、分支和精确移除路径；只有操作者交互输入 `y` 才会继续。确认后它调用 Retrom 的 `pfb-destroy`，再逐个执行 Git worktree removal，并保留本地分支和共享网关。
+
+不要向该入口传 `CONFIRM`；内部确认值来自已经校验的 spec。`CONFIRM=<actual-pfb-id>` 仍只是直接调用底层 `pfb-destroy` 时的接口。
+
+只有在统一入口不可用、且用户仍明确要求手工清理源码 worktree 时，才执行以下 Git 清理：
 
 1. 对每个 worktree 运行 `git status --short`，若有修改则停止并报告。
 2. 确认目标是 `.worktree/<pfb>/project/` 下的精确仓库路径。

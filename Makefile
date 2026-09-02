@@ -10,7 +10,7 @@ PFB_TARGETS := pfb-init pfb-validate pfb-build pfb-up pfb-use pfb-restart \
 	pfb-down pfb-status pfb-logs pfb-verify pfb-prune pfb-destroy \
 	pfb-gateway-up pfb-gateway-down
 
-.PHONY: help validate init check update status install-deps dev pfb-list $(PFB_TARGETS)
+.PHONY: help validate init check update status install-deps dev pfb-list pfb-remove $(PFB_TARGETS)
 
 help:
 	@echo 'Retrom development workspace'
@@ -22,6 +22,7 @@ help:
 	@echo '  make install-deps  install Retrom and retrom-runtime dependencies'
 	@echo '  make dev           run Retrom development services on localhost:4000'
 	@echo '  make pfb-list      show all PFB development flows in this workspace'
+	@echo '  make pfb-remove    destroy one PFB and remove all of its clean worktrees'
 	@echo '  make pfb-<action>  pass a PFB action through to Retrom'
 
 validate:
@@ -48,6 +49,9 @@ dev:
 
 pfb-list:
 	@$(PYTHON) scripts/pfb_list.py
+
+pfb-remove:
+	@$(PYTHON) scripts/pfb_remove.py --pfb "$(PFB)"
 
 $(PFB_TARGETS):
 	@$(MAKE) -C "$(RETROM_DIR)" $@
