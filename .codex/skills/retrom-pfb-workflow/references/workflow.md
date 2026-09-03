@@ -11,7 +11,7 @@ retrom-project/
 ├── .worktree/
 │   └── <pfb>/
 │       └── project/
-│           ├── retrom/
+│           ├── retrom/                 # .pfb/workspace 保存该PFB全部持久数据/cache
 │           ├── retrom-runtime/
 │           ├── retrom-core/<core-repository>/
 │           └── retrom-other/<support-repository>/
@@ -25,7 +25,9 @@ retrom-project/
 
 根仓库只管理环境元数据，`project/` 和 `.worktree/` 中的源码由各自子仓库管理。当前 PFB 命令消费已有 worktree，但不创建、切换或删除 Git worktree。Agent 负责先准备目录，再从 `.worktree/<pfb>/project/retrom/` 调用 PFB。
 
-物理上位于用户级状态目录或 Docker 中的内容包括 PFB 注册表、共享网关、网络、镜像、命名卷和缓存。它们可能由命令正常创建或更新，因此本工作流保证的是源代码与构建输入的工作区隔离，以及运行时资源的 PFB 逻辑隔离。
+每个 PFB 的数据库/CAS/上传、已物化依赖和构建缓存物理位于 Retrom worktree 的 `.pfb/workspace/`，并与源码一起 bind mount 到开发容器。用户级注册表、共享网关、网络和工具链镜像仍属于主机全局状态。旧版 PFB 的 Docker 命名卷只作为待显式迁移/清理的兼容来源，不再是新运行实例的持久存储。
+
+`.worktree/` 必须放在支持 POSIX owner/mode、SQLite lock、同目录 hard-link 与 fsync 的 Linux 本地文件系统。WSL 用户不得把它放在 `/mnt/c` 等 Windows 文件系统挂载下。
 
 ## 2. 只读盘点
 
@@ -152,7 +154,7 @@ make -C .worktree/<pfb>/project/retrom pfb-init \
 
 多个 core 使用同一个合法 JSON object。`core_id` 必须匹配当前 PFB 规范，并与 fork 配置一致。只要存在 core，就必须同时提供 runtime root。
 
-初始化后检查 `.worktree/<pfb>/project/retrom/.pfb/spec.json`，确认每个 source root 和记录的分支都属于当前 PFB worktree。`.pfb/` 是生成状态，不应提交。
+初始化后检查 `.worktree/<pfb>/project/retrom/.pfb/spec.json`，确认每个 source root 和记录的分支都属于当前 PFB worktree；同时确认 `.pfb/workspace/.retrom-pfb-workspace.json` 的 PFB ID一致。`.pfb/` 是生成状态，不应提交。
 
 ## 6. 首次构建与启动
 
@@ -173,6 +175,20 @@ http://<actual-pfb-id>.localhost:3000
 
 只有用户明确要求让裸 `http://localhost:3000` 指向当前 PFB 时，才执行选择操作或以选择模式启动。共享网关绑定 `127.0.0.1:3000`；标准 `make dev` 使用 `127.0.0.1:4000`，两者可以同时运行。
 
+PFB v2 直接 bind mount Retrom/runtime 源码及 `.pfb/workspace/`。`pfb-build` 只重建发生变化的 core/runtime候选与缺失的工具链镜像；package lock/toolchain不变时复用 workspace中的 Node/npm cache。`pfb-up/restart` 不隐式执行 Compose image build，也不切换数据库或要求重新上传游戏。
+
+### 6.1 旧命名卷迁移
+
+若已有 PFB 在 workspace 缺失时仍存在 legacy data volume，`init/build/up` 会以 `PFB_WORKSPACE_MIGRATION_REQUIRED` 失败。只对当前任务管理的 PFB执行：
+
+```bash
+make -C .worktree/<pfb>/project/retrom pfb-down PFB=<pfb>
+make -C .worktree/<pfb>/project/retrom pfb-migrate-storage \
+  PFB=<pfb> CONFIRM=<actual-pfb-id>
+```
+
+迁移器只读 state 当前 `dataCompatibilityDigest` 指向的数据卷，并选择同一PFB最新的Node/runtime-node/Next/Go缓存卷；业务数据拒绝symlink，缓存的合法symlink路径和target参与摘要。每个源/目标的文件内容与目录摘要一致后，staging才原子重命名为`.pfb/workspace/`。旧卷不会删除；不要手工删除、改名或迁移其他PFB的卷。迁移后先执行SQLite quick/integrity check，再build/up。
+
 ## 7. 开发迭代
 
 源码可以保持未提交状态；PFB 会把被跟踪和未跟踪文件内容及模式纳入候选指纹。每次编辑仍要确保目标绝对路径位于 `.worktree/<pfb>/project/`。
@@ -186,6 +202,17 @@ make -C .worktree/<pfb>/project/retrom pfb-up PFB=<pfb> PFB_SELECT=false
 ```
 
 当 source root、分支、工具链或配置发生变化时，在 build 前再次运行 `pfb-validate`。`pfb-restart` 只适用于构建输入未变化、无需重新生成 candidate 的场景。
+
+`pfb-build` 必须保留并复用输入未变化且描述符仍逐文件有效的 core/runtime candidate；相同输入的第二次build不应再次执行候选构建或镜像构建。容器内Web/runtime的`npm ci`只在package/package-lock/toolchain指纹变化时运行，依赖源也只在摘要变化时同步。不要为了“获得干净环境”删除整个workspace，这会同时丢失用户上传和DB。
+
+数据库 migration兼容时继续使用上述同一workspace原地升级。若本次分支明确引入不兼容的开发期schema或数据语义，在`pfb-up`前执行：
+
+```bash
+make -C .worktree/<pfb>/project/retrom pfb-data-reset \
+  PFB=<pfb> CONFIRM=<actual-pfb-id>
+```
+
+该命令只允许停止态运行，把`home/data/dev-state`原子移动到`.pfb/retired-data/<UTC时间>/`，建立空目录并保留dependencies/cache；随后仍在同一branch/worktree/PFB ID/URL上build/up。Agent必须向用户报告归档路径。禁止用新建branch、checkout或PFB规避这一步；也不要把兼容migration误判为必须reset。
 
 运行中可用以下命令检查状态和陈旧候选：
 
@@ -220,7 +247,7 @@ make -C .worktree/<pfb>/project/retrom pfb-status PFB=<pfb> FORMAT=json
 make -C .worktree/<pfb>/project/retrom pfb-destroy PFB=<pfb> CONFIRM=<actual-pfb-id>
 ```
 
-`pfb-destroy` 清理当前 PFB 的容器、卷、注册记录和 `.pfb/` 状态，但不会移除 Git worktree 或分支。
+`pfb-destroy` 清理当前 PFB 的容器、`.pfb/workspace/`、retired data、遗留卷、注册记录和其他 `.pfb/` 状态，但不会移除 Git worktree 或分支。
 
 用户明确要求将 PFB 和源码 worktree 一并下线时，从根项目使用统一清理入口：
 

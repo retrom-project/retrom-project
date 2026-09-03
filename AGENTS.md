@@ -39,7 +39,7 @@ Nested Git submodules remain owned by their parent child repository. The authori
 - `make install-deps` installs Retrom and retrom-runtime dependencies.
 - `make dev` forwards to Retrom and serves the standard development stack at `http://localhost:4000`.
 - `make pfb-list` reports every PFB flow's Retrom branch, creation time, effective status, PFB ID, and stable URL.
-- `make pfb-remove PFB=<name>` validates that all of that PFB's manifest worktrees are clean, asks for an interactive `y`, destroys the PFB, and removes its Git worktrees while preserving branches and the shared gateway.
+- `make pfb-remove PFB=<name>` validates that all of that PFB's manifest worktrees are clean, asks for an interactive `y`, destroys the PFB (including `.pfb/workspace/` and retired data), and removes its Git worktrees while preserving branches and the shared gateway.
 - `make pfb-<action>` forwards the corresponding PFB command to Retrom. PFB uses port 3000.
 
 Run development, PFB, and initialization commands as the current non-root user. Never use `sudo`; Retrom intentionally rejects root/sudo dev and PFB invocations.
@@ -58,11 +58,15 @@ PFB source isolation mirrors the baseline layout below `.worktree/<pfb>/project/
 
 Create those directories with `git worktree add` from the corresponding baseline repository. All source edits, builds, tests, and PFB inputs for the feature belong in that named worktree. Keep `RUNTIME_ROOT` and `CORE_ROOTS` pointed at repositories inside the same PFB tree.
 
+Each initialized Retrom PFB owns persistent runtime state below its own `.pfb/workspace/`. Source, database/CAS/uploads, materialized dependencies, node_modules, Next and Go caches are bind-mounted into the development container, so rebuilding or restarting that container must retain them and keep the same PFB ID/URL. Keep the entire worktree on a Linux local filesystem with POSIX permissions, SQLite locking, hard-link, and fsync semantics; do not place it under WSL `/mnt/c` or another Windows filesystem mount.
+
+For a legacy named-volume PFB, stop only that PFB and run its `pfb-migrate-storage` command with the exact PFB ID; migration must remain scoped to that PFB, verify the copy, and retain the old volumes. Compatible database migrations run in place. When a branch intentionally introduces an incompatible development database/data change, do not create a replacement branch, worktree, or PFB: stop the existing PFB and use `pfb-data-reset` with the exact ID before startup. That command archives `home/data/dev-state` below `.pfb/retired-data/` and preserves dependency/build caches; report the archive path.
+
 Use the `retrom-pfb-workflow` skill under `.codex/skills/` for the complete workflow. The isolation is a working-file boundary, not an access-control mechanism: a user may explicitly ask to edit a baseline checkout.
 
 Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with each initialized PFB's read-only status command; do not infer current runtime state from directory presence or the owner-local registry alone.
 
-Use `make pfb-remove PFB=<name>` when the user explicitly requests complete PFB cleanup. Its all-worktree clean preflight happens before PFB runtime destruction; never bypass it with forced Git removal or recursive filesystem deletion. The prompt's resolved ID and path list are the destructive-action confirmation boundary.
+Use `make pfb-remove PFB=<name>` when the user explicitly requests complete PFB cleanup. Its all-worktree clean preflight happens before PFB runtime destruction; never bypass it with forced Git removal or recursive filesystem deletion. The prompt's resolved ID and path list are the destructive-action confirmation boundary and include the worktree-local workspace/retired data that will be removed.
 
 The root Makefile can target a PFB Retrom worktree with an override, for example:
 

@@ -61,7 +61,7 @@ def remove_pfb(
 
     ask = prompt or input
     try:
-        answer = ask("Type y to destroy this PFB and remove these worktrees: ")
+        answer = ask("Type y to destroy this PFB, its persistent data/cache, and remove these worktrees: ")
     except EOFError:
         answer = ""
     if answer.strip().lower() != "y":
@@ -262,7 +262,7 @@ def _print_plan(name: str, identifier: str, worktrees: list[Worktree]) -> None:
     print("Clean worktrees to remove:")
     for item in worktrees:
         print(f"  {item.repository:<28} {item.path} [{item.branch}]")
-    print("PFB containers, volumes, registry state and generated .pfb data will also be removed.")
+    print("PFB containers, worktree-local workspace/retired data, legacy volumes and registry state will also be removed.")
     print("Git branches and the shared gateway will be preserved.")
 
 
