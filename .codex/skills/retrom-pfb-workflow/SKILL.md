@@ -44,7 +44,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 日常源码不触发PFB build或data generation：Web保存后等待HMR；Go保存后执行轻量`pfb-restart`；runtime adapter保存后等待`providerDevModuleSha256`变化，再执行一次`pfb-restart`让Go重新装载。只有Dockerfile/Compose/entrypoint、package lock、Go module或API生成输入变化时才停止app并显式运行一次`pfb-build`。
 - `pfb-build`只准备工具链、package依赖和生成代码，不能构建Provider archive、全量provider/core或production镜像。core仅在用户任务确实需要新core字节时由`pfb-core-build CORE=<id>`显式触发。
 - 新workspace在首次up前用`pfb-provider-import`显式导入一个已验证Provider基座；已有旧命名卷的PFB改为先执行一次`pfb-migrate-storage`，不要同时走两条路径。
-- 兼容数据库 migration 使用当前 `.pfb/workspace/` 原地升级。若当前分支明确引入不兼容开发数据变更，必须停止同一 PFB，并在启动前用 exact PFB ID 执行 `pfb-data-reset`；它可恢复地归档 `home/data/dev-state`、保留依赖/cache。禁止通过新分支、新 worktree 或新 PFB 规避数据清理。
+- 兼容数据库 migration 使用当前 `.pfb/workspace/` 原地升级。若当前分支明确引入不兼容开发数据变更，必须停止同一 PFB，并在启动前用 exact PFB ID 执行 `pfb-data-reset`；它可恢复地归档 `data/`、保留依赖/cache。若同时废弃旧 Provider 契约，使用当前 Retrom 支持的显式 `SOURCE_ROOT` 选项先验证新基座，再一并归档并替换 Provider 活动状态；不手改 `.pfb/` 绕过常规导入校验。禁止通过新分支、新 worktree 或新 PFB 规避数据清理。
 - 先运行各仓库 `AGENTS.md` 要求的针对性检查。首次执行PFB validate、基座导入或旧卷迁移、build、up；工具链变化执行down/build/up；日常迭代按HMR/restart路径；交付前执行status、verify和受影响的真实产品链。
 
 ## 权限与清理边界
