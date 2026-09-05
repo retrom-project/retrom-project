@@ -212,7 +212,13 @@ make -C .worktree/<pfb>/project/retrom pfb-data-reset \
   PFB=<pfb> CONFIRM=<actual-pfb-id>
 ```
 
-该命令只允许停止态运行，把`data`原子移动到`.pfb/workspace/reset-backups/<UTC时间>/`，建立空目录并保留provider/Node/Next/Go cache；随后仍在同一branch/worktree/PFB ID/URL上up。Agent必须报告归档路径。禁止用新建branch、checkout或PFB规避这一步；也不要把兼容migration误判为必须reset。
+该命令只允许停止态运行，把`data`移动到`.pfb/workspace/reset-backups/<UTC时间>/data/`，建立空目录并保留provider/Node/Next/Go cache；随后仍在同一branch/worktree/PFB ID/URL上up。Agent必须报告归档路径。禁止用新建branch、checkout或PFB规避这一步；也不要把兼容migration误判为必须reset。
+
+若开发期重建还明确废弃旧 Provider manifest 契约，在当前 Retrom 支持时向同一 `pfb-data-reset` 命令传入
+`SOURCE_ROOT=<absolute-verified-provider-base>`。它先完整验证来源，再将旧 data、Provider active 与 dev 状态
+按相对路径归档到同一 backup，通过正式 staging/import 安装新基座；失败恢复旧数据和选择。
+immutable installed/core/依赖缓存、ID、URL 保留。默认不传此选项时仍只重建 data；普通 Provider 升级仍使用
+`pfb-provider-import` 的严格升级校验，不能用 reset 规避生产数据兼容性要求。
 
 运行中可用以下命令检查健康、workspace与开发 Provider 模块内容摘要：
 
