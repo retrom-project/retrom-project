@@ -7,8 +7,8 @@ RUNTIME_DIR ?= $(abspath project/retrom-runtime)
 RETROM_NODE_HOME ?= $(RETROM_DIR)/.cache/tools/node-v24.18.0-linux-x64
 
 PFB_TARGETS := pfb-init pfb-validate pfb-build pfb-up pfb-use pfb-restart \
-	pfb-down pfb-status pfb-logs pfb-verify pfb-prune pfb-destroy \
-	pfb-migrate-storage pfb-data-reset \
+	pfb-down pfb-status pfb-logs pfb-verify pfb-destroy pfb-core-build \
+	pfb-provider-import pfb-migrate-storage pfb-data-reset \
 	pfb-gateway-up pfb-gateway-down
 
 .PHONY: help validate init check update status install-deps dev pfb-list pfb-remove $(PFB_TARGETS)
