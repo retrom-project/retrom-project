@@ -41,7 +41,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 需要统一刷新全部基线 checkout 时可运行根项目的 `make update`；它只在全部 manifest 仓库 clean 时执行，并会把所有基线切换、快进到各自 `defaultBranch`。只需准备单个 PFB 仓库或需要保留基线当前分支时，显式 fetch 该仓库的 manifest 默认分支，不要运行全局 update。
 - 每个需要启动的 PFB 都提供同一树中的 `.worktree/<pfb>/project/retrom-runtime/`；runtime watcher 是标准开发拓扑的一部分。有 core worktree 时同样使用这棵 runtime worktree。
 - 默认以 `PFB_SELECT=false` 启动，使用 PFB 专属的 `http://<actual-pfb-id>.localhost:3000` 地址，避免改变裸 `localhost:3000` 当前选中的 PFB。只有用户明确需要裸地址时才选择它。
-- 日常源码不触发PFB build或data generation：Web保存后等待HMR；Go保存后执行轻量`pfb-restart`；runtime adapter保存后等待`providerDevRevision`变化，再执行一次`pfb-restart`让Go重新装载。只有Dockerfile/Compose/entrypoint、package lock、Go module或API生成输入变化时才停止app并显式运行一次`pfb-build`。
+- 日常源码不触发PFB build或data generation：Web保存后等待HMR；Go保存后执行轻量`pfb-restart`；runtime adapter保存后等待`providerDevModuleSha256`变化，再执行一次`pfb-restart`让Go重新装载。只有Dockerfile/Compose/entrypoint、package lock、Go module或API生成输入变化时才停止app并显式运行一次`pfb-build`。
 - `pfb-build`只准备工具链、package依赖和生成代码，不能构建Provider archive、全量provider/core或production镜像。core仅在用户任务确实需要新core字节时由`pfb-core-build CORE=<id>`显式触发。
 - 新workspace在首次up前用`pfb-provider-import`显式导入一个已验证Provider基座；已有旧命名卷的PFB改为先执行一次`pfb-migrate-storage`，不要同时走两条路径。
 - 兼容数据库 migration 使用当前 `.pfb/workspace/` 原地升级。若当前分支明确引入不兼容开发数据变更，必须停止同一 PFB，并在启动前用 exact PFB ID 执行 `pfb-data-reset`；它可恢复地归档 `home/data/dev-state`、保留依赖/cache。禁止通过新分支、新 worktree 或新 PFB 规避数据清理。

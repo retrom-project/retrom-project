@@ -37,7 +37,7 @@ retrom-project/
 make pfb-list
 ```
 
-输出至少包含 PFB 名称、Retrom 分支、初始化时间、有效状态、实际 PFB ID 和稳定访问 URL。状态由每个 PFB 的只读 `pfb-status` 计算，不以目录是否存在或全局registry缓存代替；status还报告workspace和`providerDevRevision`，不扫描整棵源码，也不存在源码`STALE`。随后针对每个可能涉及的基线仓库检查：
+输出至少包含 PFB 名称、Retrom 分支、初始化时间、有效状态、实际 PFB ID 和稳定访问 URL。状态由每个 PFB 的只读 `pfb-status` 计算，不以目录是否存在或全局registry缓存代替；status还报告workspace和`providerDevModuleSha256`，不扫描整棵源码，也不存在源码`STALE`。随后针对每个可能涉及的基线仓库检查：
 
 ```bash
 git -C project/retrom worktree list --porcelain
@@ -199,7 +199,7 @@ make -C .worktree/<pfb>/project/retrom pfb-migrate-storage \
 
 - Web变化由Next HMR直接加载；
 - Go变化执行`pfb-restart`；
-- runtime adapter变化先用`pfb-status`等待`providerDevRevision`改变，再执行一次`pfb-restart`；
+- runtime adapter变化先用`pfb-status`等待`providerDevModuleSha256`改变，再执行一次`pfb-restart`；
 - Dockerfile/Compose/entrypoint、package lock、Go module或API生成输入变化时，才`pfb-down → pfb-build → pfb-up`；
 - core只在明确需要时执行`pfb-core-build PFB=<pfb> CORE=<id>`，不能把它塞进普通build。
 
@@ -214,7 +214,7 @@ make -C .worktree/<pfb>/project/retrom pfb-data-reset \
 
 该命令只允许停止态运行，把`data`原子移动到`.pfb/workspace/reset-backups/<UTC时间>/`，建立空目录并保留provider/Node/Next/Go cache；随后仍在同一branch/worktree/PFB ID/URL上up。Agent必须报告归档路径。禁止用新建branch、checkout或PFB规避这一步；也不要把兼容migration误判为必须reset。
 
-运行中可用以下命令检查健康、workspace与开发provider revision：
+运行中可用以下命令检查健康、workspace与开发 Provider 模块内容摘要：
 
 ```bash
 make -C .worktree/<pfb>/project/retrom pfb-status PFB=<pfb> FORMAT=json
@@ -230,7 +230,7 @@ make -C .worktree/<pfb>/project/retrom pfb-status PFB=<pfb> FORMAT=json
 make -C .worktree/<pfb>/project/retrom pfb-verify PFB=<pfb>
 ```
 
-根据任务检查稳定PFB URL、runtime launch URL、dev revision、显式core选择和浏览器行为。保存命令结果、失败原因以及PFB evidence位置；不要把生成evidence提交到源码仓库。
+根据任务检查稳定PFB URL、runtime launch URL、开发模块内容摘要、显式core选择和浏览器行为。保存命令结果、失败原因以及PFB evidence位置；不要把生成evidence提交到源码仓库。
 
 ## 9. 停止与清理
 
