@@ -1,4 +1,5 @@
 /.worktree/
+/.dev-data/
 
 # Child repositories are independent Git repositories. The management
 # repository tracks only the directory skeleton under project/.
