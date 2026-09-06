@@ -1,5 +1,6 @@
 /.worktree/
-/.dev-data/
+/.dev-data/*
+!/.dev-data/.gitkeep
 
 # Child repositories are independent Git repositories. The management
 # repository tracks only the directory skeleton under project/.
