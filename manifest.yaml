@@ -24,7 +24,8 @@
         "kirikiroid2-web",
         "butterscotch",
         "tyranoscript",
-        "wasm4"
+        "wasm4",
+        "scummvm"
       ]
     },
     {
@@ -79,6 +80,15 @@
       "role": "core",
       "gitlink": "git@github.com:retrom-project/tyranoscript.git",
       "defaultBranch": "retrom/gc8dbfd492afd",
+      "submodules": false,
+      "dependsOn": []
+    },
+    {
+      "id": "scummvm",
+      "path": "project/retrom-core/scummvm",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/scummvm.git",
+      "defaultBranch": "master",
       "submodules": false,
       "dependsOn": []
     },
