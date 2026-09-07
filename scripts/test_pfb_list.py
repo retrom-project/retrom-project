@@ -106,6 +106,28 @@ class PFBListTests(unittest.TestCase):
                 self.root / ".pfb/registry-v1.json",
             )
 
+    def test_any_dirty_repository_overrides_live_status(self) -> None:
+        retrom = self._create_retrom_worktree("dirty", "feat/dirty")
+        identifier = pfb_list.pfb_id("dirty")
+        spec_path = retrom / ".pfb/spec.json"
+        spec_path.parent.mkdir()
+        spec_path.write_text(
+            json.dumps({"name": "dirty", "id": identifier}),
+            encoding="utf-8",
+        )
+        runtime = retrom.parent / "retrom-runtime"
+        self._create_git_repository(runtime, "feat/dirty-runtime")
+        (runtime / "tracked.txt").write_text("changed\n", encoding="utf-8")
+        self._write_registry([self._registry_entry(identifier, "dirty", retrom)])
+
+        flows = pfb_list.discover_flows(
+            self.root,
+            state_file=self.registry,
+            status_reader=lambda _root, _name: self.fail("dirty status must win"),
+        )
+
+        self.assertEqual(flows[0].status, "DIRTY")
+
     def test_worktree_symlink_cannot_escape_workspace(self) -> None:
         outside = self.root / "outside"
         (outside / "project/retrom").mkdir(parents=True)
@@ -124,12 +146,16 @@ class PFBListTests(unittest.TestCase):
 
     def _create_retrom_worktree(self, name: str, branch: str) -> Path:
         root = self.root / ".worktree" / name / "project/retrom"
+        return self._create_git_repository(root, branch)
+
+    def _create_git_repository(self, root: Path, branch: str) -> Path:
         root.mkdir(parents=True)
         self._run("git", "init", f"--initial-branch={branch}", str(root))
         self._run("git", "-C", str(root), "config", "user.name", "PFB Test")
         self._run("git", "-C", str(root), "config", "user.email", "pfb-test@example.invalid")
+        (root / ".gitignore").write_text(".pfb/\n", encoding="utf-8")
         (root / "README.md").write_text("test\n", encoding="utf-8")
-        self._run("git", "-C", str(root), "add", "README.md")
+        self._run("git", "-C", str(root), "add", ".gitignore", "README.md")
         self._run("git", "-C", str(root), "commit", "-m", "initial")
         return root.resolve()
 

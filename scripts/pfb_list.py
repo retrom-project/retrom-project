@@ -86,7 +86,9 @@ def discover_flows(
         branch = _git_branch(retrom_root) or _spec_branch(spec) or "-"
         created_source = spec_path if spec_path.is_file() else flow_root
         created_at = _creation_time(created_source) if created_source.exists() else "-"
-        status = _flow_status(retrom_root, name, spec, entry, status_reader)
+        status = _flow_repository_status(flow_root) or _flow_status(
+            retrom_root, name, spec, entry, status_reader
+        )
         flows.append(
             PFBFlow(
                 name=name,
@@ -185,6 +187,49 @@ def _is_workspace_retrom_root(retrom_root: Path, worktree_root: Path) -> bool:
     except ValueError:
         return False
     return len(relative.parts) == 3 and relative.parts[1:] == ("project", "retrom")
+
+
+def _flow_repository_status(flow_root: Path) -> str | None:
+    had_error = False
+    for repository in _flow_repositories(flow_root):
+        completed = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repository),
+                "status",
+                "--porcelain=v1",
+                "-z",
+                "--untracked-files=all",
+                "--ignore-submodules=none",
+            ],
+            check=False,
+            capture_output=True,
+        )
+        if completed.returncode != 0:
+            had_error = True
+        elif completed.stdout:
+            return "DIRTY"
+    return "ERROR" if had_error else None
+
+
+def _flow_repositories(flow_root: Path) -> list[Path]:
+    project_root = flow_root / "project"
+    candidates = [project_root / "retrom", project_root / "retrom-runtime"]
+    for group_name in ("retrom-core", "retrom-other"):
+        group = project_root / group_name
+        if group.is_dir() and not group.is_symlink():
+            candidates.extend(group.iterdir())
+    return sorted(
+        (
+            candidate
+            for candidate in candidates
+            if candidate.is_dir()
+            and not candidate.is_symlink()
+            and (candidate / ".git").exists()
+        ),
+        key=str,
+    )
 
 
 def _flow_status(
