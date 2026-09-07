@@ -128,6 +128,28 @@ class PFBListTests(unittest.TestCase):
 
         self.assertEqual(flows[0].status, "DIRTY")
 
+    def test_unpushed_commit_overrides_live_status(self) -> None:
+        retrom = self._create_retrom_worktree("unpushed", "feat/unpushed")
+        identifier = pfb_list.pfb_id("unpushed")
+        spec_path = retrom / ".pfb/spec.json"
+        spec_path.parent.mkdir()
+        spec_path.write_text(
+            json.dumps({"name": "unpushed", "id": identifier}),
+            encoding="utf-8",
+        )
+        (retrom / "committed.txt").write_text("not pushed\n", encoding="utf-8")
+        self._run("git", "-C", str(retrom), "add", "committed.txt")
+        self._run("git", "-C", str(retrom), "commit", "-m", "local commit")
+        self._write_registry([self._registry_entry(identifier, "unpushed", retrom)])
+
+        flows = pfb_list.discover_flows(
+            self.root,
+            state_file=self.registry,
+            status_reader=lambda _root, _name: self.fail("unpushed status must win"),
+        )
+
+        self.assertEqual(flows[0].status, "DIRTY")
+
     def test_worktree_symlink_cannot_escape_workspace(self) -> None:
         outside = self.root / "outside"
         (outside / "project/retrom").mkdir(parents=True)
@@ -157,6 +179,14 @@ class PFBListTests(unittest.TestCase):
         (root / "README.md").write_text("test\n", encoding="utf-8")
         self._run("git", "-C", str(root), "add", ".gitignore", "README.md")
         self._run("git", "-C", str(root), "commit", "-m", "initial")
+        self._run(
+            "git",
+            "-C",
+            str(root),
+            "update-ref",
+            f"refs/remotes/origin/{branch}",
+            "HEAD",
+        )
         return root.resolve()
 
     def _registry_entry(self, identifier: str, name: str, root: Path) -> dict[str, str]:

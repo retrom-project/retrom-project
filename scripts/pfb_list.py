@@ -210,6 +210,24 @@ def _flow_repository_status(flow_root: Path) -> str | None:
             had_error = True
         elif completed.stdout:
             return "DIRTY"
+        unpublished = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repository),
+                "rev-list",
+                "--max-count=1",
+                "HEAD",
+                "--not",
+                "--remotes",
+            ],
+            check=False,
+            capture_output=True,
+        )
+        if unpublished.returncode != 0:
+            had_error = True
+        elif unpublished.stdout:
+            return "DIRTY"
     return "ERROR" if had_error else None
 
 

@@ -37,7 +37,7 @@ retrom-project/
 make pfb-list
 ```
 
-输出至少包含 PFB 名称、Retrom 分支、初始化时间、有效状态、实际 PFB ID 和稳定访问 URL。根工作区先检查该 PFB 的 Retrom、runtime、core 与 supporting 顶层仓库；任一仓库存在 tracked、untracked 或 submodule 改动时有效状态固定为 `DIRTY`。全部 clean 时才由该 PFB 的只读 `pfb-status` 计算运行状态，不以目录是否存在或 registry 缓存代替；status还报告workspace和`providerDevModuleSha256`，不扫描整棵源码，也不存在源码`STALE`。随后针对每个可能涉及的基线仓库检查：
+输出至少包含 PFB 名称、Retrom 分支、初始化时间、有效状态、实际 PFB ID 和稳定访问 URL。根工作区先离线检查该 PFB 的 Retrom、runtime、core 与 supporting 顶层仓库；任一仓库存在 tracked、untracked、submodule 改动，或 `HEAD` 含尚未进入任何本地 remote-tracking ref 的提交时，有效状态固定为 `DIRTY`，该命令不隐式 fetch。全部 clean 且已 push 时才由该 PFB 的只读 `pfb-status` 计算运行状态，不以目录是否存在或 registry 缓存代替；status还报告workspace和`providerDevModuleSha256`，不扫描整棵源码，也不存在源码`STALE`。随后针对每个可能涉及的基线仓库检查：
 
 ```bash
 git -C project/retrom worktree list --porcelain
