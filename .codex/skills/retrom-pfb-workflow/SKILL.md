@@ -28,7 +28,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 将 PFB 的 `RUNTIME_ROOT` 和 `CORE_ROOTS` 只指向该 PFB 目录里的 worktree，不要指向根目录下的基线仓库。
 - 保留基线 checkout 中已有的用户改动。必要时在开发前后对基线仓库运行只读的 `git status --short`，用结果证明没有新增工作区修改。
 - Git worktree 仍共享对象库、refs 和部分 Git 元数据；“隔离”主要指工作文件与 PFB 构建输入隔离，不代表 Git 仓库在物理上完全独立。
-- PFB 的应用源码和持久运行状态都归当前 worktree 所有：Retrom 的 `.pfb/workspace/` 保存数据库/CAS/上传、基座与loose dev provider、node_modules、Next、Go 与 npm cache，并 bind mount 到开发容器。共享网关、Docker 网络/工具链镜像以及用户级注册表仍是主机全局状态；不要把这些全局资源误称为 worktree 私有。
+- PFB 的应用源码和持久运行状态都归当前 worktree 所有：Retrom 的 `.pfb/workspace/` 保存数据库/CAS/上传、基座与loose dev provider、node_modules、Next、Go 与 npm cache，并 bind mount 到开发容器。registry、锁和生成的共享网关配置归当前 `retrom-project/.pfb/` 所有；Docker 网络、容器和工具链镜像仍是主机资源。不要把共享控制面误称为某个 worktree 私有，也不要把项目配置写回用户全局目录。
 - worktree 与 `.pfb/workspace/` 必须位于支持 POSIX owner/mode、SQLite lock、hard-link 与 fsync 的 Linux 本地文件系统；不要在 WSL `/mnt/c` 等 Windows 文件系统挂载下创建 PFB。
 
 ## 执行工作流

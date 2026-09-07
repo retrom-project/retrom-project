@@ -25,7 +25,7 @@ retrom-project/
 
 根仓库只管理环境元数据，`project/` 和 `.worktree/` 中的源码由各自子仓库管理。当前 PFB 命令消费已有 worktree，但不创建、切换或删除 Git worktree。Agent 负责先准备目录，再从 `.worktree/<pfb>/project/retrom/` 调用 PFB。
 
-每个 PFB 的数据库/CAS/上传、已物化依赖和构建缓存物理位于 Retrom worktree 的 `.pfb/workspace/`，并与源码一起 bind mount 到开发容器。用户级注册表、共享网关、网络和工具链镜像仍属于主机全局状态。旧版 PFB 的 Docker 命名卷只作为待显式迁移/清理的兼容来源，不再是新运行实例的持久存储。
+每个 PFB 的数据库/CAS/上传、已物化依赖和构建缓存物理位于 Retrom worktree 的 `.pfb/workspace/`，并与源码一起 bind mount 到开发容器。registry、锁和生成的网关配置位于当前根工作区被忽略的 `.pfb/`；共享网关容器、网络和工具链镜像仍属于主机资源。旧版 PFB 的 Docker 命名卷只作为待显式迁移/清理的兼容来源，不再是新运行实例的持久存储。
 
 `.worktree/` 必须放在支持 POSIX owner/mode、SQLite lock、同目录 hard-link 与 fsync 的 Linux 本地文件系统。WSL 用户不得把它放在 `/mnt/c` 等 Windows 文件系统挂载下。
 
@@ -281,4 +281,4 @@ git -C .worktree/<pfb>/project/retrom status --short
 git -C project/retrom status --short
 ```
 
-对所有纳入的 runtime/core 仓库重复检查。报告 PFB 工作区中的预期修改，并将基线的最终状态与开始时记录比较。若 PFB 命令正常更新了用户级注册表、共享网关或 Docker 资源，也要明确说明这些是工作流允许的主机全局副作用。
+对所有纳入的 runtime/core 仓库重复检查。报告 PFB 工作区中的预期修改，并将基线的最终状态与开始时记录比较。若 PFB 命令正常更新了根工作区 `.pfb/` 中的 registry/网关配置，或更新了共享网关与 Docker 资源，也要明确说明这些是工作流允许的共享副作用。

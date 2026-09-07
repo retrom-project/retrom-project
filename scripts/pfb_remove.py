@@ -63,7 +63,7 @@ def remove_pfb(
     if spec is not None:
         _validate_spec_roots(spec, retrom_root, worktrees)
     else:
-        (recovery_check or _require_detached_partial_state)(identifier)
+        _run_recovery_check(root, identifier, recovery_check)
     legacy_volumes = (volume_reader or _discover_legacy_volumes)(identifier)
     _require_all_clean(worktrees)
     _print_plan(
@@ -86,7 +86,7 @@ def remove_pfb(
     # Recheck after the interactive pause and before the first destructive action.
     _require_all_clean(worktrees)
     if spec is None:
-        (recovery_check or _require_detached_partial_state)(identifier)
+        _run_recovery_check(root, identifier, recovery_check)
     if volume_remover is None:
         _require_legacy_volume_plan(identifier, legacy_volumes)
     if destroy is not None:
@@ -443,8 +443,19 @@ def _require_legacy_volume_plan(identifier: str, planned: list[str]) -> None:
         )
 
 
-def _require_detached_partial_state(identifier: str) -> None:
-    registry = _registry_path()
+def _run_recovery_check(
+    root: Path,
+    identifier: str,
+    recovery_check: Callable[[str], None] | None,
+) -> None:
+    if recovery_check is not None:
+        recovery_check(identifier)
+    else:
+        _require_detached_partial_state(root, identifier)
+
+
+def _require_detached_partial_state(root: Path, identifier: str) -> None:
+    registry = _registry_path(root)
     if registry.exists():
         try:
             value = json.loads(registry.read_text(encoding="utf-8"))
@@ -479,12 +490,8 @@ def _require_detached_partial_state(identifier: str) -> None:
         )
 
 
-def _registry_path() -> Path:
-    configured = os.environ.get("XDG_STATE_HOME")
-    base = Path(configured) if configured else Path.home() / ".local/state"
-    if not base.is_absolute():
-        raise PFBRemoveError("XDG_STATE_HOME must be an absolute path")
-    return base / "retrom-pfb/registry-v1.json"
+def _registry_path(root: Path) -> Path:
+    return root / ".pfb/registry-v1.json"
 
 
 def _destroy_partial_state(retrom_root: Path) -> None:

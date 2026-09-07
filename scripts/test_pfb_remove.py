@@ -270,6 +270,12 @@ class PFBRemoveTests(unittest.TestCase):
 
         self.assertFalse((self.worktrees["retrom"] / ".pfb").exists())
 
+    def test_recovery_registry_is_owned_by_workspace(self) -> None:
+        self.assertEqual(
+            pfb_remove._registry_path(self.root),
+            self.root / ".pfb/registry-v1.json",
+        )
+
     @mock.patch.object(pfb_remove.os, "geteuid", return_value=1000)
     def test_clean_initialized_submodule_is_deinitialized_before_removal(
         self, _geteuid: mock.Mock

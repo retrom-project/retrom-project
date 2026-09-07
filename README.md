@@ -18,9 +18,11 @@ Standard development is available at `http://localhost:4000`. PFB environments u
 
 Run `make status` to inspect every baseline checkout. `make update` first requires all manifest repositories to be clean, then fetches each manifest `defaultBranch`, switches every baseline checkout to that branch, and fast-forwards it to the latest remote commit. If any repository is dirty, divergent, or has its default branch checked out in another worktree, the update fails before switching any checkout.
 
-Run `make pfb-list` to inspect every PFB development flow below `.worktree/`. The table includes its Retrom branch, creation time, effective status, PFB ID, and stable `http://<pfb-id>.localhost:3000` URL. Effective status is obtained from that PFB's own read-only status command, so a stale candidate is reported as `STALE` even if the owner-local registry still says `RUNNING`.
+Run `make pfb-list` to inspect every PFB development flow below `.worktree/`. The table includes its Retrom branch, creation time, effective status, PFB ID, and stable `http://<pfb-id>.localhost:3000` URL. Effective status is obtained from that PFB's own read-only status command, so a stale candidate is reported as `STALE` even if the workspace registry still says `RUNNING`.
 
 Each PFB keeps all persistent development state under `.worktree/<name>/project/retrom/.pfb/workspace/`. Its application/runtime source, database/CAS/uploads, materialized dependencies, node_modules, Next output and Go/npm caches are bind-mounted into the container. Rebuild/restart therefore keeps the same data and URL and reuses unchanged dependencies. Put `.worktree/` on a Linux local filesystem; WSL `/mnt/c` and other Windows mounts do not provide the required POSIX permission, SQLite lock, hard-link and fsync semantics.
+
+The ignored root `.pfb/` directory owns the workspace-shared PFB registry, lock and generated Nginx gateway configuration. These project-specific files never use `~/.local/state` or another user-global state directory. A standalone Retrom checkout uses its ignored `.pfb-shared/` directory instead, and all linked Retrom worktrees resolve to the same owner checkout.
 
 Legacy PFBs that still use Docker named volumes must be stopped and migrated once from their Retrom worktree:
 
@@ -44,6 +46,7 @@ The command first validates the PFB identity and every registered top-level work
 ```text
 retrom-project/
 ├── .codex/             # AI skills and prompts
+├── .pfb/               # ignored, shared PFB registry and gateway state
 ├── .worktree/          # ignored, isolated PFB worktrees
 ├── project/            # ignored, baseline child repositories
 │   ├── retrom/

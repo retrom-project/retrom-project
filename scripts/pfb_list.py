@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
 import subprocess
 import sys
@@ -35,12 +34,8 @@ class PFBFlow:
     url: str
 
 
-def registry_path() -> Path:
-    configured = os.environ.get("XDG_STATE_HOME")
-    base = Path(configured) if configured else Path.home() / ".local/state"
-    if not base.is_absolute():
-        raise PFBListError("XDG_STATE_HOME must be an absolute path")
-    return base / "retrom-pfb/registry-v1.json"
+def registry_path(root: Path = ROOT) -> Path:
+    return root / ".pfb/registry-v1.json"
 
 
 def pfb_id(name: str) -> str:
@@ -67,7 +62,7 @@ def discover_flows(
 ) -> list[PFBFlow]:
     worktree_root = root / ".worktree"
     status_reader = status_reader or live_status
-    registry = _load_registry(state_file or registry_path())
+    registry = _load_registry(state_file or registry_path(root))
     registered = _workspace_registry_entries(registry, worktree_root)
     retrom_roots = set(registered)
     if worktree_root.is_dir():

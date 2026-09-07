@@ -64,7 +64,7 @@ For a legacy named-volume PFB, stop only that PFB and run its `pfb-migrate-stora
 
 Use the `retrom-pfb-workflow` skill under `.codex/skills/` for the complete workflow. A new PFB imports an already verified Provider base explicitly; a legacy PFB migrates its old named volumes once. Neither daily lifecycle builds Provider archives. The isolation is a working-file boundary, not an access-control mechanism: a user may explicitly ask to edit a baseline checkout.
 
-Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with each initialized PFB's read-only status command; do not infer current runtime state from directory presence or the owner-local registry alone.
+Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with each initialized PFB's read-only status command; do not infer current runtime state from directory presence or the workspace-local `.pfb/registry-v1.json` alone. The ignored root `.pfb/` also owns the generated shared gateway configuration; do not move those project-specific files back into a user-global state directory.
 
 Use `make pfb-remove PFB=<name>` when the user explicitly requests complete PFB cleanup. Its all-worktree clean preflight happens before PFB runtime destruction; never bypass it with manual forced Git removal or recursive filesystem deletion. The unified command itself may use its documented, second-clean-checked `--force` fallback only for Git's specific submodule-worktree limitation. The prompt's resolved ID and path list are the destructive-action confirmation boundary and include the worktree-local workspace/retired data that will be removed.
 

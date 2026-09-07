@@ -10,6 +10,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 
 MODULE_PATH = Path(__file__).with_name("pfb_list.py")
@@ -97,6 +98,13 @@ class PFBListTests(unittest.TestCase):
         value = output.getvalue()
         for expected in ("BRANCH", "CREATED (UTC)", "STATUS", "PFB ID", "URL", "feat/alpha"):
             self.assertIn(expected, value)
+
+    def test_default_registry_is_owned_by_workspace(self) -> None:
+        with mock.patch.dict(os.environ, {"XDG_STATE_HOME": str(self.root / "xdg")}):
+            self.assertEqual(
+                pfb_list.registry_path(self.root),
+                self.root / ".pfb/registry-v1.json",
+            )
 
     def test_worktree_symlink_cannot_escape_workspace(self) -> None:
         outside = self.root / "outside"
