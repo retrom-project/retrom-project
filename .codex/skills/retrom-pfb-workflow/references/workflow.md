@@ -261,7 +261,7 @@ make -C .worktree/<pfb>/project/retrom pfb-destroy PFB=<pfb> CONFIRM=<actual-pfb
 make pfb-remove PFB=<pfb>
 ```
 
-该命令在产生任何销毁副作用前，先验证 PFB 名称、由名称派生的实际 ID、spec 中的 source root、manifest 基线仓库归属，以及该 PFB 下全部 manifest worktree 的状态。只要任一 worktree 有 tracked、untracked 或 submodule 改动，命令就直接失败，PFB 不会被停止或销毁。全部 clean 后，命令显示实际 PFB ID、分支和精确移除路径；只有操作者交互输入 `y` 才会继续。确认后它调用 Retrom 的 `pfb-destroy`，再逐个执行 Git worktree removal，并保留本地分支和共享网关。
+该命令在产生任何销毁副作用前，先验证 PFB 名称、由名称派生的实际 ID、spec 中的 source root，以及标准 `project/retrom`、`project/retrom-runtime`、`project/retrom-core/*`、`project/retrom-other/*` 布局下的全部已注册顶层 worktree。manifest 仓库必须匹配其基线 checkout；已退出当前 manifest 的历史仓库也必须能通过 Git common dir 映射到 PFB 外的已注册 owner checkout。若早先destroy已删除spec后中断，只有在同ID registry entry和容器均已不存在时才允许续传。只要任一 worktree 有 tracked、untracked 或 submodule 改动，命令就直接失败，PFB 不会被停止或销毁。全部 clean 后，命令显示实际 PFB ID、分支、精确worktree移除路径和匹配该ID的legacy volume；只有操作者交互输入 `y` 才会继续。确认后它调用 Retrom 的 `pfb-destroy`、删除已列出的legacy volume，非强制 deinit 已验证干净的 submodule，再逐个执行 Git worktree removal。若普通移除仍返回Git特定的submodule worktree拒绝，只在对该精确worktree再次clean检查后使用一次`--force`，绝不借此绕过脏状态。本地分支和共享网关保留。直接调用Retrom `pfb-destroy`仍保留迁移源旧卷，只有这个更强的根工作区清理入口才删除它们。
 
 不要向该入口传 `CONFIRM`；内部确认值来自已经校验的 spec。`CONFIRM=<actual-pfb-id>` 仍只是直接调用底层 `pfb-destroy` 时的接口。
 

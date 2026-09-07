@@ -39,7 +39,7 @@ Nested Git submodules remain owned by their parent child repository. The authori
 - `make install-deps` installs Retrom and retrom-runtime dependencies.
 - `make dev` forwards to Retrom and serves the standard development stack at `http://localhost:4000`.
 - `make pfb-list` reports every PFB flow's Retrom branch, creation time, effective status, PFB ID, and stable URL.
-- `make pfb-remove PFB=<name>` validates that all of that PFB's manifest worktrees are clean, asks for an interactive `y`, destroys the PFB (including `.pfb/workspace/` and retired data), and removes its Git worktrees while preserving branches and the shared gateway.
+- `make pfb-remove PFB=<name>` validates that all registered top-level worktrees in that PFB's standard project layout are clean and have a verified owner checkout outside the PFB, including historical repositories no longer in the manifest. It can resume a partial destroy with a missing spec only after proving the matching registry entry and containers are absent. It asks for an interactive `y`, destroys the PFB (including `.pfb/workspace/`, retired data and exact-ID legacy volumes), deinitializes clean submodules, and removes its Git worktrees while preserving branches and the shared gateway. Direct Retrom `pfb-destroy` still preserves migration-source legacy volumes. If ordinary Git removal returns the specific submodule-worktree refusal, one `--force` fallback is allowed only after a second clean check; force must never bypass dirty-state validation.
 - `make pfb-<action>` forwards the corresponding PFB command to Retrom. `pfb-build` prepares only the dev toolchain/dependencies; daily `up/restart` never builds an image, Provider archive, or core. PFB uses port 3000.
 
 Run development, PFB, and initialization commands as the current non-root user. Never use `sudo`; Retrom intentionally rejects root/sudo dev and PFB invocations.
@@ -66,7 +66,7 @@ Use the `retrom-pfb-workflow` skill under `.codex/skills/` for the complete work
 
 Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with each initialized PFB's read-only status command; do not infer current runtime state from directory presence or the owner-local registry alone.
 
-Use `make pfb-remove PFB=<name>` when the user explicitly requests complete PFB cleanup. Its all-worktree clean preflight happens before PFB runtime destruction; never bypass it with forced Git removal or recursive filesystem deletion. The prompt's resolved ID and path list are the destructive-action confirmation boundary and include the worktree-local workspace/retired data that will be removed.
+Use `make pfb-remove PFB=<name>` when the user explicitly requests complete PFB cleanup. Its all-worktree clean preflight happens before PFB runtime destruction; never bypass it with manual forced Git removal or recursive filesystem deletion. The unified command itself may use its documented, second-clean-checked `--force` fallback only for Git's specific submodule-worktree limitation. The prompt's resolved ID and path list are the destructive-action confirmation boundary and include the worktree-local workspace/retired data that will be removed.
 
 The root Makefile can target a PFB Retrom worktree with an override, for example:
 
