@@ -90,7 +90,7 @@
       "path": "project/retrom-core/scummvm",
       "role": "core",
       "gitlink": "git@github.com:retrom-project/scummvm.git",
-      "defaultBranch": "master",
+      "defaultBranch": "retrom/2026.3.0",
       "submodules": false,
       "dependsOn": []
     },
