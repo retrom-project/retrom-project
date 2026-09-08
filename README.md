@@ -61,3 +61,8 @@ retrom-project/
 `manifest.yaml` uses JSON syntax, which is valid YAML 1.2. This lets the bootstrap script parse it with Python's standard library before any additional dependencies are installed. Its `gitlink` fields are SSH clone URLs, not root-repository submodules; initialize your GitHub SSH credentials before running `make init`. A repository may set `shallowClone` to `true` to clone its configured branch and recursive submodules with depth 1. This only affects newly created checkouts; it does not convert an existing full clone into a shallow clone.
 
 Do not use `root` or `sudo` for `make dev` or PFB commands. Retrom rejects those invocations to prevent root-owned generated files and containers.
+
+TIC-80 and FAKE-08 live in `retrom-project/TIC-80` and `retrom-project/fake-08`.
+The manifest selects their tested Retrom maintenance branches, `retrom/g4aba09c98f1e`
+and `retrom/g814991a2571a`; the fork `main` / `master` branches remain upstream mirrors.
+Runtime consumption uses immutable core releases rather than floating mirror branches.
