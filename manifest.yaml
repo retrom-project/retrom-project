@@ -25,7 +25,9 @@
         "butterscotch",
         "tyranoscript",
         "wasm4",
-        "scummvm"
+        "scummvm",
+        "tic80",
+        "fake08"
       ]
     },
     {
@@ -98,6 +100,24 @@
       "role": "core",
       "gitlink": "git@github.com:retrom-project/wasm4.git",
       "defaultBranch": "main",
+      "submodules": true,
+      "dependsOn": []
+    },
+    {
+      "id": "tic80",
+      "path": "project/retrom-core/TIC-80",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/TIC-80.git",
+      "defaultBranch": "retrom/g4aba09c98f1e",
+      "submodules": true,
+      "dependsOn": []
+    },
+    {
+      "id": "fake08",
+      "path": "project/retrom-core/fake-08",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/fake-08.git",
+      "defaultBranch": "retrom/g814991a2571a",
       "submodules": true,
       "dependsOn": []
     }
