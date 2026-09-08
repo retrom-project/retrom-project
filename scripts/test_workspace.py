@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import importlib.util
-import json
 import subprocess
 import tempfile
 import unittest
@@ -210,9 +209,7 @@ class ManifestTests(unittest.TestCase):
             workspace.validate_repositories([repository])
 
     def test_clone_links_use_ssh(self) -> None:
-        manifest_path = MODULE_PATH.parents[1] / "manifest.yaml"
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        for repository in manifest["repositories"]:
+        for repository in workspace.load_manifest():
             with self.subTest(repository=repository["id"]):
                 self.assertRegex(repository["gitlink"], r"^git@github\.com:.+\.git$")
 

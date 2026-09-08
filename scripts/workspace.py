@@ -4,116 +4,34 @@
 from __future__ import annotations
 
 import argparse
-import json
 import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
+import workspace_config as config
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "manifest.yaml"
-ALLOWED_ROLES = {"application", "runtime", "core", "support"}
 
-
-class WorkspaceError(RuntimeError):
-    pass
+WorkspaceError = config.WorkspaceError
 
 
 def run_git(path: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["git", "-C", str(path), *args],
-        check=check,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        ["git", "-C", str(path), *args], check=check, text=True,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
     )
 
 
-def load_manifest() -> list[dict[str, object]]:
-    try:
-        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as error:
-        raise WorkspaceError(f"cannot read {MANIFEST}: {error}") from error
-
-    if data.get("schemaVersion") != 1:
-        raise WorkspaceError("manifest schemaVersion must be 1")
-    repositories = data.get("repositories")
-    if not isinstance(repositories, list) or not repositories:
-        raise WorkspaceError("manifest repositories must be a non-empty list")
-    validate_repositories(repositories)
-    return repositories
+def load_manifest(retrom_root: Path | None = None, *, root: Path | None = None) -> list[dict[str, object]]:
+    return config.load_manifest(root or ROOT, retrom_root)
 
 
 def validate_repositories(repositories: list[object]) -> None:
-    ids: set[str] = set()
-    paths: set[str] = set()
-
-    for index, value in enumerate(repositories):
-        if not isinstance(value, dict):
-            raise WorkspaceError(f"repositories[{index}] must be an object")
-        repo = value
-        required = {
-            "id": str,
-            "path": str,
-            "role": str,
-            "gitlink": str,
-            "defaultBranch": str,
-            "submodules": bool,
-            "dependsOn": list,
-        }
-        for field, expected_type in required.items():
-            if field not in repo or not isinstance(repo[field], expected_type):
-                raise WorkspaceError(
-                    f"repositories[{index}].{field} must be {expected_type.__name__}"
-                )
-        if "shallowClone" in repo and not isinstance(repo["shallowClone"], bool):
-            raise WorkspaceError(
-                f"repositories[{index}].shallowClone must be bool"
-            )
-
-        repo_id = str(repo["id"])
-        repo_path = str(repo["path"])
-        if not repo_id or repo_id in ids:
-            raise WorkspaceError(f"duplicate or empty repository id: {repo_id!r}")
-        if not repo_path or repo_path in paths:
-            raise WorkspaceError(f"duplicate or empty repository path: {repo_path!r}")
-        ids.add(repo_id)
-        paths.add(repo_path)
-
-        relative = Path(repo_path)
-        if relative.is_absolute() or ".." in relative.parts or relative.parts[:1] != ("project",):
-            raise WorkspaceError(f"repository path must stay under project/: {repo_path}")
-        if str(repo["role"]) not in ALLOWED_ROLES:
-            raise WorkspaceError(f"unsupported role for {repo_id}: {repo['role']}")
-        if not str(repo["gitlink"]).strip() or not str(repo["defaultBranch"]).strip():
-            raise WorkspaceError(f"gitlink and defaultBranch are required for {repo_id}")
-        dependencies = repo["dependsOn"]
-        if any(not isinstance(item, str) or not item for item in dependencies):
-            raise WorkspaceError(f"dependsOn must contain repository ids for {repo_id}")
-
-    by_id = {str(repo["id"]): repo for repo in repositories if isinstance(repo, dict)}
-    for repo_id, repo in by_id.items():
-        unknown = set(repo["dependsOn"]) - set(by_id)
-        if unknown:
-            raise WorkspaceError(f"unknown dependencies for {repo_id}: {sorted(unknown)}")
-
-    visiting: set[str] = set()
-    visited: set[str] = set()
-
-    def visit(repo_id: str) -> None:
-        if repo_id in visiting:
-            raise WorkspaceError(f"dependency cycle includes {repo_id}")
-        if repo_id in visited:
-            return
-        visiting.add(repo_id)
-        for dependency in by_id[repo_id]["dependsOn"]:
-            visit(str(dependency))
-        visiting.remove(repo_id)
-        visited.add(repo_id)
-
-    for repo_id in by_id:
-        visit(repo_id)
+    try:
+        config.catalog(ROOT / "project/retrom").validate_repositories(repositories)
+    except ValueError as error:
+        raise WorkspaceError(str(error)) from error
 
 
 def normalize_git_url(url: str) -> str:
@@ -129,8 +47,8 @@ def normalize_git_url(url: str) -> str:
     return value.lower()
 
 
-def validate_checkout(repo: dict[str, object]) -> Path:
-    path = ROOT / str(repo["path"])
+def validate_checkout(repo: dict[str, object], root: Path | None = None) -> Path:
+    path = (root or ROOT) / str(repo["path"])
     if not path.exists():
         raise WorkspaceError(f"missing checkout {repo['id']}: {path}")
     result = run_git(path, "rev-parse", "--show-toplevel", check=False)
@@ -193,37 +111,45 @@ def update_repositories(repositories: list[dict[str, object]]) -> None:
             + ", ".join(dirty)
         )
 
-    for repo, path in checkouts:
-        branch = str(repo["defaultBranch"])
-        remote_ref = f"refs/remotes/origin/{branch}"
-        refspec = f"+refs/heads/{branch}:{remote_ref}"
-        print(f"fetch  {repo['id']:<28} origin/{branch}")
-        run_git(path, "fetch", "--prune", "origin", refspec)
-        run_git(path, "rev-parse", "--verify", remote_ref)
-
-    for repo, path in checkouts:
-        branch = str(repo["defaultBranch"])
-        _validate_default_branch_update(path, branch)
-
-    for repo, path in checkouts:
-        branch = str(repo["defaultBranch"])
-        remote_ref = f"refs/remotes/origin/{branch}"
-        if _local_branch_exists(path, branch):
-            run_git(path, "switch", branch)
-        else:
-            run_git(path, "switch", "--track", "-c", branch, remote_ref)
-        run_git(path, "merge", "--ff-only", remote_ref)
-        if repo["submodules"]:
-            run_git(path, "submodule", "sync", "--recursive")
-            submodule_args = ["submodule", "update", "--init", "--recursive"]
-            if repo.get("shallowClone", False):
-                submodule_args.extend(["--depth", "1"])
-            run_git(path, *submodule_args)
-        head = run_git(path, "rev-parse", "--short=10", "HEAD").stdout.strip()
-        print(f"update {repo['id']:<28} {branch} {head}")
+    targets = [(repo, path, fetch_default(repo, path)) for repo, path in checkouts]
+    for repo, path, commit in targets:
+        _validate_default_branch_update(path, str(repo["defaultBranch"]), commit)
+    for repo, path, commit in targets:
+        apply_default(repo, path, commit)
 
 
-def _validate_default_branch_update(path: Path, branch: str) -> None:
+def fetch_default(repo: dict[str, object], path: Path) -> str:
+    branch = str(repo["defaultBranch"])
+    remote_ref = f"refs/remotes/origin/{branch}"
+    print(f"fetch  {repo['id']:<28} origin/{branch}")
+    run_git(path, "fetch", "--prune", "origin", f"+refs/heads/{branch}:{remote_ref}")
+    return run_git(path, "rev-parse", "--verify", remote_ref).stdout.strip()
+
+
+def apply_default(repo: dict[str, object], path: Path, commit: str) -> None:
+    branch = str(repo["defaultBranch"])
+    if _local_branch_exists(path, branch):
+        run_git(path, "switch", branch)
+    else:
+        run_git(path, "branch", branch, commit)
+        run_git(path, "branch", "--set-upstream-to", f"origin/{branch}", branch)
+        run_git(path, "switch", branch)
+    run_git(path, "merge", "--ff-only", commit)
+    initialize_submodules(repo, path)
+    head = run_git(path, "rev-parse", "--short=10", "HEAD").stdout.strip()
+    print(f"update {repo['id']:<28} {branch} {head}")
+
+
+def initialize_submodules(repo: dict[str, object], path: Path) -> None:
+    if repo["submodules"]:
+        run_git(path, "submodule", "sync", "--recursive")
+        args = ["submodule", "update", "--init", "--recursive"]
+        if repo.get("shallowClone", False):
+            args.extend(["--depth", "1"])
+        run_git(path, *args)
+
+
+def _validate_default_branch_update(path: Path, branch: str, commit: str | None = None) -> None:
     if not _local_branch_exists(path, branch):
         return
     target_ref = f"refs/heads/{branch}"
@@ -233,7 +159,7 @@ def _validate_default_branch_update(path: Path, branch: str) -> None:
                 f"default branch {branch} is checked out in another worktree: {worktree}"
             )
 
-    remote_ref = f"refs/remotes/origin/{branch}"
+    remote_ref = commit or f"refs/remotes/origin/{branch}"
     local_is_ancestor = run_git(
         path, "merge-base", "--is-ancestor", target_ref, remote_ref, check=False
     ).returncode == 0
@@ -284,24 +210,38 @@ def parse_args() -> argparse.Namespace:
         choices=("validate", "init", "check", "update", "status"),
         help="operation to perform",
     )
+    parser.add_argument("--pfb")
+    parser.add_argument("--retrom-dir")
+    parser.add_argument("--repos", nargs="+", help="exact repository IDs to prepare/check; no implicit dependency expansion")
     return parser.parse_args()
 
 
 def main() -> int:
+    import workspace_sources as sources
+    import workspace_update as updates
+
     args = parse_args()
     try:
-        repositories = load_manifest()
+        scope, retrom = config.context(ROOT, args.pfb, args.retrom_dir)
+        if args.command == "update" and (scope != ROOT or args.repos):
+            raise WorkspaceError("update is baseline-only and requires the complete manifest")
+        if args.command in {"init", "update"}:
+            with sources.locked(ROOT):
+                if args.command == "init":
+                    sources.initialize(sys.modules[__name__], scope, retrom, args.repos)
+                else:
+                    updates.update_workspace(sys.modules[__name__])
+            return 0
+        repositories = sources.selected(load_manifest(retrom), args.repos)
+        print(f"manifest: {retrom / 'workspace/manifest.yaml'}")
         if args.command == "validate":
             print(f"manifest valid: {len(repositories)} repositories")
-        elif args.command == "init":
-            clone_missing(repositories)
         elif args.command == "check":
-            check_workspace(repositories)
-        elif args.command == "update":
-            update_repositories(repositories)
+            for repo in repositories:
+                print(f"ready  {repo['id']:<28} {validate_checkout(repo, scope)}")
         elif args.command == "status":
-            show_status(repositories)
-    except (WorkspaceError, subprocess.CalledProcessError) as error:
+            sources.status(sys.modules[__name__], scope, repositories)
+    except (WorkspaceError, subprocess.CalledProcessError, OSError, ValueError) as error:
         print(f"workspace error: {error}", file=sys.stderr)
         return 1
     return 0

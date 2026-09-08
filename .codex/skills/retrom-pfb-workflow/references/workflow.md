@@ -20,10 +20,10 @@ retrom-project/
 │   ├── retrom-runtime/                 # 基线 checkout
 │   ├── retrom-core/<core-repository>/  # 基线 checkout
 │   └── retrom-other/<support-repository>/
-└── manifest.yaml
+└── manifest.yaml                     # 只引导 Retrom；依赖清单在各 Retrom 的 workspace/manifest.yaml
 ```
 
-根仓库只管理环境元数据，`project/` 和 `.worktree/` 中的源码由各自子仓库管理。当前 PFB 命令消费已有 worktree，但不创建、切换或删除 Git worktree。Agent 负责先准备目录，再从 `.worktree/<pfb>/project/retrom/` 调用 PFB。
+根仓库只管理环境元数据，`project/` 和 `.worktree/` 中的源码由各自子仓库管理。Retrom 内的 PFB 生命周期命令消费已有 worktree，不创建或切换源码；根工作区的 `make init PFB=...` 负责准备源码。准备完成后从 `.worktree/<pfb>/project/retrom/` 调用 PFB。
 
 每个 PFB 的数据库/CAS/上传、已物化依赖和构建缓存物理位于 Retrom worktree 的 `.pfb/workspace/`，并与源码一起 bind mount 到开发容器。registry、锁和生成的网关配置位于当前根工作区被忽略的 `.pfb/`；共享网关容器、网络和工具链镜像仍属于主机资源。旧版 PFB 的 Docker 命名卷只作为待显式迁移/清理的兼容来源，不再是新运行实例的持久存储。
 
@@ -59,55 +59,56 @@ git -C project/retrom-runtime status --short
 
 ## 3. 准备 worktree
 
-每个新 PFB 开发分支的基准都固定为 `manifest.yaml` 对应仓库 `defaultBranch` 的最新远端提交。`project/` 下的 checkout 仅用于管理共享 Git 仓库和 worktree；不得使用其当前分支、`HEAD` 或工作区内容作为 PFB 分支基准。
+根 `manifest.yaml`（schemaVersion 2）只声明 Retrom 的地址、默认分支和依赖清单位置。
+其他仓库由当前 Retrom worktree 的 `workspace/manifest.yaml`（schemaVersion 1）管理；
+`path` 相对于当前 workspace 根，始终保留 `project/...` 布局。
 
-若明确需要统一刷新全部基线，可在所有 manifest checkout 都 clean 时运行根项目的 `make update`。该命令先完成全仓 dirty 检查，再 fetch、检查可快进性，最后把所有基线切换并快进到各自 `defaultBranch`；任一仓库 dirty 时不会切换任何仓库。若只需创建涉及少量仓库的 PFB，或需要保留其他基线当前分支，则不要运行全局 update，按下方步骤只 fetch 所需仓库。
-
-下面的尖括号是占位符，执行前必须替换成 manifest 或已确认的值。先把根目录保存为绝对路径，避免 `git -C` 导致相对路径落到错误位置：
-
-```bash
-RETROM_PROJECT_ROOT="$(pwd -P)"
-PFB_WORKSPACE="$RETROM_PROJECT_ROOT/.worktree/<pfb>"
-mkdir -p "$PFB_WORKSPACE/project/retrom-core" "$PFB_WORKSPACE/project/retrom-other"
-```
-
-针对每个待纳入的仓库：
-
-1. 从 manifest 找到其 `path`、`gitlink` 和 `defaultBranch`。
-2. 确认仓库中用于该 `gitlink` 的远端；通常是 `origin`，但不要仅凭名称猜测，应用 `git remote -v` 核对 URL。
-3. 显式抓取 manifest 的默认分支，并解析刚抓取到的远端 ref：
+默认使用根命令准备所需源码：
 
 ```bash
-git -C "$RETROM_PROJECT_ROOT/<manifest-path>" fetch <manifest-remote> \
-  +refs/heads/<manifest-default-branch>:refs/remotes/<manifest-remote>/<manifest-default-branch>
-git -C "$RETROM_PROJECT_ROOT/<manifest-path>" rev-parse --verify \
-  refs/remotes/<manifest-remote>/<manifest-default-branch>
+make init PFB=<pfb> REPOS="retrom-runtime <core-id> <support-id>"
+make validate PFB=<pfb>
+make check PFB=<pfb> REPOS="retrom-runtime <core-id> <support-id>"
+make status PFB=<pfb>
 ```
 
-4. 使用符合该仓库约定的 PFB 开发分支名，从这个远端 ref 创建 worktree：
+`REPOS` 是精确仓库 ID 列表，不自动展开依赖；Retrom 始终包含在内。只需要应用/runtime
+时使用 `REPOS="retrom-runtime"`，省略 `REPOS` 才会准备完整清单。`init` 只准备源码，
+不初始化 PFB spec、不启动容器、不构建 core。
+
+命令先确保 Retrom owner checkout 存在，从刚 fetch 的维护分支提交创建 Retrom worktree，
+再读取这个 worktree 的清单准备其他仓库。Retrom/runtime 新分支为 `codex/<pfb>`，
+core/support 新分支为 `feat/<pfb>`。缺失的 owner checkout 克隆到根 `project/`，
+其存在只提供 Git 对象与 worktree 管理入口，不会把依赖加入基线清单。
+已有 owner 的分支、detached HEAD 和工作文件保持原状；新 PFB 的基准不能来自 owner 的 HEAD。
+
+已有目标 worktree 必须匹配声明的 origin 和外部 owner，并处于 attached branch；命令不切换、
+重置或清空它。新分支名已经存在时失败，不自动把未知分支复用到 PFB。
+需要自定义分支名时，先按相同来源规则手动准备相应 worktree，再运行 `init`：
 
 ```bash
-git -C "$RETROM_PROJECT_ROOT/<manifest-path>" worktree add \
-  -b <new-development-branch> \
-  "$PFB_WORKSPACE/<manifest-path>" \
-  refs/remotes/<manifest-remote>/<manifest-default-branch>
+git -C <owner-checkout> fetch origin \
+  +refs/heads/<maintenance-branch>:refs/remotes/origin/<maintenance-branch>
+git -C <owner-checkout> rev-parse --verify refs/remotes/origin/<maintenance-branch>
+git -C <owner-checkout> worktree add -b <explicit-feature-branch> \
+  <absolute-pfb-repository-path> <resolved-commit>
 ```
 
-例如，manifest 中 Retrom 的 `defaultBranch` 为 `master` 时，应先抓取并从 `refs/remotes/origin/master` 创建其 PFB 开发分支；基线 `project/retrom` 当前检出了什么分支不影响结果。
+先准备 Retrom，再读取它的清单决定 runtime/core/support 来源。记录解析出的完整 base commit；
+不要将本次功能分支写成 manifest 的 `defaultBranch`。
 
-其余仓库采用同样模式。core 分支还必须符合当前 fork/branch policy；不要为了绕过校验临时更改策略。若目标开发分支已存在于本地或其他 worktree，先确认它确实属于同一个 PFB。恢复已有 PFB 可以继续使用其原开发分支；不要为了追随新主线而静默重建、变基或覆盖已有工作。
+新增核心时，只编辑 `.worktree/<pfb>/project/retrom/workspace/manifest.yaml`，补齐依赖边，
+运行 `make validate PFB=<pfb>`，再以对应 `REPOS` 重跑 `init`。清单和集成代码一起进入该
+Retrom PR；不得写回根 bootstrap 或其他 PFB。根脚本串行化源码准备与基线 update，锁位于
+被忽略的 `.pfb/sources.lock`，普通开发编辑与只读查询不占锁。
 
-创建后对每个目录执行：
+旧 PFB 若缺少 `workspace/manifest.yaml` 或 `workspace/catalog.py`，先在该 Retrom 分支合入
+清单迁移。源码命令明确报错，不回退读取基线清单；`pfb-list`、生命周期操作与清理仍可使用。
 
-```bash
-git -C "$PFB_WORKSPACE/project/retrom" rev-parse --show-toplevel
-git -C "$PFB_WORKSPACE/project/retrom" branch --show-current
-git -C "$PFB_WORKSPACE/project/retrom" status --short
-```
-
-对 runtime 和 core 重复检查，并用 `realpath` 确认所有 toplevel 都是 `.worktree/<pfb>/project/` 的子路径。不要仅依赖相似的字符串前缀。
-
-对每个新建 worktree 记录创建时的 base commit，并确认它等于创建前解析的 `refs/remotes/<manifest-remote>/<manifest-default-branch>`。这能证明 PFB 来自 manifest 主线的最新抓取结果，而不是基线 checkout 当前分支。
+统一刷新基线时才使用 `make update`：先检查当前清单的脏状态，fetch 目标 Retrom 提交并
+用 `git show` 读取新清单，预检新旧清单中的现有仓库和默认分支后，才克隆新增仓库并应用更新。
+被移出清单的仓库不自动删除。新 clone 失败时不切换现有仓库；跨仓库应用不是 Git 原子事务，
+失败后应检查状态再续跑。不要用全局 update 准备一个 PFB。
 
 ## 4. 阅读仓库约束
 
@@ -261,7 +262,7 @@ make -C .worktree/<pfb>/project/retrom pfb-destroy PFB=<pfb> CONFIRM=<actual-pfb
 make pfb-remove PFB=<pfb>
 ```
 
-该命令在产生任何销毁副作用前，先验证 PFB 名称、由名称派生的实际 ID、spec 中的 source root，以及标准 `project/retrom`、`project/retrom-runtime`、`project/retrom-core/*`、`project/retrom-other/*` 布局下的全部已注册顶层 worktree。manifest 仓库必须匹配其基线 checkout；已退出当前 manifest 的历史仓库也必须能通过 Git common dir 映射到 PFB 外的已注册 owner checkout。若早先destroy已删除spec后中断，只有在同ID registry entry和容器均已不存在时才允许续传。只要任一 worktree 有 tracked、untracked 或 submodule 改动，命令就直接失败，PFB 不会被停止或销毁。全部 clean 后，命令显示实际 PFB ID、分支、精确worktree移除路径和匹配该ID的legacy volume；只有操作者交互输入 `y` 才会继续。确认后它调用 Retrom 的 `pfb-destroy`、删除已列出的legacy volume，非强制 deinit 已验证干净的 submodule，再逐个执行 Git worktree removal。若普通移除仍返回Git特定的submodule worktree拒绝，只在对该精确worktree再次clean检查后使用一次`--force`，绝不借此绕过脏状态。本地分支和共享网关保留。直接调用Retrom `pfb-destroy`仍保留迁移源旧卷，只有这个更强的根工作区清理入口才删除它们。
+该命令在产生任何销毁副作用前，先验证 PFB 名称、由名称派生的实际 ID、spec 中的 source root，以及标准 `project/retrom`、`project/retrom-runtime`、`project/retrom-core/*`、`project/retrom-other/*` 布局下的全部已注册顶层 worktree。当前 PFB 清单中的仓库必须匹配其基线 checkout；旧 PFB 无清单时仅从引导信息确认 Retrom，其余仓库按 Git 注册信息发现。已退出当前 manifest 的历史仓库也必须能通过 Git common dir 映射到 PFB 外的已注册 owner checkout。若早先destroy已删除spec后中断，只有在同ID registry entry和容器均已不存在时才允许续传。只要任一 worktree 有 tracked、untracked 或 submodule 改动，命令就直接失败，PFB 不会被停止或销毁。全部 clean 后，命令显示实际 PFB ID、分支、精确worktree移除路径和匹配该ID的legacy volume；只有操作者交互输入 `y` 才会继续。确认后它调用 Retrom 的 `pfb-destroy`、删除已列出的legacy volume，非强制 deinit 已验证干净的 submodule，再逐个执行 Git worktree removal。若普通移除仍返回Git特定的submodule worktree拒绝，只在对该精确worktree再次clean检查后使用一次`--force`，绝不借此绕过脏状态。本地分支和共享网关保留。直接调用Retrom `pfb-destroy`仍保留迁移源旧卷，只有这个更强的根工作区清理入口才删除它们。
 
 不要向该入口传 `CONFIRM`；内部确认值来自已经校验的 spec。`CONFIRM=<actual-pfb-id>` 仍只是直接调用底层 `pfb-destroy` 时的接口。
 

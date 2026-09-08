@@ -23,13 +23,13 @@ Baseline checkouts live at:
 - `project/retrom-core/<repository>` for cores consumed directly by the runtime
 - `project/retrom-other/<repository>` for supporting repositories that are not cores
 
-Nested Git submodules remain owned by their parent child repository. The authoritative repository list, default clone branch, clone URL, and dependency edges are in `manifest.yaml`.
+Nested Git submodules remain owned by their parent child repository. Root `manifest.yaml` only bootstraps Retrom. Read dependency paths, clone URLs, maintenance branches and edges from the selected Retrom checkout’s `workspace/manifest.yaml`. In a PFB, edit and commit that PFB’s Retrom catalog with the integration changes; never add dependencies to the shared root bootstrap or substitute another PFB’s catalog.
 
 ## Workspace commands
 
-- `make init` validates existing checkouts and clones only missing repositories.
-- `make check` validates every checkout and its origin.
-- `make update` requires every manifest checkout to be clean, fetches every manifest `defaultBranch`, switches all baseline checkouts to their declared default, and fast-forwards them. The all-repository dirty preflight must finish before any checkout is switched.
+- `make init` clones Retrom first, then its declared dependencies. `make init PFB=<name> REPOS="<ids>"` prepares selected source worktrees from that PFB’s catalog, preserving existing worktrees and baseline working files.
+- `make check` validates catalog checkouts and origins. `PFB=<name>` selects the PFB catalog and paths; `REPOS` selects exact IDs without expanding dependencies.
+- `make update` is baseline-only. It reads the target Retrom commit’s catalog before switching checkouts, checks existing repositories in both old and new catalogs, and validates default branches before cloning additions or applying updates. Removed repositories remain on disk. Never use this global operation to prepare a single PFB.
 - `make status` reports child branches, commits, and dirty state.
 - `make install-deps` installs Retrom and retrom-runtime dependencies.
 - `make dev` forwards to Retrom and serves the standard development stack at `http://localhost:4000`.
@@ -51,7 +51,7 @@ PFB source isolation mirrors the baseline layout below `.worktree/<pfb>/project/
 └── retrom-other/<repository>/
 ```
 
-Create those directories with `git worktree add` from the corresponding baseline repository. All source edits, builds, tests, and PFB inputs for the feature belong in that named worktree. Keep `RUNTIME_ROOT` and `CORE_ROOTS` pointed at repositories inside the same PFB tree.
+Use `make init PFB=<name> REPOS="<ids>"` to prepare sources, or `git worktree add` from the corresponding baseline repository when explicit branch names are needed. All source edits, builds, tests, and PFB inputs for the feature belong in that named worktree. Keep `RUNTIME_ROOT` and `CORE_ROOTS` pointed at repositories inside the same PFB tree.
 
 Each initialized Retrom PFB owns persistent runtime state below its own `.pfb/workspace/`. Source, database/CAS/uploads, base/loose dev providers, node_modules, Next and Go caches are bind-mounted into the development container, so restarting that container must retain them and keep the same PFB ID/URL. Web edits use HMR; Go edits need only `pfb-restart`; runtime adapter edits are rebuilt by the provider watcher and need one restart to reload the revision. Core builds are always explicit. Keep the entire worktree on a Linux local filesystem with POSIX permissions, SQLite locking, hard-link, and fsync semantics; do not place it under WSL `/mnt/c` or another Windows filesystem mount.
 
@@ -71,4 +71,4 @@ make RETROM_DIR="$PWD/.worktree/<pfb>/project/retrom" pfb-status PFB=<pfb>
 
 ## Change boundaries
 
-Changes to `manifest.yaml`, the root `Makefile`, root docs, bootstrap scripts, or `.codex/` belong to this root repository. Changes below `project/` or `.worktree/` belong exclusively to their child repositories. Verify both scopes independently before reporting or committing work.
+Changes to the Retrom bootstrap entry, root `Makefile`, root docs, bootstrap scripts, or `.codex/` belong to this root repository. Dependency catalog changes belong to Retrom’s `workspace/manifest.yaml` and must be reviewed and committed in that repository. Changes below `project/` or `.worktree/` belong exclusively to their child repositories. Verify both scopes independently before reporting or committing work.

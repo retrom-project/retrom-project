@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Callable
 
 from workspace import WorkspaceError, load_manifest, run_git
+from workspace_config import bootstrap
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,15 @@ PFB_ID = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,22}[a-z0-9])?$")
 
 class PFBRemoveError(RuntimeError):
     pass
+
+
+def load_pfb_repositories(root: Path, workspace_root: Path) -> list[dict[str, object]]:
+    retrom = workspace_root / "project/retrom"
+    if (retrom / "workspace/manifest.yaml").exists():
+        return load_manifest(retrom, root=root)
+    # Pre-migration PFBs remain removable through registered Git owners.
+    # Never substitute another branch's dependency catalog.
+    return [bootstrap(root)[0]]
 
 
 @dataclass(frozen=True)
@@ -52,7 +62,8 @@ def remove_pfb(
         raise PFBRemoveError("PFB commands must run as the current non-root user; do not use sudo")
 
     workspace_root = _flow_root(root, name)
-    repositories = repositories if repositories is not None else load_manifest()
+    if repositories is None:
+        repositories = load_pfb_repositories(root, workspace_root)
     worktrees = _discover_worktrees(root, workspace_root, repositories)
     retrom_root = workspace_root / "project/retrom"
     if not any(item.path == retrom_root for item in worktrees):
