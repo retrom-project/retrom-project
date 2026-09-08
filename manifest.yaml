@@ -24,6 +24,8 @@
         "kirikiroid2-web",
         "butterscotch",
         "tyranoscript",
+        "vice-libretro",
+        "virtualjaguar-libretro",
         "wasm4",
         "scummvm",
         "tic80",
@@ -82,6 +84,24 @@
       "role": "core",
       "gitlink": "git@github.com:retrom-project/tyranoscript.git",
       "defaultBranch": "retrom/gc8dbfd492afd",
+      "submodules": false,
+      "dependsOn": []
+    },
+    {
+      "id": "vice-libretro",
+      "path": "project/retrom-core/vice-libretro",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/vice-libretro.git",
+      "defaultBranch": "retrom/g1b4309f4d56d",
+      "submodules": false,
+      "dependsOn": []
+    },
+    {
+      "id": "virtualjaguar-libretro",
+      "path": "project/retrom-core/virtualjaguar-libretro",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/virtualjaguar-libretro.git",
+      "defaultBranch": "retrom/3.6.1",
       "submodules": false,
       "dependsOn": []
     },
