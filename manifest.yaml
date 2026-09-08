@@ -24,6 +24,7 @@
         "kirikiroid2-web",
         "butterscotch",
         "tyranoscript",
+        "j2me-web",
         "vice-libretro",
         "virtualjaguar-libretro",
         "wasm4",
@@ -88,6 +89,15 @@
       "dependsOn": []
     },
     {
+      "id": "j2me-web",
+      "path": "project/retrom-core/j2me-web",
+      "role": "core",
+      "gitlink": "git@github.com:retrom-project/j2me-web.git",
+      "defaultBranch": "main",
+      "submodules": false,
+      "dependsOn": ["minijvm", "freej2me-on-minijvm", "freej2me-plus"]
+    },
+    {
       "id": "vice-libretro",
       "path": "project/retrom-core/vice-libretro",
       "role": "core",
@@ -119,7 +129,7 @@
       "path": "project/retrom-core/wasm4",
       "role": "core",
       "gitlink": "git@github.com:retrom-project/wasm4.git",
-      "defaultBranch": "main",
+      "defaultBranch": "retrom/gca2600db8de4",
       "submodules": true,
       "dependsOn": []
     },
@@ -139,6 +149,33 @@
       "gitlink": "git@github.com:retrom-project/fake-08.git",
       "defaultBranch": "retrom/g814991a2571a",
       "submodules": true,
+      "dependsOn": []
+    },
+    {
+      "id": "minijvm",
+      "path": "project/retrom-other/miniJVM",
+      "role": "support",
+      "gitlink": "git@github.com:retrom-project/miniJVM.git",
+      "defaultBranch": "main",
+      "submodules": false,
+      "dependsOn": []
+    },
+    {
+      "id": "freej2me-on-minijvm",
+      "path": "project/retrom-other/freej2meOnMinijvm",
+      "role": "support",
+      "gitlink": "git@github.com:retrom-project/freej2meOnMinijvm.git",
+      "defaultBranch": "main",
+      "submodules": false,
+      "dependsOn": ["minijvm", "freej2me-plus"]
+    },
+    {
+      "id": "freej2me-plus",
+      "path": "project/retrom-other/freej2me-plus",
+      "role": "support",
+      "gitlink": "git@github.com:retrom-project/freej2me-plus.git",
+      "defaultBranch": "main",
+      "submodules": false,
       "dependsOn": []
     }
   ]

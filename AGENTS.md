@@ -13,12 +13,7 @@ Before editing a child repository, read every applicable `AGENTS.md` in that rep
 ```text
 retrom
 └── retrom-runtime
-    ├── Player
-    ├── mkxp-z-libretro-emscripten
-    ├── OnscripterYuri
-    ├── kirikiroid2-web
-    ├── Butterscotch
-    └── tyranoscript
+    └── ...
 ```
 
 Baseline checkouts live at:

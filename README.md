@@ -62,7 +62,32 @@ retrom-project/
 
 Do not use `root` or `sudo` for `make dev` or PFB commands. Retrom rejects those invocations to prevent root-owned generated files and containers.
 
-TIC-80 and FAKE-08 live in `retrom-project/TIC-80` and `retrom-project/fake-08`.
-The manifest selects their tested Retrom maintenance branches, `retrom/g4aba09c98f1e`
-and `retrom/g814991a2571a`; the fork `main` / `master` branches remain upstream mirrors.
-Runtime consumption uses immutable core releases rather than floating mirror branches.
+## Core and supporting repositories
+
+The manifest tracks Retrom, retrom-runtime, 13 core repositories and three J2ME
+supporting forks. Core entries come from the runtime's `provider-sources.json`
+and the workspace's maintained core forks. EmulatorJS archives are tracked by
+the runtime's `src/providers/emulatorjs/source-catalog.ts`; the individual cores
+inside those prebuilt archives do not each require a workspace checkout.
+
+The J2ME source chain uses these repositories, all on the `main` maintenance branch:
+
+| Repository | Workspace path | Dependencies in this workspace |
+| --- | --- | --- |
+| [j2me-web](https://github.com/retrom-project/j2me-web) | `project/retrom-core/j2me-web` | miniJVM, freej2meOnMinijvm, freej2me-plus |
+| [miniJVM](https://github.com/retrom-project/miniJVM) | `project/retrom-other/miniJVM` | None |
+| [freej2meOnMinijvm](https://github.com/retrom-project/freej2meOnMinijvm) | `project/retrom-other/freej2meOnMinijvm` | miniJVM, freej2me-plus |
+| [freej2me-plus](https://github.com/retrom-project/freej2me-plus) | `project/retrom-other/freej2me-plus` | None |
+
+The J2ME build script and maintenance documentation own the fixed dependency
+commits. Its historical `xxxsen` URLs do not change the workspace's canonical
+`retrom-project` clone URLs. TinySoundFont, FFmpeg and the SoundFont asset remain
+pinned downloads managed by the J2ME build script; nested Git submodules remain
+managed by their parent core repository.
+
+WASM-4, TIC-80 and FAKE-08 use `retrom-project/wasm4`, `retrom-project/TIC-80`
+and `retrom-project/fake-08`. The manifest selects their Retrom maintenance
+branches, `retrom/gca2600db8de4`, `retrom/g4aba09c98f1e` and
+`retrom/g814991a2571a`; the fork `main` / `master` branches remain upstream mirrors.
+Manifest branches select development checkouts. Runtime consumption continues
+to use immutable core releases and fixed build inputs from the child repositories.
