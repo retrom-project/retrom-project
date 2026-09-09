@@ -48,6 +48,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 新workspace在首次up前用`pfb-provider-import`显式导入一个已验证Provider基座；已有旧命名卷的PFB改为先执行一次`pfb-migrate-storage`，不要同时走两条路径。
 - 兼容数据库 migration 使用当前 `.pfb/workspace/` 原地升级。若当前分支明确引入不兼容开发数据变更，必须停止同一 PFB，并在启动前用 exact PFB ID 执行 `pfb-data-reset`；它可恢复地归档 `data/`、保留依赖/cache。若同时废弃旧 Provider 契约，使用当前 Retrom 支持的显式 `SOURCE_ROOT` 选项先验证新基座，再一并归档并替换 Provider 活动状态；不手改 `.pfb/` 绕过常规导入校验。禁止通过新分支、新 worktree 或新 PFB 规避数据清理。
 - 先运行各仓库 `AGENTS.md` 要求的针对性检查。首次执行PFB validate、基座导入或旧卷迁移、build、up；工具链变化执行down/build/up；日常迭代按HMR/restart路径；交付前执行status、verify和受影响的真实产品链。
+- 核心接入的标准手柄最低要求为方向移动和确认，取消可选。一个按钮在同一映射配置中只能对应一个具体目标输入，不得叠加原生 A/B 和 Enter/Escape 来满足菜单要求；保留真实键盘与已有正常取消。按当前 PFB 的 runtime 规范和 Retrom 产品 Case 验证，宿主菜单 B 返回不变。
 
 ## 权限与清理边界
 
