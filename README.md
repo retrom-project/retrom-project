@@ -166,3 +166,4 @@ to use immutable core releases and fixed build inputs from the child repositorie
 ## Refactor handoffs
 
 - [Retrom structure refactor handoff (2026-09-20)](docs/handoffs/retrom-project-structure.md): committed checkpoints, unfinished work, verification limits, and the PFB working-tree inventory.
+- [Retrom refactor publication record (2026-09-20)](docs/handoffs/retrom-project-structure-publication.md): published commits, Draft PR, current validation failures, and upstream integration status.

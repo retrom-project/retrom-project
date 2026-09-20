@@ -1,0 +1,919 @@
+{
+  "branch": "refactor/retrom-project-structure",
+  "parent": "28504499b37f14d15818df677f0c8e3083aba663",
+  "tree": "df7a7752cb24e720c7dab598d6f9626a9df0114f",
+  "path_count": 127,
+  "files": [
+    {
+      "path": "docs/import-and-review.md",
+      "status_before": " M",
+      "sha256": "79d6af76ca56a2d4cf5220a1d093dfd715b8bfcccd252766cd3d908942ec42cf",
+      "bytes": 131643
+    },
+    {
+      "path": "docs/retrom-product-architecture.md",
+      "status_before": " M",
+      "sha256": "e3c3dfa628f614d5284f1bd1d9ad4b83b89d556922a85ac3391739d2c0ec86b7",
+      "bytes": 67014
+    },
+    {
+      "path": "internal/adapter/integration/libraryimport/arcade_closure_integration_test.go",
+      "status_before": " M",
+      "sha256": "24b0e61bc22c6b61e9a7482d9a479ceb4cbaa25eb6b4b26e35734a39baa406d3",
+      "bytes": 13669
+    },
+    {
+      "path": "internal/adapter/integration/libraryimport/arcade_parent_worker.go",
+      "status_before": " M",
+      "sha256": "e96367410acc3c624e603c749365ee4e6295103a82ef5b3e628e55282350cdc9",
+      "bytes": 10714
+    },
+    {
+      "path": "internal/adapter/integration/libraryimport/dos_arcade_integration_test.go",
+      "status_before": " M",
+      "sha256": "e632c2c4c73fa336e5a4251e468710277b72d4656a315d453d4304975082f5bd",
+      "bytes": 24047
+    },
+    {
+      "path": "internal/adapter/integration/libraryimport/dos_corpus_test.go",
+      "status_before": " M",
+      "sha256": "5674292f8a5b51499c44f0f13abc391401b8491c80beaea9f4e1043f9d3d5aa5",
+      "bytes": 3799
+    },
+    {
+      "path": "internal/adapter/integration/libraryimport/service.go",
+      "status_before": " M",
+      "sha256": "4f6c527ab31e3276169e8004e97dd979e1ace04bedb9b596984277837da23a95",
+      "bytes": 2940
+    },
+    {
+      "path": "internal/bootstrap/composition/libraryimport/creation.go",
+      "status_before": " M",
+      "sha256": "bed1f8e467b7f34a3d690caf4dc9e292f1392b879162caf2cfc341c47120998e",
+      "bytes": 2210
+    },
+    {
+      "path": "internal/bootstrap/composition/server_import.go",
+      "status_before": " M",
+      "sha256": "b4de7dcf955e55ce59b8f8da60c65c081f17075d3c89b694fba9e195da7ea24c",
+      "bytes": 1644
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/detector.go",
+      "status_before": " M",
+      "sha256": "56daaf1fef0fff788912100385dff15a4f2bc8b3906180a5dd8ca27428418081",
+      "bytes": 5456
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/detector_test.go",
+      "status_before": " M",
+      "sha256": "96b08bda22c4b65bf4dc6e1d876d66d6e5fca2c5193097024ed5eab23dc4d2ca",
+      "bytes": 7526
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/fuzz_test.go",
+      "status_before": " M",
+      "sha256": "0761a5b9074e5e470da18eb7aa545110835cc6c5fc887f0c92ba0e5d1e30b933",
+      "bytes": 1042
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/index.go",
+      "status_before": " M",
+      "sha256": "0bc5dcf08021ce32cf8efbe6d0d9bc450e7bc777afc4abe46a599f8d70d4ed5e",
+      "bytes": 2802
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/ini.go",
+      "status_before": " M",
+      "sha256": "93eb9aa904d5eb0d0b6d58903bc590abf94bbd87be672d665f50a8e33ece83c9",
+      "bytes": 2880
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/lcf.go",
+      "status_before": " M",
+      "sha256": "7e640fed7563496f6faa98a70d6d1bd83c2aec098445ed885afca7469d5a4326",
+      "bytes": 8113
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/lcf_test.go",
+      "status_before": " M",
+      "sha256": "a9072e0fa16373af97a4869a6893fb8845eae89bca2bcda21597ba3178d63d10",
+      "bytes": 5907
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/public_security_fixture_test.go",
+      "status_before": "D ",
+      "deleted": true
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/rgss.go",
+      "status_before": " M",
+      "sha256": "7b07ae62c0e563ad97bf6509754f29968600d0d9448b6e03e716f112bdac53e6",
+      "bytes": 5875
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/rgss_test.go",
+      "status_before": " M",
+      "sha256": "b6651ea01d865cfcecc94c81743919e72a2d8553698175d9fde5d72b1fd4f096",
+      "bytes": 4123
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/types.go",
+      "status_before": " M",
+      "sha256": "d559bb1cedd67e41ecac29977ffd8d03c07264596cd4bbaec1f01f2dbbc9f4eb",
+      "bytes": 2991
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/web.go",
+      "status_before": " M",
+      "sha256": "da7941ca9fffb833e46fe7b6c08bc4ce2d4ce7409f06ccff487e83530aa30e3a",
+      "bytes": 8816
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/web_test.go",
+      "status_before": " M",
+      "sha256": "f33e3e3566f9f98f40c48c144886f764a75c373e6509858fbbd3922f1d3baf63",
+      "bytes": 6540
+    },
+    {
+      "path": "internal/capability/format/importing/archive.go",
+      "status_before": " M",
+      "sha256": "265d956b031443c6b8d406669b5e088fa996f78a1955e640ced8ce7b8a509ee4",
+      "bytes": 3345
+    },
+    {
+      "path": "internal/capability/format/importing/archive_compatibility_linux_test.go",
+      "status_before": " M",
+      "sha256": "5917afc6ae59f380f817a3c6c9eadb04076422162162f307b2f17d4702aa976d",
+      "bytes": 6051
+    },
+    {
+      "path": "internal/capability/format/importing/archive_compatibility_run_linux_test.go",
+      "status_before": " M",
+      "sha256": "f9fc11b17d72e59b5ec56b70a997bfe0fc3e19cf068ba29275a1891c66ed7718",
+      "bytes": 7827
+    },
+    {
+      "path": "internal/capability/format/importing/archive_facts_test.go",
+      "status_before": " M",
+      "sha256": "8e8c77d4530d47078c91e4fef53aec36021134dfc07b16dadb0e9f3c65fd2e90",
+      "bytes": 3215
+    },
+    {
+      "path": "internal/capability/format/importing/archive_test.go",
+      "status_before": "D ",
+      "deleted": true
+    },
+    {
+      "path": "internal/capability/format/importing/asar_header.go",
+      "status_before": " M",
+      "sha256": "3b4c74366d01f4837ad7499309f2c5f053a659343c23e539589396676b8b2ae9",
+      "bytes": 9186
+    },
+    {
+      "path": "internal/capability/format/importing/electron_asar_layout.go",
+      "status_before": " M",
+      "sha256": "2bdc047ff02343a29c2ad2bff8d0b9c516e7875393e0f6085fa01a268f1e781c",
+      "bytes": 2275
+    },
+    {
+      "path": "internal/capability/format/importing/electron_asar_lifecycle_linux_test.go",
+      "status_before": "D ",
+      "deleted": true
+    },
+    {
+      "path": "internal/capability/format/importing/electron_asar_test.go",
+      "status_before": "D ",
+      "deleted": true
+    },
+    {
+      "path": "internal/capability/format/importing/electron_asar_zip.go",
+      "status_before": " M",
+      "sha256": "a463f933a96984c7b9505ee1cf52291bcaead72e4e55fbaf73d3b962bad5b325",
+      "bytes": 1851
+    },
+    {
+      "path": "internal/capability/format/importing/nwjs_executable.go",
+      "status_before": " M",
+      "sha256": "7bf472d36db65f791a9cd5327db8ac85ba2ace3d753cdacbcb83e88cdb91ae56",
+      "bytes": 1048
+    },
+    {
+      "path": "internal/capability/format/importing/nwjs_executable_test.go",
+      "status_before": "D ",
+      "deleted": true
+    },
+    {
+      "path": "internal/capability/format/importing/zip_header.go",
+      "status_before": " M",
+      "sha256": "8483f7fc71f4824a7226991f64c4fc034a50f1e7b2b7d307f24285282fc8eec5",
+      "bytes": 3242
+    },
+    {
+      "path": "internal/repo/firmware/context_test.go",
+      "status_before": " M",
+      "sha256": "6bd2fb28d770fde95bc06566804721df1abd89cfb9e45423ae1ac8bb52ea0244",
+      "bytes": 936
+    },
+    {
+      "path": "internal/repo/firmware/service_integration_test.go",
+      "status_before": " M",
+      "sha256": "edeeaddfa3784126764e910caf123dabfeae3ac1231de7197e3e7acac987ee05",
+      "bytes": 21396
+    },
+    {
+      "path": "internal/repo/firmware/static_archive_integration_test.go",
+      "status_before": " M",
+      "sha256": "037641bd2d546783d752032f64dba7d81144cb4cd996a960f66aecdba9cd5af5",
+      "bytes": 4157
+    },
+    {
+      "path": "internal/repo/gamecontent/service_integration_test.go",
+      "status_before": " M",
+      "sha256": "a3d2bc1ca1ab3d8c3cd7a10625c2890a7c4100415b4072df08d81eebcc6d837c",
+      "bytes": 28643
+    },
+    {
+      "path": "internal/service/firmware/service.go",
+      "status_before": " M",
+      "sha256": "49234373d3a1a5667f633699a6f147c760dd47903704216bb00c5b1043013a4e",
+      "bytes": 6244
+    },
+    {
+      "path": "internal/service/firmware/service_test.go",
+      "status_before": " M",
+      "sha256": "78d17c093e702b59dc8d5bbaacf69be2bda1781471af791430b2c244a5aa2f2d",
+      "bytes": 5482
+    },
+    {
+      "path": "internal/service/gamecontent/rpgmaker.go",
+      "status_before": " M",
+      "sha256": "1ca5ada3a3f14369fea23778c736f986f6c5c68f008b28c3e79704d7cd2937c3",
+      "bytes": 10391
+    },
+    {
+      "path": "internal/service/gamecontent/service.go",
+      "status_before": " M",
+      "sha256": "9887772ce79ddb3e184bf92706f34c05e18d6185376c1538e5102a0aabe203fe",
+      "bytes": 3269
+    },
+    {
+      "path": "internal/service/libraryimport/arcade_import.go",
+      "status_before": " M",
+      "sha256": "a5ff2c600fe2363f538d8394655247605b6f0e495d3cd141e7591584cf2dde58",
+      "bytes": 19102
+    },
+    {
+      "path": "internal/service/libraryimport/dos_import.go",
+      "status_before": " M",
+      "sha256": "bdcfb0e4f3aca38ba448da1ad5afd2c51d060ee0ba26d8c307d1a21e451660b6",
+      "bytes": 18712
+    },
+    {
+      "path": "internal/service/libraryimport/environment.go",
+      "status_before": " M",
+      "sha256": "197eb3581c8f5f6ca52eebfc63424870fb622ceecc2bb06a59cfec080f2e1df4",
+      "bytes": 1268
+    },
+    {
+      "path": "internal/service/libraryimport/import_preparation.go",
+      "status_before": " M",
+      "sha256": "159fe7bd4ed4a867e7d042eb90b18f0de2beb9a506f507204c33e6f046efe867",
+      "bytes": 4624
+    },
+    {
+      "path": "internal/service/libraryimport/marker_project_prepare.go",
+      "status_before": " M",
+      "sha256": "79a6e03bab4f012f0785d48566f1f778f503e1a10ceb31bf588c20c4b277f2db",
+      "bytes": 13463
+    },
+    {
+      "path": "internal/service/libraryimport/multidisc_import.go",
+      "status_before": " M",
+      "sha256": "6f9fe0f992ac4f4a260da64f47d6f796d9c2fe93be38a32a2999d8c6fb94875f",
+      "bytes": 15010
+    },
+    {
+      "path": "internal/service/libraryimport/rpgmaker_import.go",
+      "status_before": " M",
+      "sha256": "bb370e88a48bb3b17b7598a403224502821088ab094176c1c0e6e71bda39f4b9",
+      "bytes": 8572
+    },
+    {
+      "path": "internal/service/libraryimport/rpgmaker_sidecar.go",
+      "status_before": " M",
+      "sha256": "22d4ef17f3703d7c0f58805849021ba916ad0c8e0368701c80b89a6081629d92",
+      "bytes": 3206
+    },
+    {
+      "path": "internal/service/serverimport/application.go",
+      "status_before": " M",
+      "sha256": "81fa3cea841bd7ad810aced6183c46fa8aeec3e9683a8658d9e28879431d4414",
+      "bytes": 4657
+    },
+    {
+      "path": "internal/service/serverimport/integration_archive_catalog_test.go",
+      "status_before": " M",
+      "sha256": "97b1254f6c5031ac7b7487cf54039800d56e4e67e4af14df63e85f4e2b1afd3c",
+      "bytes": 5906
+    },
+    {
+      "path": "internal/service/serverimport/integration_service_test.go",
+      "status_before": " M",
+      "sha256": "d944e64749a2e9cdd729e99d4b9fb1490e5c9c99a6a14139a61507aced2b48dd",
+      "bytes": 17282
+    },
+    {
+      "path": "internal/service/serverimport/worker_discovery.go",
+      "status_before": " M",
+      "sha256": "f97e865d14cdb534873209e000990f27908d60d036ef7c6a2f22179bca307167",
+      "bytes": 15637
+    },
+    {
+      "path": "internal/transport/httpapi/server.go",
+      "status_before": " M",
+      "sha256": "efd48f3da8757e6c12f6410b7393f07f9b46fa7a504b4c0ffebf20e62bbc2ec0",
+      "bytes": 31283
+    },
+    {
+      "path": "quality/architecture/package-ownership.json",
+      "status_before": " M",
+      "sha256": "f9ac0217dbee3813b367756579e47d4f296fe1a586263640d28883cf4d737362",
+      "bytes": 495271
+    },
+    {
+      "path": "internal/adapter/content/archive/archive.go",
+      "status_before": "??",
+      "sha256": "3d56bcd527af2b9d6ee0fbd52eea15f40f2e8f6e128c22fea5ff7a038f2a0a60",
+      "bytes": 1512
+    },
+    {
+      "path": "internal/adapter/content/archive/archive_lifecycle_test.go",
+      "status_before": "??",
+      "sha256": "6af143e74c1dee9e52c7d012c10a111bd48fc98eda2082ea06f8d1fefce8f755",
+      "bytes": 6469
+    },
+    {
+      "path": "internal/adapter/content/archive/archive_test.go",
+      "status_before": "??",
+      "sha256": "c29d6384277ae190dcadd00e5641737cc35b749c03f5bcb078cc0535cf5afa26",
+      "bytes": 7710
+    },
+    {
+      "path": "internal/adapter/content/archive/asar_cursor.go",
+      "status_before": "??",
+      "sha256": "a96f7e2901d6e78f4e4e4e113387a1c99f8beb7d1dfb1fb468a899bcfd74d727",
+      "bytes": 4357
+    },
+    {
+      "path": "internal/adapter/content/archive/asar_cursor_test.go",
+      "status_before": "??",
+      "sha256": "c5bca9e28365e970e185dfb91d3db503cc092b9c65add45c6d96e977023ee75d",
+      "bytes": 5090
+    },
+    {
+      "path": "internal/adapter/content/archive/asar_header.go",
+      "status_before": "??",
+      "sha256": "04f4f049167ebb24d4e980ef7506470f11d74c0a9faf8285aede8a10b6ba59a8",
+      "bytes": 1102
+    },
+    {
+      "path": "internal/adapter/content/archive/asar_header_test.go",
+      "status_before": "??",
+      "sha256": "2c8164f53a9452d47ec4f90f0d9afe4dac8e92082581b8f9ff2bf793c913938d",
+      "bytes": 2351
+    },
+    {
+      "path": "internal/adapter/content/archive/asar_unpacked.go",
+      "status_before": "??",
+      "sha256": "3c8c394faf2a76000f675eb8e08ecda926328b4a90800bf563d78ce9ad4cd6e0",
+      "bytes": 693
+    },
+    {
+      "path": "internal/adapter/content/archive/diagnostics.go",
+      "status_before": "??",
+      "sha256": "cad3b77c525b558e3409064c15fc013d278dacfcad9044a3eecae7c02cfb034d",
+      "bytes": 479
+    },
+    {
+      "path": "internal/adapter/content/archive/electron_asar_lifecycle_linux_test.go",
+      "status_before": "??",
+      "sha256": "eba8505ca0e6a1d51b6dfef9f555e0fd41435c3fe9513c7dcababd734895bb7a",
+      "bytes": 2141
+    },
+    {
+      "path": "internal/adapter/content/archive/electron_asar_test.go",
+      "status_before": "??",
+      "sha256": "624c38adcec7a15eed484666229a04dbf5a62cde5b0c9b5f5d7983c1a656832c",
+      "bytes": 8164
+    },
+    {
+      "path": "internal/adapter/content/archive/electron_asar_zip.go",
+      "status_before": "??",
+      "sha256": "0b69ca34f54a891b368be5e4ae0961790a17e9f1d179a69e4da71763135c29f0",
+      "bytes": 3209
+    },
+    {
+      "path": "internal/adapter/content/archive/error_compatibility_test.go",
+      "status_before": "??",
+      "sha256": "e65f4177e57dd3da749621a3eadc747927d3455f6c4e17258b04f6f1273e5c34",
+      "bytes": 5161
+    },
+    {
+      "path": "internal/adapter/content/archive/nwjs_executable.go",
+      "status_before": "??",
+      "sha256": "eeaf6603275adcad21f9f037225eb6a2ce4353b4aecf492671628c599be78fc1",
+      "bytes": 2004
+    },
+    {
+      "path": "internal/adapter/content/archive/nwjs_executable_test.go",
+      "status_before": "??",
+      "sha256": "a9e0fe2d6e78c959c079d608a770fa9412800cac7abed971f10a7a10a5de7796",
+      "bytes": 1852
+    },
+    {
+      "path": "internal/adapter/content/archive/project_test.go",
+      "status_before": "??",
+      "sha256": "bd46f3165bfc2ef897122fba7d9a4b52f31c6e2111530efc265bd1d6d0d5b563",
+      "bytes": 1370
+    },
+    {
+      "path": "internal/adapter/content/archive/reader.go",
+      "status_before": "??",
+      "sha256": "1831b2b38766fdc2b389ea9a11a3842584fef8ee9cbadd5162c6f9689ca4473b",
+      "bytes": 1525
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/capture.go.txt",
+      "status_before": "??",
+      "sha256": "3decab35382f55c30586ff93c3bcaece4836745a994e341d12d1c22ed9ead9a5",
+      "bytes": 3415
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-go-golden.json",
+      "status_before": "??",
+      "sha256": "8552e3066764146909bef9983bb3322090a4057af134b9ada7e6ddd3032938ae",
+      "bytes": 2333
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/archive.go.txt",
+      "status_before": "??",
+      "sha256": "8f10cb0b8d2f9be46b263d899e01cd2aef717ea53e4709c6626e95fac9c99664",
+      "bytes": 11986
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/asar_header.go.txt",
+      "status_before": "??",
+      "sha256": "1f927289fe913228f8fa1cffa5254dc8be6a403a22329776fbafee4b7e191545",
+      "bytes": 9642
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/electron_asar_layout.go.txt",
+      "status_before": "??",
+      "sha256": "588be0e944f977aeffb6f28f84ec73474b251d2bcd1ecef669725b5d3b0a83ea",
+      "bytes": 3514
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/electron_asar_zip.go.txt",
+      "status_before": "??",
+      "sha256": "b922ca58ee39eec213866d8f6ec5bca9f7b8164210f1b95adadbb3acd3a0252c",
+      "bytes": 8174
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/nwjs_executable.go.txt",
+      "status_before": "??",
+      "sha256": "85092abc4660a07625237df25b2296ab0452f4b429e61f9fc952783d83e0c578",
+      "bytes": 3102
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/path.go.txt",
+      "status_before": "??",
+      "sha256": "e7a1c7db6c1c1cad427086b5a7f391439ead1f6ddc3edb4712efb5cd3b85a491",
+      "bytes": 1486
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/old-source/zip_header.go.txt",
+      "status_before": "??",
+      "sha256": "baf01c021fbaa8887643404727b76351b911650dad082413ffbca23169b1d262",
+      "bytes": 3242
+    },
+    {
+      "path": "internal/adapter/content/archive/testdata/old-errors/provenance.json",
+      "status_before": "??",
+      "sha256": "45af300f2c427ca6906d0e219adf2406b4205246c31a217efe2b5c59151e0322",
+      "bytes": 1947
+    },
+    {
+      "path": "internal/adapter/content/archive/zip.go",
+      "status_before": "??",
+      "sha256": "6d36f06381d69f35814f8936da3ee2a365f11f5ccfd52e2e31bcd742d97e1a2e",
+      "bytes": 2312
+    },
+    {
+      "path": "internal/adapter/content/archive/zip_cursor.go",
+      "status_before": "??",
+      "sha256": "95de4f6e518185bd79b4454f35a43a7be4e9eb59cb337fedd5dda5e12e7289e2",
+      "bytes": 3457
+    },
+    {
+      "path": "internal/adapter/content/archive/zip_cursor_eof_test.go",
+      "status_before": "??",
+      "sha256": "e3cb5aecec3c8d5e9e6781fe4befb3443a30c50e55337b8cce6545b45cd6479c",
+      "bytes": 7281
+    },
+    {
+      "path": "internal/adapter/content/archive/zip_cursor_fault_test.go",
+      "status_before": "??",
+      "sha256": "e391fbd8e7774b359f169534b93b1adda744381ac4f34aa21bcf9f44ec913991",
+      "bytes": 5249
+    },
+    {
+      "path": "internal/adapter/content/archive/zip_scan.go",
+      "status_before": "??",
+      "sha256": "ea15d2000cbb698bdf0ea23c8c08f43666e18b42229bd9bc0e1b48cb7bbcb4ef",
+      "bytes": 3293
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/blobs.go",
+      "status_before": "??",
+      "sha256": "715657538bca8b4d831675dae1c287f3a583f2e0216235546319ceaae0a2d90b",
+      "bytes": 1450
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/blobs_linux_test.go",
+      "status_before": "??",
+      "sha256": "3234605b0be66e3a833a285cefeee674ec7f0e428ba1474095e5832d08c68d13",
+      "bytes": 1068
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/blobs_test.go",
+      "status_before": "??",
+      "sha256": "169710c1c8723078997593120107804159cbf1c95be55d70886ef52c48fa2d64",
+      "bytes": 2090
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/compatibility_test.go",
+      "status_before": "??",
+      "sha256": "51e798659f4e9fd9be0e0e80aa9884389c5789727fe1b200751f9aa5d88d7a6a",
+      "bytes": 4119
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+      "status_before": "??",
+      "sha256": "084d948f19303d98f9138d7a92593d0a3d17d1f242a2fe1aaac7671d15940397",
+      "bytes": 1488
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/fixture_inputs_test.go",
+      "status_before": "??",
+      "sha256": "684b5a1a1c13975cf1b2cb3d60571297f446465b4b137e39fdde23ea4af746fe",
+      "bytes": 2858
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/prepared.go",
+      "status_before": "??",
+      "sha256": "cc03166a5adddf9f9de2d67e0d5f51bb893ca96afa7e51b31130ac8fa9de7f86",
+      "bytes": 1234
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/prepared_test.go",
+      "status_before": "??",
+      "sha256": "c7a5209fc5959f9bd65770aa6a0a9de14a2a53ca6755d3e6525bc2a69c0c1303",
+      "bytes": 3229
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/provenance_test.go",
+      "status_before": "??",
+      "sha256": "3e02d76d4c5ae9642c34a9f5f482be673365e27fbb6f8a8329e616843072a519",
+      "bytes": 1120
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/public_security_fixture_test.go",
+      "status_before": "??",
+      "sha256": "af8a4f68aaed2ccf66499ed3f717d29ed29742a191cee714affd81f0a3f424ec",
+      "bytes": 4571
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+      "status_before": "??",
+      "sha256": "cdc77d34e592fcf5d532446bb95bf2bf3c71ae1b27e0b5e072f0da29e7f89330",
+      "bytes": 895
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/reader_test.go",
+      "status_before": "??",
+      "sha256": "04b375bce3e84dcf1c830235ff47765000346e3db519773dea0378ca49b91f8a",
+      "bytes": 2431
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/README.md",
+      "status_before": "??",
+      "sha256": "95506e0e4b0c70d780db619f6a2f1c050d8647ccacdc68e362b1f44f158034b3",
+      "bytes": 1959
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/bounded-inputs.json",
+      "status_before": "??",
+      "sha256": "8f7ddaefadda3e040b06f5f2c0a2a1a86cc1bac133fec83a6b72b9d5a74c4737",
+      "bytes": 6405
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/fixture-inputs.json",
+      "status_before": "??",
+      "sha256": "da1130e28947423a7ac57d3f936a43ba8fd450cf966a2e09314c36144813f552",
+      "bytes": 287085
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/old-capture.go.txt",
+      "status_before": "??",
+      "sha256": "45a44ed6afdde191db7581d7b7e59fa50b991f2d580c52cf29962c3d755b96f7",
+      "bytes": 11794
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/old-golden.json",
+      "status_before": "??",
+      "sha256": "1ce3b90ccead224cca1a9f28d4d4a3d122a78aca8f3bb1cbd06de27aa5edb439",
+      "bytes": 158593
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/testdata/provenance.json",
+      "status_before": "??",
+      "sha256": "b1c70925dbb8ba60939e46627ccd6be3bd1b269e34d8588506ccf8a005e582b7",
+      "bytes": 3665
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/trace_index_test.go",
+      "status_before": "??",
+      "sha256": "b5b5181f46e4666d2f583e4c643eea3c231cc8fa3e290a269e1000feccabe570",
+      "bytes": 3031
+    },
+    {
+      "path": "internal/bootstrap/composition/firmware.go",
+      "status_before": "??",
+      "sha256": "69de24c8276bd2faab5f86cc7e4b7647c65b0099fb1d84de8f5881acb49c81e2",
+      "bytes": 705
+    },
+    {
+      "path": "internal/bootstrap/composition/gamecontent.go",
+      "status_before": "??",
+      "sha256": "2801e21aaf7de354dbdf97114ceb6a9eac7036226b91e0d9cca2985e6bac306d",
+      "bytes": 954
+    },
+    {
+      "path": "internal/bootstrap/composition/libraryimport/archive.go",
+      "status_before": "??",
+      "sha256": "1627339213a9ca4a40463601b06f20e91b2d9943ce8b2e7be306014b5b87d735",
+      "bytes": 419
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/inspection.go",
+      "status_before": "??",
+      "sha256": "dada28f41d95dff9469964a67b3dfc2a3b87568f4247cf2215e39e0f112b96c7",
+      "bytes": 6783
+    },
+    {
+      "path": "internal/capability/engine/rpgmaker/detector/inspection_test.go",
+      "status_before": "??",
+      "sha256": "294d2729e66f342d82fa71b69dd1da2a342e582826c7682ff1c9369eeeeee21a",
+      "bytes": 3165
+    },
+    {
+      "path": "internal/capability/format/importing/archive_project.go",
+      "status_before": "??",
+      "sha256": "d84e71fa3bc62d55fa3734b92d8997ecd40eb17dacb502913dcf6df2781b2e14",
+      "bytes": 633
+    },
+    {
+      "path": "internal/capability/format/importing/zip_directory.go",
+      "status_before": "??",
+      "sha256": "b186ed5238cef970bb9dc102030799bb7683a5dec975cd669e1be2dd4019e590",
+      "bytes": 3587
+    },
+    {
+      "path": "internal/model/firmware/archive_ports.go",
+      "status_before": "??",
+      "sha256": "0c3bd330980b550d15c171c6b26680598037a3a7f0cf2c9e1bab6cf589096afe",
+      "bytes": 218
+    },
+    {
+      "path": "internal/model/gamecontent/rpgmaker_ports.go",
+      "status_before": "??",
+      "sha256": "8aae248858fd7268c3890a6f8070bafdde51d897e97fe5e2d983485f206dc9df",
+      "bytes": 462
+    },
+    {
+      "path": "internal/model/libraryimport/archive_ports.go",
+      "status_before": "??",
+      "sha256": "ad8bcc1aa530a4a31109d6c8d786ddff05181104fdc6696d10a9750406f6477b",
+      "bytes": 852
+    },
+    {
+      "path": "internal/model/libraryimport/rpgmaker_ports.go",
+      "status_before": "??",
+      "sha256": "64d69f47360dd997d86497dd8dde42f283baacba0e8f53995e21f755b25b9970",
+      "bytes": 478
+    },
+    {
+      "path": "internal/model/serverimport/archive_ports.go",
+      "status_before": "??",
+      "sha256": "687b30805bb36ed3aa14bf0fa8f712747f69b1ba82171a437251403ab389875c",
+      "bytes": 222
+    },
+    {
+      "path": "internal/service/gamecontent/rpgmaker_detection_test.go",
+      "status_before": "??",
+      "sha256": "23365b79f1532fb5113dd426c7dc64e251a1e05ce1318d4e59ba77d8b6c1ac03",
+      "bytes": 3234
+    },
+    {
+      "path": "internal/service/libraryimport/project_archive.go",
+      "status_before": "??",
+      "sha256": "4f1238b133bce0c52521e68fe6431a2ca06330750083e3e000452af9bddddcca",
+      "bytes": 3356
+    },
+    {
+      "path": "internal/service/libraryimport/project_archive_error_test.go",
+      "status_before": "??",
+      "sha256": "30a14d887ff4872652027d1b32cd16a466e46296fa9f05821c9c0513905a1863",
+      "bytes": 7643
+    },
+    {
+      "path": "internal/service/libraryimport/project_archive_fixture_test.go",
+      "status_before": "??",
+      "sha256": "1819af458eb80242a2a3f26412f8dcdcb0d63ef612da62ceb7c01d9a98290fb2",
+      "bytes": 9169
+    },
+    {
+      "path": "internal/service/libraryimport/project_archive_lifecycle_test.go",
+      "status_before": "??",
+      "sha256": "e5d0bd0668898cd9e120b40f7c307f7e41ed0fa08a58ff5c93a817fdbe512d63",
+      "bytes": 3491
+    },
+    {
+      "path": "internal/service/libraryimport/project_archive_zip_eof_test.go",
+      "status_before": "??",
+      "sha256": "ee06aa5fb59712bf2ab16c01be0b36d3485f9bb7b080c41b1be2b61a3043105d",
+      "bytes": 2599
+    },
+    {
+      "path": "internal/service/libraryimport/rpgmaker_detection_test.go",
+      "status_before": "??",
+      "sha256": "4d568d714d3fbdb3bb2557fade92a7810fc0a5489a0d785845f25c1d9c5e505f",
+      "bytes": 7179
+    }
+  ],
+  "checks": {
+    "git_diff_check": "PASS",
+    "exact_scope": "PASS",
+    "source_hashes": "PASS",
+    "unexpected_source_changes": 0
+  },
+  "normalization": "10 unapproved nolint annotations changed to ordinary comments; no code behavior changed; existing registered suppressions preserved.",
+  "commit": "6fb031a90ef9db0a3dd3b6578d6d4925ed00ed57",
+  "committed_at": "2026-09-20T13:26:00.297974+00:00",
+  "commit_count_since_82834ba": 60,
+  "validation": {
+    "scope": "Current combined B2/RPG worktree, with unapproved annotations converted to plain comments; full refactor remains incomplete.",
+    "source_digest_before": "a2bccce1110f60866067be962c329b7d9523c66c9918201f71dbe58236bf8527",
+    "commands": [
+      {
+        "name": "backend-check",
+        "command": [
+          "make",
+          "-k",
+          "backend-check"
+        ],
+        "exit": 2,
+        "seconds": 509.611,
+        "log": ".artifacts/refactor/pr-publish/backend-check.log"
+      },
+      {
+        "name": "integration-test",
+        "command": [
+          "make",
+          "integration-test"
+        ],
+        "exit": 2,
+        "seconds": 763.57,
+        "log": ".artifacts/refactor/pr-publish/integration-test.log"
+      },
+      {
+        "name": "focused-race",
+        "command": [
+          "go",
+          "test",
+          "-race",
+          "-count=1",
+          "./internal/adapter/content/archive",
+          "./internal/adapter/engine/rpgmaker/detector",
+          "./internal/service/libraryimport",
+          "./internal/service/gamecontent",
+          "./internal/service/firmware",
+          "./internal/service/serverimport"
+        ],
+        "exit": 0,
+        "seconds": 60.819,
+        "log": ".artifacts/refactor/pr-publish/focused-race.log"
+      }
+    ],
+    "status": "HAS_FAILURES",
+    "source_digest_after": "a2bccce1110f60866067be962c329b7d9523c66c9918201f71dbe58236bf8527",
+    "sources_unchanged": true,
+    "report_sha256": "6f54df050c5fc466071f120e5cbdf97b0ee135eba71cc2a6f90719ca0e2cf3f0"
+  },
+  "serial_architecture_reproduction": {
+    "name": "serial-architecture-integration",
+    "command": [
+      "go",
+      "test",
+      "-tags=integration",
+      "-count=1",
+      "./internal/testkit/architecture",
+      "./scripts/architecture-check"
+    ],
+    "exit": 1,
+    "seconds": 73.184,
+    "log": ".artifacts/refactor/pr-publish/serial-architecture-integration.log",
+    "note": "Targeted rerun after full integration failed; no timeout/rule changes; original full integration failure retained.",
+    "report_sha256": "0b44559b048119e8aabdfedcf20b92e73a950436fbcfd37890cca5b3ed0cffad"
+  },
+  "working_tree_after_commit": "clean",
+  "upstream_master": "36574c39690fe1cbf9f9f8e07876f7562239a6cf",
+  "published_at": "2026-09-20T13:32:04.610008+00:00",
+  "repository": "retrom-project/retrom",
+  "head_repository": "testcgd/retrom",
+  "pull_request": "https://github.com/retrom-project/retrom/pull/57",
+  "draft": true,
+  "mergeable": "CONFLICTING",
+  "merge_state": "DIRTY",
+  "upstream_integration_pending": "36574c39690fe1cbf9f9f8e07876f7562239a6cf (#56 Content I/O)",
+  "test_counts": {
+    "backend-check": {
+      "passed_packages": 148,
+      "failed_packages": [
+        "retrom/internal/testkit/architecture"
+      ],
+      "failed_tests": [
+        "TestRefactorRF03_adapter_free",
+        "TestRefactorRF03_no_reexport"
+      ],
+      "make_failures": [
+        "make: *** [Makefile:115: test] Error 1",
+        "make: *** [Makefile:118: lint-go] Error 1",
+        "make: Target 'backend-check' not remade because of errors."
+      ],
+      "log_sha256": "b0f56900cef15faaac5dd32bb676d37fb35f75e4742aa912e2c11cb2247f811a"
+    },
+    "integration-test": {
+      "passed_packages": 148,
+      "failed_packages": [
+        "retrom/internal/testkit/architecture"
+      ],
+      "failed_tests": [
+        "TestRefactorRF03_adapter_free",
+        "TestRefactorRF03_no_reexport"
+      ],
+      "make_failures": [
+        "make: *** [Makefile:166: integration-test] Error 1"
+      ],
+      "log_sha256": "397e80b2025591c34f05376c6487a9b5dcb3125b1a28b1795ced378805c9f036"
+    },
+    "focused-race": {
+      "passed_packages": 6,
+      "failed_packages": [],
+      "failed_tests": [],
+      "make_failures": [],
+      "log_sha256": "0f2192506272f9b44be91e746d851115e09ac6e9ded6b98a85b227eb41bc6d08"
+    }
+  },
+  "suppression_comments": [
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+      "annotations_changed_to_plain_comments": 6,
+      "before_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33",
+      "after_sha256": "084d948f19303d98f9138d7a92593d0a3d17d1f242a2fe1aaac7671d15940397"
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+      "annotations_changed_to_plain_comments": 3,
+      "before_sha256": "fc086f6215eb73998452d4ddfaa1d6dede1896821e6c42ea7eaa10c4601edf56",
+      "after_sha256": "cdc77d34e592fcf5d532446bb95bf2bf3c71ae1b27e0b5e072f0da29e7f89330"
+    },
+    {
+      "path": "internal/adapter/engine/rpgmaker/detector/trace_index_test.go",
+      "annotations_changed_to_plain_comments": 1,
+      "before_sha256": "398281a05f9955ec3da1c72e2bd39de6160cd05f3d82f28030a2d134533c9145",
+      "after_sha256": "b5b5181f46e4666d2f583e4c643eea3c231cc8fa3e290a269e1000feccabe570"
+    }
+  ],
+  "runtime": {
+    "branch": "refactor/retrom-project-structure",
+    "head": "3ba27985a23f00663546164ac28491b57ec07862",
+    "working_tree": "clean",
+    "new_commits": 0
+  },
+  "workspace_docs_branch": "codex/retrom-refactor-handoff",
+  "original_handoff_snapshot": "retrom-project-structure-state.json",
+  "publication_scope": "Tracked refactor source, owned compatibility testdata, and workspace handoff metadata. Ignored PFB state, caches, private inputs, and unrelated root ZIP items are not published.",
+  "goal_status": "paused; this action publishes the existing work without completing or resuming the full refactor."
+}
