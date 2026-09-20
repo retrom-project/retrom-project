@@ -1,0 +1,2131 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-20T12:58:27.560323+08:00",
+  "document_scope": "Workspace handoff metadata; not child source, product specification, or a final acceptance result.",
+  "goal_status": "paused",
+  "retrom_base": "82834bade1648da3067ebda1b1fc89c18577fd6a",
+  "repositories": {
+    "workspace": {
+      "path": ".",
+      "branch": "codex/add-user-facing-instruction",
+      "head": "26422b5ebf875edfb6cf21f80c55a6bb4196c10c",
+      "staged_paths": [],
+      "working_changes": [
+        {
+          "path": "gam4980.zip",
+          "status": "??",
+          "head": null,
+          "bytes": 2365734
+        },
+        {
+          "path": "gam4980.zipZone.Identifier",
+          "status": "??",
+          "head": null,
+          "bytes": 25
+        }
+      ]
+    },
+    "retrom": {
+      "path": ".worktree/retrom-project-structure/project/retrom",
+      "branch": "refactor/retrom-project-structure",
+      "head": "28504499b37f14d15818df677f0c8e3083aba663",
+      "staged_paths": [
+        "internal/capability/engine/rpgmaker/detector/public_security_fixture_test.go",
+        "internal/capability/format/importing/archive_test.go",
+        "internal/capability/format/importing/electron_asar_lifecycle_linux_test.go",
+        "internal/capability/format/importing/electron_asar_test.go",
+        "internal/capability/format/importing/nwjs_executable_test.go"
+      ],
+      "working_changes": [
+        {
+          "path": "docs/import-and-review.md",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f494216799b1b6e7deeadbc879c6ad74c86bfd4e"
+          },
+          "working_sha256": "79d6af76ca56a2d4cf5220a1d093dfd715b8bfcccd252766cd3d908942ec42cf",
+          "bytes": 131643
+        },
+        {
+          "path": "docs/retrom-product-architecture.md",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "17fc3957900ed4fcfd3d4af9cfe8253603e3fa38"
+          },
+          "working_sha256": "e3c3dfa628f614d5284f1bd1d9ad4b83b89d556922a85ac3391739d2c0ec86b7",
+          "bytes": 67014
+        },
+        {
+          "path": "internal/adapter/integration/libraryimport/arcade_closure_integration_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4b7ef033a863b92bf9d8df18ea5c43f755f6c5a8"
+          },
+          "working_sha256": "24b0e61bc22c6b61e9a7482d9a479ceb4cbaa25eb6b4b26e35734a39baa406d3",
+          "bytes": 13669
+        },
+        {
+          "path": "internal/adapter/integration/libraryimport/arcade_parent_worker.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "12861c2cc8ada6cbec80875ebd62234196d8645f"
+          },
+          "working_sha256": "e96367410acc3c624e603c749365ee4e6295103a82ef5b3e628e55282350cdc9",
+          "bytes": 10714
+        },
+        {
+          "path": "internal/adapter/integration/libraryimport/dos_arcade_integration_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4aa2d82d9656e89029c8025f97455cdee9cf7679"
+          },
+          "working_sha256": "e632c2c4c73fa336e5a4251e468710277b72d4656a315d453d4304975082f5bd",
+          "bytes": 24047
+        },
+        {
+          "path": "internal/adapter/integration/libraryimport/dos_corpus_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "009ccc877b881ba23f52941dd95cf69471832860"
+          },
+          "working_sha256": "5674292f8a5b51499c44f0f13abc391401b8491c80beaea9f4e1043f9d3d5aa5",
+          "bytes": 3799
+        },
+        {
+          "path": "internal/adapter/integration/libraryimport/service.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "5ed3aee70b809ab8a12bb7dc2e824efe66b722b2"
+          },
+          "working_sha256": "4f6c527ab31e3276169e8004e97dd979e1ace04bedb9b596984277837da23a95",
+          "bytes": 2940
+        },
+        {
+          "path": "internal/bootstrap/composition/libraryimport/creation.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "53f80890f746261afdea1bcb4b526aa21e888cac"
+          },
+          "working_sha256": "bed1f8e467b7f34a3d690caf4dc9e292f1392b879162caf2cfc341c47120998e",
+          "bytes": 2210
+        },
+        {
+          "path": "internal/bootstrap/composition/server_import.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "80a74f11448b5bbb39163ce050853228c46caf95"
+          },
+          "working_sha256": "b4de7dcf955e55ce59b8f8da60c65c081f17075d3c89b694fba9e195da7ea24c",
+          "bytes": 1644
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/detector.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9fd2f040c6eaab31444ea3929b0333a6540d2976"
+          },
+          "working_sha256": "56daaf1fef0fff788912100385dff15a4f2bc8b3906180a5dd8ca27428418081",
+          "bytes": 5456
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/detector_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1ca338677d7a3aea6354659cde30f220c14b2a98"
+          },
+          "working_sha256": "96b08bda22c4b65bf4dc6e1d876d66d6e5fca2c5193097024ed5eab23dc4d2ca",
+          "bytes": 7526
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/fuzz_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4b1f18c2673b67776e90b16b020450eb4c23a68b"
+          },
+          "working_sha256": "0761a5b9074e5e470da18eb7aa545110835cc6c5fc887f0c92ba0e5d1e30b933",
+          "bytes": 1042
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/index.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "58524434920297b7f29ec6487a286dfffa5b144b"
+          },
+          "working_sha256": "0bc5dcf08021ce32cf8efbe6d0d9bc450e7bc777afc4abe46a599f8d70d4ed5e",
+          "bytes": 2802
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/ini.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4f295124415a85548bcb6effdbf5323ea302cd86"
+          },
+          "working_sha256": "93eb9aa904d5eb0d0b6d58903bc590abf94bbd87be672d665f50a8e33ece83c9",
+          "bytes": 2880
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/lcf.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "79bf8ef61337c468473df256d4a5db3eec74326e"
+          },
+          "working_sha256": "7e640fed7563496f6faa98a70d6d1bd83c2aec098445ed885afca7469d5a4326",
+          "bytes": 8113
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/lcf_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "7457de75ad3ba48b49147ef8e352246b135aa80c"
+          },
+          "working_sha256": "a9072e0fa16373af97a4869a6893fb8845eae89bca2bcda21597ba3178d63d10",
+          "bytes": 5907
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/public_security_fixture_test.go",
+          "status": "D ",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "497d41c03f2d8dd4ceffce763db0750cbd4d2933"
+          },
+          "deleted": true
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/rgss.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e1e3f96beb56a0cb079bb450b281a1d29fb68999"
+          },
+          "working_sha256": "7b07ae62c0e563ad97bf6509754f29968600d0d9448b6e03e716f112bdac53e6",
+          "bytes": 5875
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/rgss_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "ccd6daa5f45055829fa457375020547c487dc6c4"
+          },
+          "working_sha256": "b6651ea01d865cfcecc94c81743919e72a2d8553698175d9fde5d72b1fd4f096",
+          "bytes": 4123
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/types.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "6b23726104a0f5e9f4f80c5ed799a8bd6996a646"
+          },
+          "working_sha256": "d559bb1cedd67e41ecac29977ffd8d03c07264596cd4bbaec1f01f2dbbc9f4eb",
+          "bytes": 2991
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/web.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "46359819a9bee68cd34208c810b2080d324c0ee0"
+          },
+          "working_sha256": "da7941ca9fffb833e46fe7b6c08bc4ce2d4ce7409f06ccff487e83530aa30e3a",
+          "bytes": 8816
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/web_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "6cc3df9d5428dcef663e6f93e89ce9b1959d0164"
+          },
+          "working_sha256": "f33e3e3566f9f98f40c48c144886f764a75c373e6509858fbbd3922f1d3baf63",
+          "bytes": 6540
+        },
+        {
+          "path": "internal/capability/format/importing/archive.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "05a9ad612c698c0c275c91ad95134ef92c7dbb2b"
+          },
+          "working_sha256": "265d956b031443c6b8d406669b5e088fa996f78a1955e640ced8ce7b8a509ee4",
+          "bytes": 3345
+        },
+        {
+          "path": "internal/capability/format/importing/archive_compatibility_linux_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c255b7b5b9efdbfc5d5ee6bee08b5f7f6cb00cd8"
+          },
+          "working_sha256": "5917afc6ae59f380f817a3c6c9eadb04076422162162f307b2f17d4702aa976d",
+          "bytes": 6051
+        },
+        {
+          "path": "internal/capability/format/importing/archive_compatibility_run_linux_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "5d6f1ff87b32fdbb1a0fc3006ba7e23310c53315"
+          },
+          "working_sha256": "f9fc11b17d72e59b5ec56b70a997bfe0fc3e19cf068ba29275a1891c66ed7718",
+          "bytes": 7827
+        },
+        {
+          "path": "internal/capability/format/importing/archive_facts_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "899d1f0c1df3c9a93f8620bb248045f82e8d7c8a"
+          },
+          "working_sha256": "8e8c77d4530d47078c91e4fef53aec36021134dfc07b16dadb0e9f3c65fd2e90",
+          "bytes": 3215
+        },
+        {
+          "path": "internal/capability/format/importing/archive_test.go",
+          "status": "D ",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9562c39a7269a42d1bcf6f889dfbae5c3d8ba3e7"
+          },
+          "deleted": true
+        },
+        {
+          "path": "internal/capability/format/importing/asar_header.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "b46a3389a9eba2a48fa451e65942e162301ecb51"
+          },
+          "working_sha256": "3b4c74366d01f4837ad7499309f2c5f053a659343c23e539589396676b8b2ae9",
+          "bytes": 9186
+        },
+        {
+          "path": "internal/capability/format/importing/electron_asar_layout.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "5e828f9108d45d753e0d88bc1c757adfb820b3f8"
+          },
+          "working_sha256": "2bdc047ff02343a29c2ad2bff8d0b9c516e7875393e0f6085fa01a268f1e781c",
+          "bytes": 2275
+        },
+        {
+          "path": "internal/capability/format/importing/electron_asar_lifecycle_linux_test.go",
+          "status": "D ",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9ef00ebe3f97cbea6910a2fbf3230e8c78bc4591"
+          },
+          "deleted": true
+        },
+        {
+          "path": "internal/capability/format/importing/electron_asar_test.go",
+          "status": "D ",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d7814f6911b8f5a2b4d4033537797aff0fec5a7b"
+          },
+          "deleted": true
+        },
+        {
+          "path": "internal/capability/format/importing/electron_asar_zip.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "62c16bdc273d9575fd8dc29c7440c2863ea670f4"
+          },
+          "working_sha256": "a463f933a96984c7b9505ee1cf52291bcaead72e4e55fbaf73d3b962bad5b325",
+          "bytes": 1851
+        },
+        {
+          "path": "internal/capability/format/importing/nwjs_executable.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "b18204c6c1f228c14b347114ea96d022021e9042"
+          },
+          "working_sha256": "7bf472d36db65f791a9cd5327db8ac85ba2ace3d753cdacbcb83e88cdb91ae56",
+          "bytes": 1048
+        },
+        {
+          "path": "internal/capability/format/importing/nwjs_executable_test.go",
+          "status": "D ",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "570ccae3d22092028df4329b8b4440523bfe173b"
+          },
+          "deleted": true
+        },
+        {
+          "path": "internal/capability/format/importing/zip_header.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9a1e262be48d34773e4f1c8766ebcda93633a31a"
+          },
+          "working_sha256": "8483f7fc71f4824a7226991f64c4fc034a50f1e7b2b7d307f24285282fc8eec5",
+          "bytes": 3242
+        },
+        {
+          "path": "internal/repo/firmware/context_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "0075c170ef9b3d7ebec4d206e6f75d6cc47b6ea8"
+          },
+          "working_sha256": "6bd2fb28d770fde95bc06566804721df1abd89cfb9e45423ae1ac8bb52ea0244",
+          "bytes": 936
+        },
+        {
+          "path": "internal/repo/firmware/service_integration_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "0ae3a33a8d3fe754a1c4140588d0e52664277008"
+          },
+          "working_sha256": "edeeaddfa3784126764e910caf123dabfeae3ac1231de7197e3e7acac987ee05",
+          "bytes": 21396
+        },
+        {
+          "path": "internal/repo/firmware/static_archive_integration_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "310a71233a108c683a3e093f48be05a8c0d173a1"
+          },
+          "working_sha256": "037641bd2d546783d752032f64dba7d81144cb4cd996a960f66aecdba9cd5af5",
+          "bytes": 4157
+        },
+        {
+          "path": "internal/repo/gamecontent/service_integration_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "195a7bad0ec1c1205b9a6db8978be500488dd24e"
+          },
+          "working_sha256": "a3d2bc1ca1ab3d8c3cd7a10625c2890a7c4100415b4072df08d81eebcc6d837c",
+          "bytes": 28643
+        },
+        {
+          "path": "internal/service/firmware/service.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "7c1b5ddf3cbbc3ba09fe77290df74e8e21f356fa"
+          },
+          "working_sha256": "49234373d3a1a5667f633699a6f147c760dd47903704216bb00c5b1043013a4e",
+          "bytes": 6244
+        },
+        {
+          "path": "internal/service/firmware/service_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "20ab999bef688b435dc06af75173d52777ae4a9b"
+          },
+          "working_sha256": "78d17c093e702b59dc8d5bbaacf69be2bda1781471af791430b2c244a5aa2f2d",
+          "bytes": 5482
+        },
+        {
+          "path": "internal/service/gamecontent/rpgmaker.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "bab3a59bd25b7a9d84a27584781537cd40098118"
+          },
+          "working_sha256": "1ca5ada3a3f14369fea23778c736f986f6c5c68f008b28c3e79704d7cd2937c3",
+          "bytes": 10391
+        },
+        {
+          "path": "internal/service/gamecontent/service.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e9ebea1916b13f13f921e5f86cbffd6ba6375d36"
+          },
+          "working_sha256": "9887772ce79ddb3e184bf92706f34c05e18d6185376c1538e5102a0aabe203fe",
+          "bytes": 3269
+        },
+        {
+          "path": "internal/service/libraryimport/arcade_import.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "a8d90cbf550a256362571f816b51317e47d8405f"
+          },
+          "working_sha256": "a5ff2c600fe2363f538d8394655247605b6f0e495d3cd141e7591584cf2dde58",
+          "bytes": 19102
+        },
+        {
+          "path": "internal/service/libraryimport/dos_import.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "dcd38ddabfd50fbdeed84d40dda4bb7bd0292fbd"
+          },
+          "working_sha256": "bdcfb0e4f3aca38ba448da1ad5afd2c51d060ee0ba26d8c307d1a21e451660b6",
+          "bytes": 18712
+        },
+        {
+          "path": "internal/service/libraryimport/environment.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c779852da4b5dca4d794f1c7157ee720ab6627c2"
+          },
+          "working_sha256": "197eb3581c8f5f6ca52eebfc63424870fb622ceecc2bb06a59cfec080f2e1df4",
+          "bytes": 1268
+        },
+        {
+          "path": "internal/service/libraryimport/import_preparation.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c6ba62952c028a63e472fd9c8fdd01d28209df2e"
+          },
+          "working_sha256": "159fe7bd4ed4a867e7d042eb90b18f0de2beb9a506f507204c33e6f046efe867",
+          "bytes": 4624
+        },
+        {
+          "path": "internal/service/libraryimport/marker_project_prepare.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "b03995ce15e02f25f8b9a06b89393a7ae6280db1"
+          },
+          "working_sha256": "79a6e03bab4f012f0785d48566f1f778f503e1a10ceb31bf588c20c4b277f2db",
+          "bytes": 13463
+        },
+        {
+          "path": "internal/service/libraryimport/multidisc_import.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "bc9ea9472626123a6ca95e8bfd262421be310b08"
+          },
+          "working_sha256": "6f9fe0f992ac4f4a260da64f47d6f796d9c2fe93be38a32a2999d8c6fb94875f",
+          "bytes": 15010
+        },
+        {
+          "path": "internal/service/libraryimport/rpgmaker_import.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3b71cab20d690134dff1d8d31db3b89e45e70ded"
+          },
+          "working_sha256": "bb370e88a48bb3b17b7598a403224502821088ab094176c1c0e6e71bda39f4b9",
+          "bytes": 8572
+        },
+        {
+          "path": "internal/service/libraryimport/rpgmaker_sidecar.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "2c520c5b1fc33c2a50eac0f240be0f71cc2b4404"
+          },
+          "working_sha256": "22d4ef17f3703d7c0f58805849021ba916ad0c8e0368701c80b89a6081629d92",
+          "bytes": 3206
+        },
+        {
+          "path": "internal/service/serverimport/application.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d069dac1aaa2ee99670abe250bad5c06e5888cb1"
+          },
+          "working_sha256": "81fa3cea841bd7ad810aced6183c46fa8aeec3e9683a8658d9e28879431d4414",
+          "bytes": 4657
+        },
+        {
+          "path": "internal/service/serverimport/integration_archive_catalog_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "bcc2548bb2b2a7252022d77aee6e0905f11f6a87"
+          },
+          "working_sha256": "97b1254f6c5031ac7b7487cf54039800d56e4e67e4af14df63e85f4e2b1afd3c",
+          "bytes": 5906
+        },
+        {
+          "path": "internal/service/serverimport/integration_service_test.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "2360abffde02982e78b10981f80ddb223bc126ac"
+          },
+          "working_sha256": "d944e64749a2e9cdd729e99d4b9fb1490e5c9c99a6a14139a61507aced2b48dd",
+          "bytes": 17282
+        },
+        {
+          "path": "internal/service/serverimport/worker_discovery.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "16aed202a6e8d35a8a56b3e68e245fa1e95f0b85"
+          },
+          "working_sha256": "f97e865d14cdb534873209e000990f27908d60d036ef7c6a2f22179bca307167",
+          "bytes": 15637
+        },
+        {
+          "path": "internal/transport/httpapi/server.go",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "cde44b12060cabd96825cbbc61553b61f495b1d8"
+          },
+          "working_sha256": "efd48f3da8757e6c12f6410b7393f07f9b46fa7a504b4c0ffebf20e62bbc2ec0",
+          "bytes": 31283
+        },
+        {
+          "path": "quality/architecture/package-ownership.json",
+          "status": " M",
+          "head": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f23f2967edee53ba284cb65bab52d1f8d27883e0"
+          },
+          "working_sha256": "f9ac0217dbee3813b367756579e47d4f296fe1a586263640d28883cf4d737362",
+          "bytes": 495271
+        },
+        {
+          "path": "internal/adapter/content/archive/archive.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "3d56bcd527af2b9d6ee0fbd52eea15f40f2e8f6e128c22fea5ff7a038f2a0a60",
+          "bytes": 1512
+        },
+        {
+          "path": "internal/adapter/content/archive/archive_lifecycle_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "6af143e74c1dee9e52c7d012c10a111bd48fc98eda2082ea06f8d1fefce8f755",
+          "bytes": 6469
+        },
+        {
+          "path": "internal/adapter/content/archive/archive_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "c29d6384277ae190dcadd00e5641737cc35b749c03f5bcb078cc0535cf5afa26",
+          "bytes": 7710
+        },
+        {
+          "path": "internal/adapter/content/archive/asar_cursor.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "a96f7e2901d6e78f4e4e4e113387a1c99f8beb7d1dfb1fb468a899bcfd74d727",
+          "bytes": 4357
+        },
+        {
+          "path": "internal/adapter/content/archive/asar_cursor_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "c5bca9e28365e970e185dfb91d3db503cc092b9c65add45c6d96e977023ee75d",
+          "bytes": 5090
+        },
+        {
+          "path": "internal/adapter/content/archive/asar_header.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "04f4f049167ebb24d4e980ef7506470f11d74c0a9faf8285aede8a10b6ba59a8",
+          "bytes": 1102
+        },
+        {
+          "path": "internal/adapter/content/archive/asar_header_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "2c8164f53a9452d47ec4f90f0d9afe4dac8e92082581b8f9ff2bf793c913938d",
+          "bytes": 2351
+        },
+        {
+          "path": "internal/adapter/content/archive/asar_unpacked.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "3c8c394faf2a76000f675eb8e08ecda926328b4a90800bf563d78ce9ad4cd6e0",
+          "bytes": 693
+        },
+        {
+          "path": "internal/adapter/content/archive/diagnostics.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "cad3b77c525b558e3409064c15fc013d278dacfcad9044a3eecae7c02cfb034d",
+          "bytes": 479
+        },
+        {
+          "path": "internal/adapter/content/archive/electron_asar_lifecycle_linux_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "eba8505ca0e6a1d51b6dfef9f555e0fd41435c3fe9513c7dcababd734895bb7a",
+          "bytes": 2141
+        },
+        {
+          "path": "internal/adapter/content/archive/electron_asar_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "624c38adcec7a15eed484666229a04dbf5a62cde5b0c9b5f5d7983c1a656832c",
+          "bytes": 8164
+        },
+        {
+          "path": "internal/adapter/content/archive/electron_asar_zip.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "0b69ca34f54a891b368be5e4ae0961790a17e9f1d179a69e4da71763135c29f0",
+          "bytes": 3209
+        },
+        {
+          "path": "internal/adapter/content/archive/error_compatibility_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "e65f4177e57dd3da749621a3eadc747927d3455f6c4e17258b04f6f1273e5c34",
+          "bytes": 5161
+        },
+        {
+          "path": "internal/adapter/content/archive/nwjs_executable.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "eeaf6603275adcad21f9f037225eb6a2ce4353b4aecf492671628c599be78fc1",
+          "bytes": 2004
+        },
+        {
+          "path": "internal/adapter/content/archive/nwjs_executable_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "a9e0fe2d6e78c959c079d608a770fa9412800cac7abed971f10a7a10a5de7796",
+          "bytes": 1852
+        },
+        {
+          "path": "internal/adapter/content/archive/project_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "bd46f3165bfc2ef897122fba7d9a4b52f31c6e2111530efc265bd1d6d0d5b563",
+          "bytes": 1370
+        },
+        {
+          "path": "internal/adapter/content/archive/reader.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "1831b2b38766fdc2b389ea9a11a3842584fef8ee9cbadd5162c6f9689ca4473b",
+          "bytes": 1525
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/capture.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "3decab35382f55c30586ff93c3bcaece4836745a994e341d12d1c22ed9ead9a5",
+          "bytes": 3415
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-go-golden.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "8552e3066764146909bef9983bb3322090a4057af134b9ada7e6ddd3032938ae",
+          "bytes": 2333
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/archive.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "8f10cb0b8d2f9be46b263d899e01cd2aef717ea53e4709c6626e95fac9c99664",
+          "bytes": 11986
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/asar_header.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "1f927289fe913228f8fa1cffa5254dc8be6a403a22329776fbafee4b7e191545",
+          "bytes": 9642
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/electron_asar_layout.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "588be0e944f977aeffb6f28f84ec73474b251d2bcd1ecef669725b5d3b0a83ea",
+          "bytes": 3514
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/electron_asar_zip.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "b922ca58ee39eec213866d8f6ec5bca9f7b8164210f1b95adadbb3acd3a0252c",
+          "bytes": 8174
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/nwjs_executable.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "85092abc4660a07625237df25b2296ab0452f4b429e61f9fc952783d83e0c578",
+          "bytes": 3102
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/path.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "e7a1c7db6c1c1cad427086b5a7f391439ead1f6ddc3edb4712efb5cd3b85a491",
+          "bytes": 1486
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/old-source/zip_header.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "baf01c021fbaa8887643404727b76351b911650dad082413ffbca23169b1d262",
+          "bytes": 3242
+        },
+        {
+          "path": "internal/adapter/content/archive/testdata/old-errors/provenance.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "45af300f2c427ca6906d0e219adf2406b4205246c31a217efe2b5c59151e0322",
+          "bytes": 1947
+        },
+        {
+          "path": "internal/adapter/content/archive/zip.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "6d36f06381d69f35814f8936da3ee2a365f11f5ccfd52e2e31bcd742d97e1a2e",
+          "bytes": 2312
+        },
+        {
+          "path": "internal/adapter/content/archive/zip_cursor.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "95de4f6e518185bd79b4454f35a43a7be4e9eb59cb337fedd5dda5e12e7289e2",
+          "bytes": 3457
+        },
+        {
+          "path": "internal/adapter/content/archive/zip_cursor_eof_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "e3cb5aecec3c8d5e9e6781fe4befb3443a30c50e55337b8cce6545b45cd6479c",
+          "bytes": 7281
+        },
+        {
+          "path": "internal/adapter/content/archive/zip_cursor_fault_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "e391fbd8e7774b359f169534b93b1adda744381ac4f34aa21bcf9f44ec913991",
+          "bytes": 5249
+        },
+        {
+          "path": "internal/adapter/content/archive/zip_scan.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "ea15d2000cbb698bdf0ea23c8c08f43666e18b42229bd9bc0e1b48cb7bbcb4ef",
+          "bytes": 3293
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/blobs.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "715657538bca8b4d831675dae1c287f3a583f2e0216235546319ceaae0a2d90b",
+          "bytes": 1450
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/blobs_linux_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "3234605b0be66e3a833a285cefeee674ec7f0e428ba1474095e5832d08c68d13",
+          "bytes": 1068
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/blobs_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "169710c1c8723078997593120107804159cbf1c95be55d70886ef52c48fa2d64",
+          "bytes": 2090
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/compatibility_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "51e798659f4e9fd9be0e0e80aa9884389c5789727fe1b200751f9aa5d88d7a6a",
+          "bytes": 4119
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33",
+          "bytes": 1602
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/fixture_inputs_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "684b5a1a1c13975cf1b2cb3d60571297f446465b4b137e39fdde23ea4af746fe",
+          "bytes": 2858
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/prepared.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "cc03166a5adddf9f9de2d67e0d5f51bb893ca96afa7e51b31130ac8fa9de7f86",
+          "bytes": 1234
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/prepared_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "c7a5209fc5959f9bd65770aa6a0a9de14a2a53ca6755d3e6525bc2a69c0c1303",
+          "bytes": 3229
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/provenance_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "3e02d76d4c5ae9642c34a9f5f482be673365e27fbb6f8a8329e616843072a519",
+          "bytes": 1120
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/public_security_fixture_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "af8a4f68aaed2ccf66499ed3f717d29ed29742a191cee714affd81f0a3f424ec",
+          "bytes": 4571
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "fc086f6215eb73998452d4ddfaa1d6dede1896821e6c42ea7eaa10c4601edf56",
+          "bytes": 952
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/reader_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "04b375bce3e84dcf1c830235ff47765000346e3db519773dea0378ca49b91f8a",
+          "bytes": 2431
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/README.md",
+          "status": "??",
+          "head": null,
+          "working_sha256": "95506e0e4b0c70d780db619f6a2f1c050d8647ccacdc68e362b1f44f158034b3",
+          "bytes": 1959
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/bounded-inputs.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "8f7ddaefadda3e040b06f5f2c0a2a1a86cc1bac133fec83a6b72b9d5a74c4737",
+          "bytes": 6405
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/fixture-inputs.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "da1130e28947423a7ac57d3f936a43ba8fd450cf966a2e09314c36144813f552",
+          "bytes": 287085
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/old-capture.go.txt",
+          "status": "??",
+          "head": null,
+          "working_sha256": "45a44ed6afdde191db7581d7b7e59fa50b991f2d580c52cf29962c3d755b96f7",
+          "bytes": 11794
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/old-golden.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "1ce3b90ccead224cca1a9f28d4d4a3d122a78aca8f3bb1cbd06de27aa5edb439",
+          "bytes": 158593
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/testdata/provenance.json",
+          "status": "??",
+          "head": null,
+          "working_sha256": "b1c70925dbb8ba60939e46627ccd6be3bd1b269e34d8588506ccf8a005e582b7",
+          "bytes": 3665
+        },
+        {
+          "path": "internal/adapter/engine/rpgmaker/detector/trace_index_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "398281a05f9955ec3da1c72e2bd39de6160cd05f3d82f28030a2d134533c9145",
+          "bytes": 3047
+        },
+        {
+          "path": "internal/bootstrap/composition/firmware.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "69de24c8276bd2faab5f86cc7e4b7647c65b0099fb1d84de8f5881acb49c81e2",
+          "bytes": 705
+        },
+        {
+          "path": "internal/bootstrap/composition/gamecontent.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "2801e21aaf7de354dbdf97114ceb6a9eac7036226b91e0d9cca2985e6bac306d",
+          "bytes": 954
+        },
+        {
+          "path": "internal/bootstrap/composition/libraryimport/archive.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "1627339213a9ca4a40463601b06f20e91b2d9943ce8b2e7be306014b5b87d735",
+          "bytes": 419
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/inspection.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "dada28f41d95dff9469964a67b3dfc2a3b87568f4247cf2215e39e0f112b96c7",
+          "bytes": 6783
+        },
+        {
+          "path": "internal/capability/engine/rpgmaker/detector/inspection_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "294d2729e66f342d82fa71b69dd1da2a342e582826c7682ff1c9369eeeeee21a",
+          "bytes": 3165
+        },
+        {
+          "path": "internal/capability/format/importing/archive_project.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "d84e71fa3bc62d55fa3734b92d8997ecd40eb17dacb502913dcf6df2781b2e14",
+          "bytes": 633
+        },
+        {
+          "path": "internal/capability/format/importing/zip_directory.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "b186ed5238cef970bb9dc102030799bb7683a5dec975cd669e1be2dd4019e590",
+          "bytes": 3587
+        },
+        {
+          "path": "internal/model/firmware/archive_ports.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "0c3bd330980b550d15c171c6b26680598037a3a7f0cf2c9e1bab6cf589096afe",
+          "bytes": 218
+        },
+        {
+          "path": "internal/model/gamecontent/rpgmaker_ports.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "8aae248858fd7268c3890a6f8070bafdde51d897e97fe5e2d983485f206dc9df",
+          "bytes": 462
+        },
+        {
+          "path": "internal/model/libraryimport/archive_ports.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "ad8bcc1aa530a4a31109d6c8d786ddff05181104fdc6696d10a9750406f6477b",
+          "bytes": 852
+        },
+        {
+          "path": "internal/model/libraryimport/rpgmaker_ports.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "64d69f47360dd997d86497dd8dde42f283baacba0e8f53995e21f755b25b9970",
+          "bytes": 478
+        },
+        {
+          "path": "internal/model/serverimport/archive_ports.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "687b30805bb36ed3aa14bf0fa8f712747f69b1ba82171a437251403ab389875c",
+          "bytes": 222
+        },
+        {
+          "path": "internal/service/gamecontent/rpgmaker_detection_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "23365b79f1532fb5113dd426c7dc64e251a1e05ce1318d4e59ba77d8b6c1ac03",
+          "bytes": 3234
+        },
+        {
+          "path": "internal/service/libraryimport/project_archive.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "4f1238b133bce0c52521e68fe6431a2ca06330750083e3e000452af9bddddcca",
+          "bytes": 3356
+        },
+        {
+          "path": "internal/service/libraryimport/project_archive_error_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "30a14d887ff4872652027d1b32cd16a466e46296fa9f05821c9c0513905a1863",
+          "bytes": 7643
+        },
+        {
+          "path": "internal/service/libraryimport/project_archive_fixture_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "1819af458eb80242a2a3f26412f8dcdcb0d63ef612da62ceb7c01d9a98290fb2",
+          "bytes": 9169
+        },
+        {
+          "path": "internal/service/libraryimport/project_archive_lifecycle_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "e5d0bd0668898cd9e120b40f7c307f7e41ed0fa08a58ff5c93a817fdbe512d63",
+          "bytes": 3491
+        },
+        {
+          "path": "internal/service/libraryimport/project_archive_zip_eof_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "ee06aa5fb59712bf2ab16c01be0b36d3485f9bb7b080c41b1be2b61a3043105d",
+          "bytes": 2599
+        },
+        {
+          "path": "internal/service/libraryimport/rpgmaker_detection_test.go",
+          "status": "??",
+          "head": null,
+          "working_sha256": "4d568d714d3fbdb3bb2557fade92a7810fc0a5489a0d785845f25c1d9c5e505f",
+          "bytes": 7179
+        }
+      ]
+    },
+    "retrom-runtime": {
+      "path": ".worktree/retrom-project-structure/project/retrom-runtime",
+      "branch": "refactor/retrom-project-structure",
+      "head": "3ba27985a23f00663546164ac28491b57ec07862",
+      "staged_paths": [],
+      "working_changes": []
+    }
+  },
+  "retrom_commits": [
+    {
+      "commit": "36aa523186205f59456526280d9d6dcd6df66aa6",
+      "timestamp": "2026-09-19T17:24:40+08:00",
+      "subject": "fix(RF01): preserve dependency preparation errors"
+    },
+    {
+      "commit": "6c031480410e5c2ebfda73aa01aa00180daebc04",
+      "timestamp": "2026-09-19T17:33:40+08:00",
+      "subject": "refactor(RF01): inventory owned sources and resolved type graphs"
+    },
+    {
+      "commit": "ba4484ba8c21862ebc82471492806346845d9036",
+      "timestamp": "2026-09-19T17:48:57+08:00",
+      "subject": "refactor(RF21): inspect typed port values and layer boundaries"
+    },
+    {
+      "commit": "27b50753c45615c492f8d247e9dbd4855cf38efc",
+      "timestamp": "2026-09-19T18:06:10+08:00",
+      "subject": "refactor(RF01): trace execution effects and persistence consumers"
+    },
+    {
+      "commit": "06c65d2a4a3dae7c167e389c87111ef1fea94971",
+      "timestamp": "2026-09-19T18:08:00+08:00",
+      "subject": "fix(RF21): stabilize architecture finding deduplication"
+    },
+    {
+      "commit": "8f8c99f461add037658d4a40772fdcafc66f0de1",
+      "timestamp": "2026-09-19T18:24:30+08:00",
+      "subject": "test(RF01): pin fixed-baseline storage and wire snapshots"
+    },
+    {
+      "commit": "936001244ce085a3548735c9ed2bf1a518135db7",
+      "timestamp": "2026-09-19T18:47:23+08:00",
+      "subject": "refactor(RF21): record bounded named test execution evidence"
+    },
+    {
+      "commit": "e0416b34757626f01f6f9d73116727b14e601bb4",
+      "timestamp": "2026-09-19T19:05:02+08:00",
+      "subject": "refactor(RF01,RF21): register save operation plans and static contracts"
+    },
+    {
+      "commit": "55a0d7d87ade7e7229af4d2c9aab32d25323c52c",
+      "timestamp": "2026-09-19T19:16:05+08:00",
+      "subject": "refactor(RF01): inventory account writes and security policies"
+    },
+    {
+      "commit": "98b7ef53117f3432b11effe7275ac7cf3a7daef8",
+      "timestamp": "2026-09-19T19:24:41+08:00",
+      "subject": "refactor(RF01): inventory upload commits and lease transitions"
+    },
+    {
+      "commit": "b0a980add97b4b4ac45613dd27d5b66313fe1f7b",
+      "timestamp": "2026-09-19T19:38:33+08:00",
+      "subject": "refactor(RF01,RF21): resolve service reexports and their consumers"
+    },
+    {
+      "commit": "ea8fd3db21530baa197407c323fca05abe80b355",
+      "timestamp": "2026-09-19T20:01:08+08:00",
+      "subject": "refactor(RF01): inventory library writes and cross-domain effects"
+    },
+    {
+      "commit": "55137cdb9532c534ac225daa6ab56ba5bed18e88",
+      "timestamp": "2026-09-19T20:11:21+08:00",
+      "subject": "fix(RF21): include compiled web sources and dynamic loading"
+    },
+    {
+      "commit": "f0ec9833325b8c80d3d6128805b3749a6d440cff",
+      "timestamp": "2026-09-19T20:29:19+08:00",
+      "subject": "refactor(RF21): enforce resolved frontend boundary checks"
+    },
+    {
+      "commit": "63b0f117c256bb1f409b761da727dba40a90e73a",
+      "timestamp": "2026-09-19T20:43:37+08:00",
+      "subject": "refactor(RF01): inventory launch and isolation transactions"
+    },
+    {
+      "commit": "82f8c4eef5b7c3bb2bc0fac58bceb39ca1603394",
+      "timestamp": "2026-09-19T20:57:59+08:00",
+      "subject": "refactor(RF01): inventory runtime and BIOS transactions"
+    },
+    {
+      "commit": "77199430e862028947c2363a2a930a3f27ba7498",
+      "timestamp": "2026-09-19T21:11:32+08:00",
+      "subject": "refactor(RF21): add bounded final verification coordinator"
+    },
+    {
+      "commit": "79e95c6a8dca8f9f6b071a1cf393d435754f6e8d",
+      "timestamp": "2026-09-19T21:26:58+08:00",
+      "subject": "refactor(RF01): inventory netplay control transactions"
+    },
+    {
+      "commit": "49fffba7e2ebfcdc6ceb91e4d981b10f0ecd1abe",
+      "timestamp": "2026-09-19T21:46:25+08:00",
+      "subject": "refactor(RF01): inventory metadata and media transactions"
+    },
+    {
+      "commit": "e64eb6f4d563a0f35ce8190bb4692a2ee610534e",
+      "timestamp": "2026-09-19T21:53:42+08:00",
+      "subject": "refactor(RF01): inventory job and receipt transaction boundaries"
+    },
+    {
+      "commit": "fd1a86363570a99713561abaae3ad82b5aa03b84",
+      "timestamp": "2026-09-19T21:56:25+08:00",
+      "subject": "fix(RF01): include forwarded import progress consumers"
+    },
+    {
+      "commit": "60833642c11da42f08063a633263a267ab34a84c",
+      "timestamp": "2026-09-19T22:06:46+08:00",
+      "subject": "refactor(RF01): inventory payload worker and garbage collection"
+    },
+    {
+      "commit": "20f60ce7bde316a9fd6dbeb46ad7c6698cd0dbec",
+      "timestamp": "2026-09-19T22:20:10+08:00",
+      "subject": "refactor(RF01): inventory recursive payload release effects"
+    },
+    {
+      "commit": "9e00868ada38ad7a1da335a1385ea088b42216c5",
+      "timestamp": "2026-09-19T22:29:11+08:00",
+      "subject": "refactor(RF01): inventory import admission and execution lifecycle"
+    },
+    {
+      "commit": "5225cea5f8ffd9f9cc1c8046751358175c8ac119",
+      "timestamp": "2026-09-19T22:36:14+08:00",
+      "subject": "refactor(RF01): inventory prepared import creation and source binding"
+    },
+    {
+      "commit": "9fb630809086c11414d2dd7ceb78d419fa16e9f8",
+      "timestamp": "2026-09-19T22:41:21+08:00",
+      "subject": "refactor(RF01): inventory reconfiguration and review metadata writes"
+    },
+    {
+      "commit": "4cc03ba84bd9b7d7b2cf84d0702f64fc8cc135ae",
+      "timestamp": "2026-09-19T22:49:02+08:00",
+      "subject": "refactor(RF01): inventory review draft validation and cover writes"
+    },
+    {
+      "commit": "256abde84892a5e4b7695722446b7046a50935ea",
+      "timestamp": "2026-09-19T23:04:20+08:00",
+      "subject": "refactor(RF01): inventory review approval and discard transactions"
+    },
+    {
+      "commit": "cd8b130d0c9b86110847f18c53424b6063136e74",
+      "timestamp": "2026-09-19T23:11:03+08:00",
+      "subject": "refactor(RF01): inventory bulk review admission and worker mutations"
+    },
+    {
+      "commit": "0152d7530445501db2a39fcb36c0e5d54a1d1c4a",
+      "timestamp": "2026-09-19T23:18:48+08:00",
+      "subject": "refactor(RF01): inventory arcade parent attachment transactions"
+    },
+    {
+      "commit": "bb3500eb05ad699ab7ada3b3102c8111554b088a",
+      "timestamp": "2026-09-19T23:26:13+08:00",
+      "subject": "refactor(RF01): inventory multidisc attachment lifecycle"
+    },
+    {
+      "commit": "4d819ec3b649138da75b4f48eec8b6e69785550f",
+      "timestamp": "2026-09-19T23:37:40+08:00",
+      "subject": "refactor(RF01): inventory server source upload ownership and replay"
+    },
+    {
+      "commit": "6d287445600958aa7b9407b8c8d6dc7a3a1324c5",
+      "timestamp": "2026-09-19T23:40:35+08:00",
+      "subject": "refactor(RF01): inventory durable import discard transactions"
+    },
+    {
+      "commit": "5467ab7eee54e0b54f2101a00c791c291a0fc228",
+      "timestamp": "2026-09-19T23:46:39+08:00",
+      "subject": "refactor(RF01): inventory restore atomicity and maintenance policies"
+    },
+    {
+      "commit": "222c29969811b3543a7dea6d2c49baf53f6c8a41",
+      "timestamp": "2026-09-19T23:59:41+08:00",
+      "subject": "fix(architecture): retain service and adapter port consumers"
+    },
+    {
+      "commit": "2534e22091d42ce0881a4cb73d524957d2d067d6",
+      "timestamp": "2026-09-20T00:02:40+08:00",
+      "subject": "fix(RF01): include consumers through typed model ports"
+    },
+    {
+      "commit": "1f25ae5065ff2847ac1c85e69a3518e77ad40970",
+      "timestamp": "2026-09-20T00:10:31+08:00",
+      "subject": "refactor(RF01): inventory Pegasus transactions and remaining import policies"
+    },
+    {
+      "commit": "d5fff5c5261f26be8bb3b9c9249ff3be499f84fa",
+      "timestamp": "2026-09-20T00:12:32+08:00",
+      "subject": "refactor(RF01): inventory ES and server BIOS source transactions"
+    },
+    {
+      "commit": "f4b91a90654b0ee60a178823aca58d4be03a7f01",
+      "timestamp": "2026-09-20T00:14:37+08:00",
+      "subject": "fix(RF01): register server source cleanup compensation callers"
+    },
+    {
+      "commit": "d709708600b0be3dc5cfe29f12bbc9f529fabefa",
+      "timestamp": "2026-09-20T00:45:21+08:00",
+      "subject": "refactor(RF01): close source census before shared model migration"
+    },
+    {
+      "commit": "1a262d35933135f75e96dc9fb009ae84c48a9aec",
+      "timestamp": "2026-09-20T01:43:01+08:00",
+      "subject": "refactor(RF03): own shared values in Model and remove service reexports"
+    },
+    {
+      "commit": "1979169aef892e29d110c89295be52e31b0cad55",
+      "timestamp": "2026-09-20T02:24:32+08:00",
+      "subject": "refactor(RF03): centralize runtime catalog values and shared pure rules"
+    },
+    {
+      "commit": "0e5db8ca6ed68b605c8c412fba7814154206b0bb",
+      "timestamp": "2026-09-20T02:45:13+08:00",
+      "subject": "test(runtime): validate envelopes for every current provider binding"
+    },
+    {
+      "commit": "f39243478403695fbd95e68ac83da59f9e021c5b",
+      "timestamp": "2026-09-20T02:47:07+08:00",
+      "subject": "feat(RF04): implement cancellable process-shared digest locks"
+    },
+    {
+      "commit": "43b73ec928f6d88bfe041657c9884a6cf0f52e3f",
+      "timestamp": "2026-09-20T03:03:57+08:00",
+      "subject": "refactor(RF04): isolate password hashing behind the account port"
+    },
+    {
+      "commit": "0bca6452b6b242965e5ec4fb4feecfc7e6d67589",
+      "timestamp": "2026-09-20T03:23:07+08:00",
+      "subject": "refactor(RF03): close provider values and narrow BIOS fact readers"
+    },
+    {
+      "commit": "fecc5b75e32c952ea61dd5e451357d0aba45ec29",
+      "timestamp": "2026-09-20T03:35:12+08:00",
+      "subject": "refactor(RF04): make password blocklists immutable policy inputs"
+    },
+    {
+      "commit": "6cd37e1bbfadd8365a4faca0d1584c01f7d53379",
+      "timestamp": "2026-09-20T03:59:25+08:00",
+      "subject": "refactor(RF04): load firmware facts before writes and relocate ZIP naming"
+    },
+    {
+      "commit": "d8ca8806fd674cd1581ee11f9f20a13f60eafbdf",
+      "timestamp": "2026-09-20T04:46:38+08:00",
+      "subject": "refactor(RF04): isolate native probes and maintenance locks"
+    },
+    {
+      "commit": "85b2fac3bb3c423216949507b4123255d6b66077",
+      "timestamp": "2026-09-20T05:36:40+08:00",
+      "subject": "refactor(RF04): introduce explicit diagnostics and archive header facts"
+    },
+    {
+      "commit": "95bc3c741399540158607952b36ffbf96523efd5",
+      "timestamp": "2026-09-20T06:33:38+08:00",
+      "subject": "refactor(RF04): isolate bounded engine probes"
+    },
+    {
+      "commit": "5470153e1b0884757c4d46e60682804e1185aed2",
+      "timestamp": "2026-09-20T07:17:10+08:00",
+      "subject": "refactor(RF21): verify archive resource origins and bindings"
+    },
+    {
+      "commit": "d51752725659ad07f828b41a3da5de06237db6b2",
+      "timestamp": "2026-09-20T08:01:06+08:00",
+      "subject": "refactor(RF21): simplify import and launch integration tests"
+    },
+    {
+      "commit": "b6ff2da297de21ddd03ed79ce4021ba3717c028b",
+      "timestamp": "2026-09-20T08:19:01+08:00",
+      "subject": "refactor(RF21): clarify archive provenance and integration tests"
+    },
+    {
+      "commit": "2e98c03b59dc2a636092a523fd4d045d67ad2133",
+      "timestamp": "2026-09-20T08:36:50+08:00",
+      "subject": "refactor(RF21): track archive callers and simplify test context flow"
+    },
+    {
+      "commit": "44d97609ec3e72ea37a2ca444c3709132a3df0b4",
+      "timestamp": "2026-09-20T09:22:35+08:00",
+      "subject": "refactor(RF21): clarify import and launch integration test phases"
+    },
+    {
+      "commit": "f3c124900edfd6d6331b99aa4644f82cef070e88",
+      "timestamp": "2026-09-20T10:08:06+08:00",
+      "subject": "refactor(RF04): inject DAT acquisition and preserve catalog lifecycle"
+    },
+    {
+      "commit": "218c279a002ab4326a0a69c3ab649122b068329d",
+      "timestamp": "2026-09-20T10:14:49+08:00",
+      "subject": "refactor(RF21): finish import and launch integration test phases"
+    },
+    {
+      "commit": "28504499b37f14d15818df677f0c8e3083aba663",
+      "timestamp": "2026-09-20T10:27:42+08:00",
+      "subject": "fix(RF19): prove external resource origins and guarded failures"
+    }
+  ],
+  "status_counting": "127 Retrom paths using --porcelain=v1 --untracked-files=all --no-renames and per-command core.filemode=false on Windows UNC; 52 modified, 5 staged deletions, 70 untracked. No Git configuration changed; Linux executable modes must be reviewed separately.",
+  "pfb": {
+    "name": "retrom-project-structure",
+    "id": "retrom-proj-e20ec94170f0",
+    "url": "http://retrom-proj-e20ec94170f0.localhost:3000",
+    "container": "retrom-pfb-retrom-proj-e20ec94170f0-app-1",
+    "container_status": "running",
+    "health": "healthy",
+    "observation_scope": "Read-only container state, not a new browser/product acceptance"
+  },
+  "work_items": [
+    {
+      "id": "RF01",
+      "name": "基线冻结与全量盘点",
+      "status": "盘点闭合；完整退出待验证",
+      "completed_exit": false,
+      "done": "固定基线、真实旧源码 characterization、包/类型/写根/消费者盘点；登记 246 个操作。",
+      "remaining": "把逐操作测试、证据、所有权和原 Case 映射补齐，取得当前源码的 RF01 point 退出证据。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/rf01-final-write-audit.json",
+        "td/refactor-execution/rf01-final-write-audit.md",
+        "td/refactor-execution/architecture-execution-summary.json"
+      ]
+    },
+    {
+      "id": "RF02",
+      "name": "统一组装、资源所有权和后台生命周期",
+      "status": "局部接线；核心生命周期未迁",
+      "completed_exit": false,
+      "done": "部分 composition、锁、诊断、detector 显式注入。",
+      "remaining": "实现 Application 的 BUILT/STARTING/RUNNING/STOPPING/STOPPED、统一 Worker registry、重复 Start/Shutdown 和一次释放。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/latest-checkpoint-handoff.json"
+      ]
+    },
+    {
+      "id": "RF03",
+      "name": "共享 Model、窄端口及类型真实归属",
+      "status": "部分生产实现",
+      "completed_exit": false,
+      "done": "共享 blob/metadata/netplay/clock、Provider/Launch 值和窄 BIOS facts 已迁移；最新报告 re-export 为 0。",
+      "remaining": "关闭全部类型/端口消费者图；提交 RPG ports；清除具体跨 Service 依赖和嵌套 writer，不能用新门面隐藏依赖。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/rf03-architecture-result.md",
+        "td/refactor-execution/rf03-provider-implementation.json",
+        "td/refactor-execution/rf03-bios-result.json"
+      ]
+    },
+    {
+      "id": "RF04",
+      "name": "纯 Capability 与外部 I/O 分离",
+      "status": "部分实现；重要批次未提交",
+      "completed_exit": false,
+      "done": "Hasher、blocklist、firmware facts、ZIP 命名、native probes、process lock、diagnostics、有界引擎探测和 DAT 获取已分离。",
+      "remaining": "先收口 B2/RPG，再完成 7z worker/SDK、materializer、剩余 cleanup 与流缓存；D22 锁还需产品接线。",
+      "evidence_paths": [
+        "td/refactor-execution/rf04-capability-split-plan.json",
+        "td/refactor-execution/rf04-blocklist-result.json",
+        "td/refactor-execution/rf04-scummvm-implementation.json",
+        "td/refactor-execution/rf04-dat-catalog-service-tests-result.json",
+        "td/refactor-execution/rf04-archive-b2-result.json",
+        "td/refactor-execution/rf04-rpgmaker-detector-implementation.json",
+        "td/refactor-execution/PROGRESS.md"
+      ]
+    },
+    {
+      "id": "RF05",
+      "name": "值命令与原子事务公共机制",
+      "status": "登记/计划；事务机制未闭环",
+      "completed_exit": false,
+      "done": "operations/policies schema、静态合同、246 operations/584 policies；锁 Adapter 前置。",
+      "remaining": "实际值命令替换 Repo 业务回调；ID 在 writer 外准备，取写权后一次 admission clock，重读权限/来源/lease，原子写入与逐阶段回滚。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/rf05-transaction-requirements.py",
+        "td/retrom-baseline-refactor-82834ba/03-TRANSACTIONS.md"
+      ]
+    },
+    {
+      "id": "RF06",
+      "name": "HTTP/WebSocket 边界、错误与幂等回放",
+      "status": "盘点与局部边界迁移",
+      "completed_exit": false,
+      "done": "receipt autocommit、路由和错误回放边界已盘点。",
+      "remaining": "StoredReply、codec、全部 route port 与原子幂等回放；解决领域提交后另写 receipt 的窗口。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-identity-extracted.json",
+        "td/refactor-execution/characterization-integration-lint.log"
+      ]
+    },
+    {
+      "id": "RF07",
+      "name": "账户、会话与身份安全用例",
+      "status": "领域盘点；能力前置已做",
+      "completed_exit": false,
+      "done": "15 类身份/账户操作；密码执行和 blocklist 获取已分离。",
+      "remaining": "迁移 Initialize/Authenticate/Renew/ChangePassword/Link/Admin/Recover/RateLimit 命令，补权限新鲜度和事务 UUID 的安全回归。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-identity-extracted.json",
+        "td/refactor-execution/rf04-blocklist-result.json"
+      ]
+    },
+    {
+      "id": "RF08",
+      "name": "存档：流式协议与业务提交完整样板",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "5 类 save 操作和合同已登记。",
+      "remaining": "实现纯值 SaveCommand、Stager 与流关闭所有权、完整原子提交、取消/恢复/故障矩阵。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/retrom-baseline-refactor-82834ba/workstreams/RF08-saves.md"
+      ]
+    },
+    {
+      "id": "RF09",
+      "name": "上传与内容准备流水线",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "11 类 upload 操作，含续租、恢复重排、取消对账。",
+      "remaining": "迁移 Create/AcceptPart/Finalize/Cancel/Claim/Finish；临时文件和 Reader 留在 Adapter，消费转移进入所属导入事务。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-uploads-extracted.json"
+      ]
+    },
+    {
+      "id": "RF10",
+      "name": "Launch、预览、配置、授权与隔离",
+      "status": "盘点与局部共享值迁移",
+      "completed_exit": false,
+      "done": "14 类 Launch/隔离事务；Provider/Launch 值、BIOS facts 及部分配置测试。",
+      "remaining": "迁移 Launch/Preview/Netplay/Variant/Config/Play/Screenshot/Validation/Isolation；补预览文件闭包、回放、权限与执行防护。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-launch-extracted.json",
+        "td/refactor-execution/rf03-provider-implementation.json"
+      ]
+    },
+    {
+      "id": "RF11",
+      "name": "Runtime、BIOS、DAT 与内容验证能力",
+      "status": "部分能力实现；事务未迁完",
+      "completed_exit": false,
+      "done": "Provider 严格值、BIOS facts、firmware source、DAT CatalogService 及真实调用方。",
+      "remaining": "实现 ActivateProvider/ProjectCatalog/Install/ReplaceFirmware/SyncDATRequirements 的原子命令和故障矩阵；公开 DAT 已有验证，私有 BIOS/核心验收另列缺口。",
+      "evidence_paths": [
+        "td/refactor-execution/rf03-provider-implementation.json",
+        "td/refactor-execution/rf03-bios-result.json",
+        "td/refactor-execution/rf04-dat-catalog-service-tests-result.json",
+        "td/refactor-execution/PROGRESS.md"
+      ]
+    },
+    {
+      "id": "RF12",
+      "name": "联机控制面与实时 Hub 分离",
+      "status": "盘点；已知缺陷待修",
+      "completed_exit": false,
+      "done": "19 类 room/session/launch 写操作及恢复路径。",
+      "remaining": "迁移控制面命令；修复先发布内存再持久化、持 Hub mutex 跨 SQL、事务内 UUID 等问题；保持实时输入协议。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-netplay-extracted.json"
+      ]
+    },
+    {
+      "id": "RF13",
+      "name": "普通导入、审核、发布与集成门面消除",
+      "status": "盘点与测试整理；领域事务待迁",
+      "completed_exit": false,
+      "done": "普通导入、审核、批审、发布、附件和来源交接的写集/策略；相关 integration lint 已整理。",
+      "remaining": "PublicationPlan、原子 Repo helper、业务 callback/集成门面消除；B2/RPG 的输入边界改造不能替代发布事务闭环。",
+      "evidence_paths": [
+        "td/refactor-execution/rf13-policy-local-census.json",
+        "td/refactor-execution/rf13-policy-registry-delta.json",
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/PROGRESS.md"
+      ]
+    },
+    {
+      "id": "RF14",
+      "name": "Pegasus、EmulationStation 与服务器来源",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "Pegasus、ES、server BIOS 来源写边界和消费者已登记。",
+      "remaining": "迁移 Plan/Mapping/Scan/Start/Claim/Outcome/Materialization/Companion/Completion/Recovery；移除跨层 Discover/WithScan 等业务回调。",
+      "evidence_paths": [
+        "td/refactor-execution/rf14-es-local-census.json",
+        "td/refactor-execution/rf14-es-registry-delta.json",
+        "td/refactor-execution/rf14-pegasus-local-census.json",
+        "td/refactor-execution/rf14-pegasus-registry-delta.json"
+      ]
+    },
+    {
+      "id": "RF15",
+      "name": "元信息抓取、缓存、候选和媒体任务",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "10 类抓取/媒体事务及策略。",
+      "remaining": "迁移抓取和媒体命令；补 import payload、父任务取消及结果对执行身份的 guard。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-metadata-extracted.json"
+      ]
+    },
+    {
+      "id": "RF16",
+      "name": "游戏目录、游戏编辑、标签收藏与读模型",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "约 30 类目录/编辑/标签收藏事务及读写符号。",
+      "remaining": "迁移命令和读投影；清理跨 Service 调用，验证分页、权限、内容替换与删除兼容。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-library-extracted.json",
+        "td/refactor-execution/library-census-draft.json"
+      ]
+    },
+    {
+      "id": "RF17",
+      "name": "任务调度、取消、重试与执行防护",
+      "status": "盘点/计划",
+      "completed_exit": false,
+      "done": "通用 job mutation、receipt 关系和现有任务符号。",
+      "remaining": "落地生产 Kind registry、cancel/retry ports、恢复入口和 claim/outcome；处理休眠 IMPORT_ITEM_PIPELINE retry dispatch。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-jobs-task.md"
+      ]
+    },
+    {
+      "id": "RF18",
+      "name": "Payload 生命周期、归属注册与 GC",
+      "status": "盘点与锁前置；生命周期待迁",
+      "completed_exit": false,
+      "done": "release effect graph、嵌套写阶段、GC/过期/retirement 盘点；D22 锁 Adapter。",
+      "remaining": "将锁接入全部 publication/reference/GC；33 个登记内容操作仍缺 acquire/release；完成 release/GC 命令、所有权重验和并发/崩溃恢复。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/cursor-payload-task.md",
+        "td/refactor-execution/rf04-digest-independent-review.json"
+      ]
+    },
+    {
+      "id": "RF19",
+      "name": "维护、备份恢复、诊断及只读探针",
+      "status": "部分锁/诊断实现",
+      "completed_exit": false,
+      "done": "维护 process lock、显式注入和 sanitized diagnostics；备份关闭顺序测试及维护写集盘点。",
+      "remaining": "全部维护命令的文件准备与 SQL commit 分离，backup/restore 字节兼容、无 HTTP/Worker 入口及隐私验收。",
+      "evidence_paths": [
+        "td/refactor-execution/rf19-local-census.json",
+        "td/refactor-execution/rf04-resource-review.json",
+        "td/refactor-execution/rf04-diagnostics-first-batch-review.json",
+        "td/refactor-execution/PROGRESS.md"
+      ]
+    },
+    {
+      "id": "RF20",
+      "name": "前端 Feature、API Client 与 Player 公开边界",
+      "status": "扫描器基础设施；产品迁移待做",
+      "completed_exit": false,
+      "done": "Web 编译闭包、Feature/cycle/client-server 扫描及负向自测。",
+      "remaining": "迁移 browser-client/server-client 及消费者；清理 Feature 图违规，证明 SSR 状态隔离并完成 Player/UI 合同验证。",
+      "evidence_paths": [
+        "td/refactor-execution/PROGRESS.md",
+        "td/refactor-execution/web-check.log",
+        "td/refactor-execution/web-tooling-check.log"
+      ]
+    },
+    {
+      "id": "RF21",
+      "name": "架构扫描器与持久质量门禁",
+      "status": "部分门禁；NOT_READY",
+      "completed_exit": false,
+      "done": "Go/Web/contract/point/final coordinator、来源证明与真实反例；多个提交快照通过 backend-check。",
+      "remaining": "清理最近报告的 811 处违规及 9 类 pending checks；完整传递纯度、生命周期、操作/证据、前端结构证明与永久接线仍缺。",
+      "evidence_paths": [
+        "td/refactor-execution/rf04-archive-error-guard/actual-boundaries.json",
+        "td/refactor-execution/architecture-execution-summary.json",
+        "td/refactor-execution/latest-checkpoint-handoff.json",
+        "td/refactor-execution/backend-check.log",
+        "td/refactor-execution/PROGRESS.md"
+      ]
+    },
+    {
+      "id": "RF22",
+      "name": "正式文档、完整验证和交付收口",
+      "status": "交接已整理；最终收口未完成",
+      "completed_exit": false,
+      "done": "阶段提交、历史验证证据和本交接文档。",
+      "remaining": "合并正式契约、消除产品对临时文档的依赖；最终干净固定 HEAD 的 CI/race/integration/Web E2E、102 具名场景、原 Required Case、回滚和兼容验收。",
+      "evidence_paths": [
+        "td/refactor-execution/latest-checkpoint-handoff.json",
+        "td/refactor-execution/PROGRESS.md",
+        "td/retrom-baseline-refactor-82834ba/workstreams/RF22-closeout.md"
+      ]
+    }
+  ],
+  "registry": {
+    "operations": 246,
+    "policies": 584,
+    "named_cases": 102,
+    "original_product_cases": 217,
+    "original_nonconditional_cases": 215,
+    "baseline_census_policy_count": 581,
+    "note": "Source census counts and planned test links do not prove production migration or executed fault coverage."
+  },
+  "latest_existing_architecture": {
+    "evidence_path": "td/refactor-execution/rf04-archive-error-guard/actual-boundaries.json",
+    "sha256": "3533a76712789265192e0c7d33fa0f5eb3731cc240a38795dc159972988ee57c",
+    "baseline": {
+      "baseline": "82834bade1648da3067ebda1b1fc89c18577fd6a",
+      "commit": "218c279a002ab4326a0a69c3ab649122b068329d",
+      "tree": "b3f740aa3062abc8f59f05e363664c33eda50aa4",
+      "relation": "DESCENDANT"
+    },
+    "status": "NOT_READY",
+    "violation_count": 811,
+    "violations_by_rule": {
+      "AR02": 124,
+      "AR05": 389,
+      "AR03": 152,
+      "AR04": 112,
+      "AR08": 25,
+      "GOV01": 9
+    },
+    "implemented_checks": [
+      "source ownership",
+      "compatibility inputs",
+      "layer dependencies",
+      "model port value graphs",
+      "resolved execution graph",
+      "known I/O and SQL execution effects",
+      "resolved Model reexports and consumers",
+      "Model port implementations and consumers across all production layers",
+      "fixed archive resource signatures and bounded production binding origins"
+    ],
+    "pending_checks": [
+      "generated provenance and supported build registration",
+      "direct repository boundaries and constructor injection",
+      "transitive executable purity and SQL capability calls",
+      "construction and lifecycle ownership",
+      "atomic helper consumers and policy uniqueness",
+      "technical clock sampling and protocol privacy",
+      "operation, job, dispatcher, test, and evidence registries",
+      "frontend feature and server boundaries",
+      "test integrity and permanent gate wiring"
+    ],
+    "reexports": 0,
+    "note": "Historical worktree report whose recorded HEAD is 218c279a plus the then-pending proof source. This documentation task did not rerun or relabel it as current-HEAD acceptance."
+  },
+  "recent_verified_checkpoints": [
+    {
+      "commit": "f3c124900edfd6d6331b99aa4644f82cef070e88",
+      "tree": "35d37b498c1b0a679745625fb081121f767dd66f",
+      "timestamp": "2026-09-20T10:08:06+08:00",
+      "checks": {
+        "backend": {
+          "command": [
+            "make",
+            "backend-check"
+          ],
+          "exit": 0,
+          "seconds": 209.32262769900262
+        },
+        "integration": {
+          "command": [
+            "go",
+            "test",
+            "-tags=integration",
+            "-count=1",
+            "./internal/repo/dependencies",
+            "./internal/transport/httpapi"
+          ],
+          "exit": 0,
+          "seconds": 184.88304766401416
+        },
+        "scoped-lint": {
+          "command": [
+            "/workspace/retrom/bin/golangci-lint",
+            "run",
+            "--build-tags=integration",
+            "./internal/adapter/format/arcadedat/...",
+            "./internal/model/dependencies/...",
+            "./internal/service/dependencies/..."
+          ],
+          "exit": 0,
+          "seconds": 0.49617648299317807
+        }
+      },
+      "evidence_path": "td/refactor-execution/rf04-dat-resource-checkpoint.json"
+    },
+    {
+      "commit": "218c279a002ab4326a0a69c3ab649122b068329d",
+      "tree": "b3f740aa3062abc8f59f05e363664c33eda50aa4",
+      "timestamp": "2026-09-20T10:14:49+08:00",
+      "checks": {
+        "backend": {
+          "command": [
+            "make",
+            "backend-check"
+          ],
+          "exit": 0,
+          "seconds": 23.119010989030357
+        },
+        "integration": {
+          "command": [
+            "go",
+            "test",
+            "-tags=integration",
+            "-count=1",
+            "./internal/adapter/integration/libraryimport",
+            "./internal/adapter/runtime/launch"
+          ],
+          "exit": 0,
+          "seconds": 113.23202676000074
+        },
+        "integration-lint": {
+          "command": [
+            "/workspace/retrom/bin/golangci-lint",
+            "run",
+            "--build-tags=integration",
+            "./internal/adapter/integration/libraryimport/...",
+            "./internal/adapter/runtime/launch/..."
+          ],
+          "exit": 0,
+          "seconds": 1.3062162050046027
+        }
+      },
+      "evidence_path": "td/refactor-execution/rf04-test-batch8-checkpoint.json"
+    },
+    {
+      "commit": "28504499b37f14d15818df677f0c8e3083aba663",
+      "tree": "0f5ae00db50de058c6f436857106209e95d8305b",
+      "timestamp": "2026-09-20T10:27:42+08:00",
+      "checks": {
+        "backend": {
+          "command": [
+            "make",
+            "backend-check"
+          ],
+          "exit": 0,
+          "seconds": 64.69243470201036
+        },
+        "integration": {
+          "command": [
+            "go",
+            "test",
+            "-tags=integration",
+            "-count=1",
+            "./internal/testkit/architecture",
+            "./scripts/architecture-check"
+          ],
+          "exit": 0,
+          "seconds": 39.8003256310476
+        },
+        "integration-lint": {
+          "command": [
+            "/workspace/retrom/bin/golangci-lint",
+            "run",
+            "--build-tags=integration",
+            "./internal/testkit/architecture/...",
+            "./scripts/architecture-check/..."
+          ],
+          "exit": 0,
+          "seconds": 0.7169666290283203
+        }
+      },
+      "evidence_path": "td/refactor-execution/rf04-archive-origin-proof-checkpoint.json"
+    }
+  ],
+  "pending_protocol_exceptions": {
+    "status": "PROPOSED_UNAPPROVED",
+    "count": 17,
+    "approval_rule": "AGENTS.md section 5, lines 99-111; prior auto-review rejection requires explicit user approval before central registration",
+    "entries": [
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 18,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Preserve Begin's exact domain error; the selected core is already classified.",
+        "invariant": "Unsupported core validation occurs before Files and retains the original bare *detector.Error, CodeCoreUnsupported and empty expected generation.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 26,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Index already assigns the catalog failure code and expected generation.",
+        "invariant": "Absent catalog, logical-path and duplicate-entry failures retain the original bare *detector.Error, code, detail and expected generation.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 32,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Next already assigns the probe path, failure code and expected generation.",
+        "invariant": "Pre-open probe validation retains the original bare *detector.Error, selected path, code and expected generation; no resource is opened first.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 36,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Result owns the exact final ambiguity or generation-mismatch domain error.",
+        "invariant": "Final no-signature, ambiguity and core-mismatch failures remain the original bare *detector.Error with unchanged exposed fields and full cause chain.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 41,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Failure is the sole domain wrapper and retains the original I/O cause.",
+        "invariant": "Open, missing-reader, read and close failures gain exactly one original domain wrapper, with the raw cause identity and phase-specific detail unchanged.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/detector.go",
+        "line": 45,
+        "symbol": "func detect(coreID string, source fileIndex) (policy.Profile, error)",
+        "linter": "wrapcheck",
+        "reason": "Accept already classifies size and parse failures with the expected generation.",
+        "invariant": "Size and parser failures retain their original bare *detector.Error, code, detail, expected generation and wrapped parser cause.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "cabf1aad29a2c8111abf0023b210a3a6023ab94df2b4350b313d487c2548dd33"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+        "line": 12,
+        "symbol": "func readProbe(probe policy.Probe, source fileIndex) ([]byte, policy.ProbeFailurePhase, error)",
+        "linter": "wrapcheck",
+        "reason": "Inspection.Failure supplies the single domain wrapper for this original Open cause.",
+        "invariant": "The original Open cause reaches Inspection.Failure unchanged; an extra adapter wrapper would alter the captured concrete error chain.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "fc086f6215eb73998452d4ddfaa1d6dede1896821e6c42ea7eaa10c4601edf56"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+        "line": 21,
+        "symbol": "func readProbe(probe policy.Probe, source fileIndex) ([]byte, policy.ProbeFailurePhase, error)",
+        "linter": "wrapcheck",
+        "reason": "Preserve the Read cause for Inspection.Failure and its priority over Close failure.",
+        "invariant": "The original Read cause reaches Inspection.Failure unchanged and dominates any concurrent Close failure; the resource is still closed once.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "fc086f6215eb73998452d4ddfaa1d6dede1896821e6c42ea7eaa10c4601edf56"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/reader.go",
+        "line": 25,
+        "symbol": "func readProbe(probe policy.Probe, source fileIndex) ([]byte, policy.ProbeFailurePhase, error)",
+        "linter": "wrapcheck",
+        "reason": "Inspection.Failure supplies the single domain wrapper for this original Close cause.",
+        "invariant": "The original Close cause reaches Inspection.Failure unchanged and precedes the size check after successful reading.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "fc086f6215eb73998452d4ddfaa1d6dede1896821e6c42ea7eaa10c4601edf56"
+      },
+      {
+        "path": "internal/adapter/engine/rpgmaker/detector/trace_index_test.go",
+        "line": 63,
+        "symbol": "func (index *traceIndex) Open(name string) (io.ReadCloser, error)",
+        "linter": "nilnil",
+        "reason": "Replay the old no-reader input; an error or typed-nil reader tests another boundary.",
+        "invariant": "An actual nil io.ReadCloser with nil error exercises the old missing-reader domain failure without Read or Close; typed-nil or non-nil error inputs exercise different paths.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "398281a05f9955ec3da1c72e2bd39de6160cd05f3d82f28030a2d134533c9145"
+      },
+      {
+        "path": "internal/adapter/content/archive/asar_cursor.go",
+        "line": 153,
+        "symbol": "func (cursor *asarCursor) Close() error",
+        "linter": "wrapcheck",
+        "reason": "The active unpacked member Close cause is returned unchanged to the Service-owned Stage failure combiner. Outer app.asar and archive close failures remain nonfatal diagnostics.",
+        "invariant": "Close returns the exact original nonnil error object; ProjectArchiveStageError joins stage cause, close cause, then ErrElectronASARInvalid, in that order; resources close once.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "a96f7e2901d6e78f4e4e4e113387a1c99f8beb7d1dfb1fb468a899bcfd74d727"
+      },
+      {
+        "path": "internal/adapter/content/archive/asar_header.go",
+        "line": 19,
+        "symbol": "func readASARHeader(reader io.Reader, archiveSize int64, limits importing.ArchiveLimits) ([]importing.ASARMember, int64, error)",
+        "linter": "wrapcheck",
+        "reason": "The pure pickle bounds validator already constructs the original classified invalid-pickle error. The bounded I/O owner preserves this error graph and original phase before allocating JSON bytes.",
+        "invariant": "Exact *fmt.wrapError chain and text, including shared ASAR/unsafe sentinel identities, stay unchanged. No new wrapping stage.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "04f4f049167ebb24d4e980ef7506470f11d74c0a9faf8285aede8a10b6ba59a8"
+      },
+      {
+        "path": "internal/adapter/content/archive/asar_header.go",
+        "line": 31,
+        "symbol": "func readASARHeader(reader io.Reader, archiveSize int64, limits importing.ArchiveLimits) ([]importing.ASARMember, int64, error)",
+        "linter": "wrapcheck",
+        "reason": "The pure JSON/header policy can return distinct path, limit and ASAR failures. The I/O owner does not reclassify or wrap them.",
+        "invariant": "Preserve original bare sentinel or reason-bearing error tree and data offset failure result. Decode continues to use standard JSON semantics.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "04f4f049167ebb24d4e980ef7506470f11d74c0a9faf8285aede8a10b6ba59a8"
+      },
+      {
+        "path": "internal/adapter/content/archive/zip.go",
+        "line": 59,
+        "symbol": "func validateZIPDirectory(ctx context.Context, reader *zip.Reader, limits importing.ArchiveLimits, checkContext bool) ([]importing.ZIPMember, error)",
+        "linter": "wrapcheck",
+        "reason": "The pure directory state machine owns path, duplicate/casefold, mode, encryption, method and bound classifications. These originally escaped the central-directory phase directly, before any member was opened.",
+        "invariant": "No wrapper or reduced error vocabulary: preserve each original error identity before first payload Read.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "6d36f06381d69f35814f8936da3ee2a365f11f5ccfd52e2e31bcd742d97e1a2e"
+      },
+      {
+        "path": "internal/adapter/content/archive/zip_scan.go",
+        "line": 54,
+        "symbol": "func (factory *Factory) ScanFlatZIP(ctx context.Context, path string, limits importing.ArchiveLimits) ([]importing.ArchiveEntry, error)",
+        "linter": "wrapcheck",
+        "reason": "The original second pass returned its path/domain sentinel directly, after successful byte scanning. The pure rule remains the single structural policy.",
+        "invariant": "Return the exact original rule error, preserving two-pass order; notably flat-directory rejection remains bare ErrNestedArchiveUnsupported.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "ea15d2000cbb698bdf0ea23c8c08f43666e18b42229bd9bc0e1b48cb7bbcb4ef"
+      },
+      {
+        "path": "internal/adapter/content/archive/zip_scan.go",
+        "line": 101,
+        "symbol": "func readZIPEntry(ctx context.Context, item *zip.File, member importing.ZIPMember, reporter diagnostics.ErrorReporter, limit int64, allowNestedArchives bool) (importing.ArchiveEntry, error)",
+        "linter": "wrapcheck",
+        "reason": "The pure completion rule supplies the same bare size/nested error as the original member scanner. ScanZIP owns the only outer per-entry contextual wrapper.",
+        "invariant": "Exactly one scan archive entry wrapper around the original cause; the streaming byte scanner must not introduce another wrapper.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "ea15d2000cbb698bdf0ea23c8c08f43666e18b42229bd9bc0e1b48cb7bbcb4ef"
+      },
+      {
+        "path": "internal/service/libraryimport/project_archive.go",
+        "line": 67,
+        "symbol": "func (service *ImportPreparation) stageProjectArchive(ctx context.Context, path string, format contentprofile.ArchiveFormat, candidates map[int]*blobstore.Candidate) ([]importing.ArchiveEntry, error)",
+        "linter": "errorlint",
+        "reason": "ArchiveReader.Next uses the bare io.EOF object as its terminal protocol marker; a wrapped EOF is an actual archive failure.",
+        "invariant": "Only exact io.EOF terminates successfully. Wrapped EOF must return an error, discard all staged candidates, and close the cursor once; errors.Is swallows corruption and fails the real regression.",
+        "status": "PROPOSED_UNAPPROVED",
+        "source_sha256": "4f1238b133bce0c52521e68fe6431a2ca06330750083e3e000452af9bddddcca"
+      }
+    ]
+  },
+  "remaining_acceptance_inputs": [
+    "MZ",
+    "ONS",
+    "KiriKiri",
+    "GameMaker/Butterscotch",
+    "TyranoScript",
+    "Flycast CHD/BIOS",
+    "expansion ROM",
+    "other affected licensed console/BIOS samples"
+  ],
+  "user_direction": {
+    "private_inputs": "暂无，先完成重构和公开测试，保留缺失验收项",
+    "commits": "Independently reviewable completed increments; at least hourly while developing; no empty commit.",
+    "models": "Sol for routine bounded work; stronger models for complex resource/lifecycle/architecture proof.",
+    "automation_id": "retrom"
+  },
+  "handoff_limit": "This metadata records paths and hashes, not the 127 pending source files or ignored evidence/provider payloads. A fresh clone cannot reconstruct the pending work from this commit alone."
+}

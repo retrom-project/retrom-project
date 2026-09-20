@@ -162,3 +162,7 @@ branches, `retrom/gca2600db8de4`, `retrom/g4aba09c98f1e` and
 `retrom/g814991a2571a`; the fork `main` / `master` branches remain upstream mirrors.
 Manifest branches select development checkouts. Runtime consumption continues
 to use immutable core releases and fixed build inputs from the child repositories.
+
+## Refactor handoffs
+
+- [Retrom structure refactor handoff (2026-09-20)](docs/handoffs/retrom-project-structure.md): committed checkpoints, unfinished work, verification limits, and the PFB working-tree inventory.
