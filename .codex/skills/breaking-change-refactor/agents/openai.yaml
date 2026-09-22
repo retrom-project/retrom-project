@@ -1,0 +1,4 @@
+interface:
+  display_name: "破坏性重构"
+  short_description: "启用前确认，当前会话持续授权接口、数据与版本的破坏性重构"
+  default_prompt: "使用 $breaking-change-refactor；若当前 session 尚未启用，请先向我确认默认破坏性授权，确认后持续按该技能完成重构与验证。"
