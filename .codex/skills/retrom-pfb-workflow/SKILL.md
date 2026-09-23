@@ -53,7 +53,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 ## 权限与清理边界
 
 - 用户要求“使用 PFB 开发”时，可以把在当前 PFB 的 Retrom 清单中维护必要依赖、从声明的维护分支最新远端提交创建 worktree，以及运行 PFB 命令视为正常实施步骤；不要从基线 checkout 的当前分支派生 PFB 开发分支。
-- 不要自动提交、推送、合并或删除分支，除非用户请求包含这些操作。
+- 在当前 PFB 工作区内，可以提交本次任务的改动并推送到对应远端开发分支；提交和推送前核对仓库、分支与改动范围，不要包含已有的无关改动。不要自动创建或更新 PR、合并或删除分支，除非用户明确要求。
 - 旧命名卷版 PFB 只允许在当前 PFB 停止态执行一次 `pfb-migrate-storage PFB=<name> CONFIRM=<actual-id>`；只迁移该PFB旧state指向的数据卷及同PFB缓存，逐内容指纹校验后原子发布workspace并保留源卷。不得猜选其他PFB的卷，也不得借迁移影响其他运行实例。
 - Retrom `pfb-remove`移除容器/注册但保留workspace；`pfb-destroy`不会删除Git worktree或迁移前旧卷，但会删除该Retrom worktree的`.pfb/`。用户明确要求将PFB与worktree一并下线时，优先从根项目运行交互式`make pfb-remove PFB=<name>`；它先验证标准PFB布局下全部已注册顶层worktree clean且能映射到PFB外的owner checkout（包括已退出当前manifest的历史仓库），列出并删除精确ID的legacy volume，再调用底层destroy、deinit干净submodule并通过Git移除worktree。普通移除返回Git特定的submodule worktree拒绝时，统一入口只能在再次clean检查后对该精确worktree使用一次`--force`；不得借此绕过脏状态。若早先destroy已删除spec后中断，只有在同ID registry entry和容器均已不存在时才允许续传。不得手工绕过其检查强制或递归删除。
 - 标准 `make dev` 监听 `localhost:4000`，PFB 共享网关监听 `localhost:3000`，两者可以并行运行。处理其他冲突时只停止任务范围内明确属于当前 PFB 的进程；不要擅自终止基线工程或其他 PFB。
