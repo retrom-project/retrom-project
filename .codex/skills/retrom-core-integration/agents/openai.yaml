@@ -1,0 +1,4 @@
+interface:
+  display_name: "Retrom 核心集成"
+  short_description: "协调核心 fork、runtime、Retrom 的接入与发布验收"
+  default_prompt: "使用 $retrom-core-integration 按本次需求完成 Retrom 核心接入和相应验证。"
