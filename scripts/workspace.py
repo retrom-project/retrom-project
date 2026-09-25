@@ -47,7 +47,7 @@ def normalize_git_url(url: str) -> str:
     return value.lower()
 
 
-def validate_checkout(repo: dict[str, object], root: Path | None = None) -> Path:
+def validate_checkout_path(repo: dict[str, object], root: Path | None = None) -> Path:
     path = (root or ROOT) / str(repo["path"])
     if not path.exists():
         raise WorkspaceError(f"missing checkout {repo['id']}: {path}")
@@ -56,6 +56,11 @@ def validate_checkout(repo: dict[str, object], root: Path | None = None) -> Path
         raise WorkspaceError(f"not a Git checkout {repo['id']}: {path}")
     if Path(result.stdout.strip()).resolve() != path.resolve():
         raise WorkspaceError(f"checkout is not rooted at the declared path {repo['id']}: {path}")
+    return path
+
+
+def validate_checkout(repo: dict[str, object], root: Path | None = None) -> Path:
+    path = validate_checkout_path(repo, root)
     origin = run_git(path, "remote", "get-url", "origin", check=False)
     if origin.returncode != 0:
         raise WorkspaceError(f"checkout has no origin remote {repo['id']}: {path}")
@@ -118,22 +123,32 @@ def update_repositories(repositories: list[dict[str, object]]) -> None:
         apply_default(repo, path, commit)
 
 
-def fetch_default(repo: dict[str, object], path: Path) -> str:
+def fetch_default(repo: dict[str, object], path: Path, source: str = "origin") -> str:
     branch = str(repo["defaultBranch"])
     remote_ref = f"refs/remotes/origin/{branch}"
-    print(f"fetch  {repo['id']:<28} origin/{branch}")
-    run_git(path, "fetch", "--prune", "origin", f"+refs/heads/{branch}:{remote_ref}")
+    print(f"fetch  {repo['id']:<28} {source}/{branch}")
+    args = ["fetch"]
+    if source == "origin":
+        args.append("--prune")
+    run_git(path, *args, source, f"+refs/heads/{branch}:{remote_ref}")
     return run_git(path, "rev-parse", "--verify", remote_ref).stdout.strip()
 
 
 def apply_default(repo: dict[str, object], path: Path, commit: str) -> None:
     branch = str(repo["defaultBranch"])
+    refspec = f"refs/heads/{branch}:refs/remotes/origin/{branch}"
+    configured = run_git(path, "config", "--get-all", "remote.origin.fetch", check=False)
+    if not any(
+        value.lstrip("+") in {refspec, "refs/heads/*:refs/remotes/origin/*"}
+        for value in configured.stdout.splitlines()
+    ):
+        run_git(path, "config", "--add", "remote.origin.fetch", f"+{refspec}")
     if _local_branch_exists(path, branch):
         run_git(path, "switch", branch)
     else:
         run_git(path, "branch", branch, commit)
-        run_git(path, "branch", "--set-upstream-to", f"origin/{branch}", branch)
         run_git(path, "switch", branch)
+    run_git(path, "branch", "--set-upstream-to", f"origin/{branch}", branch)
     run_git(path, "merge", "--ff-only", commit)
     initialize_submodules(repo, path)
     head = run_git(path, "rev-parse", "--short=10", "HEAD").stdout.strip()

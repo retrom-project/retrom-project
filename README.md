@@ -21,7 +21,9 @@ it checks the current catalog's existing checkouts for dirty state, fetches the
 target Retrom commit, reads that commit's dependency catalog without switching
 Retrom, then checks the old and new catalogs before applying any branch updates.
 New repositories are cloned after the existing checkout preflight. Removed
-repositories stay on disk. Dirty, divergent or locally ahead default branches,
+repositories stay on disk. An existing checkout can adopt a new catalog origin
+only when another configured remote matches it and the histories are related.
+Dirty, divergent or locally ahead default branches,
 and default branches checked out in another worktree, block the update.
 A clone failure leaves existing branches untouched; completed new clones can be
 reused on retry. Git updates across multiple repositories are not transactional.

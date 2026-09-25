@@ -8,6 +8,72 @@ from workspace_test_support import SourceCase
 
 
 class CatalogUpdateTests(SourceCase):
+    def test_existing_upstream_checkout_adopts_declared_fork(self):
+        self.initialize()
+        core = self.repository("new-core")
+        core["defaultBranch"] = "retrom/baseline"
+        publisher = self.publisher(core)
+        self.git(publisher, "switch", "-c", "retrom/baseline")
+        self.git(publisher, "push", "origin", "retrom/baseline")
+        self.w.clone_missing([{**core, "defaultBranch": "master"}])
+        checkout = self.checkout(core)
+        upstream = self.root / "remotes/upstream-core.git"
+        subprocess.run(["git", "clone", "--bare", core["gitlink"], str(upstream)],
+                       check=True, capture_output=True, text=True)
+        self.git(checkout, "remote", "set-url", "origin", str(upstream))
+        self.git(checkout, "remote", "add", "retrom", core["gitlink"])
+        target = self.publish_catalog([self.runtime, core])
+
+        updates.update_workspace(self.w)
+
+        self.assertEqual(self.git(self.checkout(self.app), "rev-parse", "HEAD"), target)
+        self.assertEqual(self.git(checkout, "remote", "get-url", "origin"), core["gitlink"])
+        self.assertEqual(self.git(checkout, "branch", "--show-current"), "retrom/baseline")
+        self.assertEqual(self.git(checkout, "status", "--porcelain=v1"), "")
+        updates.update_workspace(self.w)
+
+    def test_origin_mismatch_without_declared_fork_remote_stops_update(self):
+        self.initialize()
+        core = self.repository("new-core")
+        self.w.clone_missing([core])
+        checkout = self.checkout(core)
+        upstream = self.root / "remotes/upstream-core.git"
+        subprocess.run(["git", "clone", "--bare", core["gitlink"], str(upstream)],
+                       check=True, capture_output=True, text=True)
+        self.git(checkout, "remote", "set-url", "origin", str(upstream))
+        before = self.git(self.checkout(self.app), "rev-parse", "HEAD")
+        self.publish_catalog([self.runtime, core])
+
+        with self.assertRaisesRegex(config.WorkspaceError, "no configured remote matches"):
+            updates.update_workspace(self.w)
+
+        self.assertEqual(self.git(self.checkout(self.app), "rev-parse", "HEAD"), before)
+        self.assertEqual(self.git(checkout, "remote", "get-url", "origin"), str(upstream))
+
+    def test_unrelated_checkout_cannot_adopt_declared_fork(self):
+        self.initialize()
+        core = self.repository("new-core")
+        unrelated = self.repository("unrelated-core")
+        publisher = self.publisher(unrelated)
+        self.git(publisher, "switch", "--orphan", "independent")
+        (publisher / "independent.txt").write_text("different history\n")
+        self.git(publisher, "add", ".")
+        self.git(publisher, "commit", "-m", "independent root")
+        self.git(publisher, "push", "--force", "origin", "HEAD:master")
+        checkout = self.checkout(core)
+        checkout.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["git", "clone", unrelated["gitlink"], str(checkout)],
+                       check=True, capture_output=True, text=True)
+        self.git(checkout, "remote", "add", "retrom", core["gitlink"])
+        before = self.git(self.checkout(self.app), "rev-parse", "HEAD")
+        self.publish_catalog([self.runtime, core])
+
+        with self.assertRaisesRegex(config.WorkspaceError, "unrelated history"):
+            updates.update_workspace(self.w)
+
+        self.assertEqual(self.git(self.checkout(self.app), "rev-parse", "HEAD"), before)
+        self.assertEqual(self.git(checkout, "remote", "get-url", "origin"), unrelated["gitlink"])
+
     def test_update_reads_target_manifest_and_clones_new_repository(self):
         self.initialize()
         before_runtime = self.git(self.checkout(self.runtime), "rev-parse", "HEAD")

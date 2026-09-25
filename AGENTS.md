@@ -29,7 +29,7 @@ Nested Git submodules remain owned by their parent child repository. Root `manif
 
 - `make init` clones Retrom first, then its declared dependencies. `make init PFB=<name> REPOS="<ids>"` prepares selected source worktrees from that PFB’s catalog, preserving existing worktrees and baseline working files.
 - `make check` validates catalog checkouts and origins. `PFB=<name>` selects the PFB catalog and paths; `REPOS` selects exact IDs without expanding dependencies.
-- `make update` is baseline-only. It reads the target Retrom commit’s catalog before switching checkouts, checks existing repositories in both old and new catalogs, and validates default branches before cloning additions or applying updates. Removed repositories remain on disk. Never use this global operation to prepare a single PFB.
+- `make update` is baseline-only. It reads the target Retrom commit’s catalog before switching checkouts, checks existing repositories in both old and new catalogs, and validates default branches before cloning additions or applying updates. An existing checkout may adopt a changed catalog origin only when a configured remote matches the new URL and the histories are related. Removed repositories remain on disk. Never use this global operation to prepare a single PFB.
 - `make status` reports child branches, commits, and dirty state.
 - `make install-deps` installs Retrom and retrom-runtime dependencies.
 - `make dev` forwards to Retrom and serves the standard development stack at `http://localhost:4000`.
