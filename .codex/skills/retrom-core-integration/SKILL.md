@@ -13,14 +13,16 @@ description: 在 Retrom 首次接入新的浏览器游戏核心，或为已接�
 
 独立核心仓库或 fork 拥有第三方核心源码、构建、许可证与核心 Release；retrom-runtime 拥有 Provider 来源、Target declaration、adapter 与 checkpoint codec；Retrom 拥有平台、内容识别、BIOS、Target binding、正式 Provider 选择与产品验收。不要在 runtime 中临时编译第三方核心，也不要为新核心增加绕过公共 Provider/Launch 的宿主专用入口。
 
+本地 `RETROM_MODE=test` 开发实例的默认测试账号为 `test/test`。产品验收先使用该账号；环境已显式覆盖账号或密码时以实际配置为准。若登录失败，先核对测试模式与配置，确认没有可用测试凭据后再向用户询问。不要将此账号用于正式环境。
+
 ## 实施顺序
 
-1. **确定接入边界。** 查明上游来源与再分发许可、浏览器构建方式、游戏文件与 BIOS/外设要求、资源体量、核心是否能按偏移读取内容及已知限制。确认有会话授权使用的游戏/BIOS；没有实际样本时明确产品验收会被阻断，不能用模拟画面替代。第三方游戏、BIOS、凭据与核心构建产物不得提交到仓库。
+1. **确定接入边界。** 查明上游来源与再分发许可、浏览器构建方式、游戏文件与 BIOS/外设要求、资源体量、核心是否能按偏移读取内容及已知限制。确认有会话授权使用的游戏/BIOS；没有实际样本时明确产品验收会被阻断，不能用模拟画面替代。除上述公开测试账号外，第三方游戏、BIOS、凭据与核心构建产物不得提交到仓库。
 2. **准备隔离源码。** 跨仓实施使用命名 PFB，并按 [retrom-pfb-workflow](../retrom-pfb-workflow/SKILL.md) 准备同一 PFB 树中的 Retrom、runtime 与 core worktree。新增依赖只改该 PFB 的 Retrom `workspace/manifest.yaml`。若用户明确要求直接修改基线，遵从用户范围。fork 存在时按其维护分支开发，不把 Retrom 补丁写入上游镜像分支；是否 fork 或向远端写入以本次会话授权为准。
 3. **完成核心候选。** 新核心或需修改核心时，在独立核心仓库或 fork 中实现构建、原生/浏览器检查和 Release 所需的资产、许可证、来源元数据；明确 adapter ABI。对同一输入重复构建并比较完整归档的字节摘要，包含 tar/zip 元数据，不能只比较其中的 JS/WASM。通过 PFB 的显式 core build 取得候选字节；第三方核心源码和补丁留在核心仓库。仅扩展已有核心的 Target/adapter 且核心字节不变时，复用已固定的核心资产。
 4. **登记 Provider Target。** 在对应 Provider 来源清单声明候选或已发布的固定来源，在 Provider catalog 声明独立 Target、运行文件、选项和能力；两处职责不能互换。实现新核心所需的 adapter，并按 runtime 仓库规范补齐准入回归，不在本 skill 中另设输入或存档行为规则。核心能够按需随机读取游戏内容时，必须接入 retrom-runtime 通用 Content I/O 的 Range reader/session，由其负责网络请求、分块缓存、校验、取消和生命周期；核心专用桥接只转发 seek/read，不独立实现一套 Range 下载。一个核心支持多个平台时，在该核心的共享加载路径实现并复用 Range 能力；平台可以有各自的格式、BIOS 和 Target 配置，但不得为每个平台另造下载路径。
 5. **接入 Retrom 产品。** 补平台与格式识别、BIOS/依赖装配、`providerId + targetId` binding 和对应文档、产品 Case。不得用默认 Target 回退掩盖声明缺失。第三方测试素材只走授权输入，不能进入 Git、Provider 归档或镜像；自有或明确可再分发的 fixture 遵守 Retrom 仓库准入规则。
-6. **验收候选。** 用同一 PFB 的核心与 runtime 构建完整 Provider 候选，验证资产身份与摘要；走真实 Retrom 上传/导入、Review Preview、发布和 Product Launch，完整执行新核心适用的产品 Case。Range 路径须验证启动前不会整包物化、读取请求有界；多平台共享核心时覆盖各平台 Target，确认使用同一核心加载机制。保留结构化结果和当次截图，并逐图检查。修复失败后重跑原 Case；单一游戏通过仅证明该样本。
+6. **验收候选。** 用同一 PFB 的核心与 runtime 构建完整 Provider 候选，验证资产身份与摘要；走真实 Retrom 上传/导入、Review Preview、发布和 Product Launch，完整执行新核心适用的产品 Case。Range 路径须验证启动前不会整包物化、读取请求有界；多平台共享核心时覆盖各平台 Target，确认使用同一核心加载机制。检查各浏览器运行阶段的 console；出现报错时，包括以 warning 级别输出的 WebGL/API 错误，须分析来源、修复并复测，不能仅凭数据断言和截图通过判定候选通过。保留错误记录、结构化结果和当次截图，并逐图检查。修复失败后重跑原 Case；单一游戏通过仅证明该样本。
 7. **按依赖顺序发布。** 候选通过后，若核心资产改变，先按 fork 维护规则合入并发布不可移动的核心 tag，复核 Release 的资产、许可证、commit 与摘要；再把 runtime 的候选来源换成固定的 repository、tag、commit、asset 与 ABI。核心资产未变时沿用已有固定来源。运行 runtime 的 Provider/聚合门禁，合入并发布 runtime tag；最后用 Retrom 的 `runtime-provider-pin-release` 固定已发布 runtime tag，准备并导入正式 Provider，重跑同一产品 Case，再完成 Retrom 门禁与发布。正式锁定中不得出现候选摘要、工作树路径或浮动分支。PR、合入、tag 和对外发布须由本次或此前会话的用户授权覆盖；已授权时直接推进。
 
 ## 正式复验与交付
