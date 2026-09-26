@@ -22,14 +22,20 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 
 ## 隔离原则
 
-- 进入 `.worktree/<pfb>/project/` 后再开展开发；所有待修改文件必须位于其子仓库中。
+- 进入 `.worktree/<pfb>/project/` 后再开展功能开发；应用源码修改和 PFB 构建输入必须位于其子仓库中。当前任务所需的共享主机工具可按下文放在根项目的 `tools/`。
 - `project/` checkout 只作为 Git worktree 的管理入口和对象库使用，不是 PFB 开发分支的代码基准。即使它当前处于其他分支、detached HEAD 或落后于远端，也必须从 manifest `defaultBranch` 的最新远端提交创建 PFB 开发分支。
-- 在每次编辑前核对目标文件的规范化绝对路径确实位于 `.worktree/<pfb>/project/` 下。
+- 在每次编辑应用源码前核对目标文件的规范化绝对路径确实位于 `.worktree/<pfb>/project/` 下。
 - 将 PFB 的 `RUNTIME_ROOT` 和 `CORE_ROOTS` 只指向该 PFB 目录里的 worktree，不要指向根目录下的基线仓库。
 - 保留基线 checkout 中已有的用户改动。必要时在开发前后对基线仓库运行只读的 `git status --short`，用结果证明没有新增工作区修改。
 - Git worktree 仍共享对象库、refs 和部分 Git 元数据；“隔离”主要指工作文件与 PFB 构建输入隔离，不代表 Git 仓库在物理上完全独立。
 - PFB 的应用源码和持久运行状态都归当前 worktree 所有：Retrom 的 `.pfb/workspace/` 保存数据库/CAS/上传、基座与loose dev provider、node_modules、Next、Go 与 npm cache，并 bind mount 到开发容器。registry、锁和生成的共享网关配置归当前 `retrom-project/.pfb/` 所有；Docker 网络、容器和工具链镜像仍是主机资源。不要把共享控制面误称为某个 worktree 私有，也不要把项目配置写回用户全局目录。
 - worktree 与 `.pfb/workspace/` 必须位于支持 POSIX owner/mode、SQLite lock、hard-link 与 fsync 的 Linux 本地文件系统；不要在 WSL `/mnt/c` 等 Windows 文件系统挂载下创建 PFB。
+
+## 共享主机工具
+
+- PFB 联调或验证需要下载独立的主机工具时（例如 Chrome/Chromium），使用规范化绝对路径 `<retrom-project>/tools/` 作为跨 PFB 共享的本地工具目录。先检查其中已有工具的平台、架构、版本及可执行性；满足当前任务要求时直接复用，不再为每个 PFB 下载一份。
+- 缺少合适版本时，创建 `tools/` 并为当前任务下载到 `tools/<tool>/` 下按版本、平台和架构区分的目录；工具自带版本化缓存结构时沿用它的结构。手动下载或解压先放在 `tools/` 下的临时目录，确认完整且可用后再移入最终目录；不要覆盖其他 PFB 可能正在使用的版本。配置实际运行工具的进程使用该路径，避免其默认把相同工具重新下载到各 PFB。若进程在容器内，先确认共享路径在容器内可访问，不能直接使用仅在主机上存在的路径。
+- `tools/` 是被根 Git 忽略的工具缓存，不属于任何 PFB 的源码、构建输入或持久状态。不要在其中放浏览器用户配置、凭据、任务产物、仓库依赖或 PFB 数据；清理单个 PFB 时不要删除共享工具。交付时说明本次新增或复用的共享工具及其位置。
 
 ## 执行工作流
 
