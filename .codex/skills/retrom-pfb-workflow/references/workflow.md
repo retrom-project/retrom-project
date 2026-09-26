@@ -162,7 +162,7 @@ make -C .worktree/<pfb>/project/retrom pfb-init \
 
 ## 6. 首次构建与启动
 
-按仓库约束先完成针对性测试，然后运行：
+任务需要实际运行产品时，按仓库约束先完成针对性测试，然后运行：
 
 ```bash
 make -C .worktree/<pfb>/project/retrom pfb-validate PFB=<pfb>
@@ -234,7 +234,7 @@ make -C .worktree/<pfb>/project/retrom pfb-status PFB=<pfb> FORMAT=json
 
 ## 8. 联调与验证
 
-验证范围至少覆盖本次改动涉及的仓库测试和 PFB 端到端行为。构建并启动成功后运行：
+验证范围至少覆盖本次改动涉及的仓库测试；实际启动了产品 PFB 时还须覆盖受影响的端到端行为。构建并启动成功后运行：
 
 ```bash
 make -C .worktree/<pfb>/project/retrom pfb-verify PFB=<pfb>

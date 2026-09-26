@@ -27,7 +27,7 @@ description: 在 Retrom 首次接入新的浏览器游戏核心，或为已接�
 6. **验收候选。** 用同一 PFB 的核心与 runtime 构建完整 Provider 候选，验证资产身份与摘要；走真实 Retrom 上传/导入、Review Preview、发布和 Product Launch，完整执行新核心适用的产品 Case。先在 Review Preview 中确认浏览器线程与 WASM 初始化、文件挂载和首帧，再执行后续能力 Case；构建成功本身不代表浏览器能够启动。Range 路径须验证启动前不会整包物化、读取请求有界；完整物化路径须跨两个独立 runtime 实例核对网络请求，确认再次启动不会重复下载整包。多平台共享核心时覆盖各平台 Target，确认使用同一核心加载机制。检查各浏览器运行阶段的 console；出现报错时，包括以 warning 级别输出的 WebGL/API 错误，须分析来源、修复并复测，不能仅凭数据断言和截图通过判定候选通过。
    每个新增平台 Target 至少用一个真实、可游玩的游戏验证手柄输入。先核对该游戏实际使用的核心按键映射，确认开局必需按键（如投币、Start）没有映射到 `SWITCH_NOTHING` 等无效操作；再从 Retrom 产品页面实际操作手柄，记录操作前状态、按键及操作后可观察的游戏状态，确认能进入可玩状态并完成方向和主要操作。调试面板提供按键显示时，核对其显示与实际按键一致。仅收到浏览器按键事件、调用了输入接口或看到待机动画变化，均不能算输入 Case 通过；无法证明状态转换时，明确标记该 Case 未通过并保留证据。
    接入改动触及共享内容加载、宿主显示或渲染路径时，选有代表性的现有核心做回归。涉及高分辨率或性能时，记录实际渲染尺寸、帧率和主线程负载；缩小并恢复浏览器视口后，核对 iframe、画布尺寸与游戏原有宽高比。通用像素预算和布局问题应在所属共享层解决，不为单一平台增加特例。保留错误记录、结构化结果和当次截图，并逐图检查。修复失败后重跑原 Case；单一游戏通过仅证明该样本。
-7. **按依赖顺序发布。** 候选通过后，若核心资产改变，先按 fork 维护规则合入并发布不可移动的核心 tag，复核 Release 的资产、许可证、commit 与摘要；再把 runtime 的候选来源换成固定的 repository、tag、commit、asset 与 ABI。核心资产未变时沿用已有固定来源。运行 runtime 的 Provider/聚合门禁，合入并发布 runtime tag；最后用 Retrom 的 `runtime-provider-pin-release` 固定已发布 runtime tag，准备并导入正式 Provider，重跑同一产品 Case，再完成 Retrom 门禁与发布。正式锁定中不得出现候选摘要、工作树路径或浮动分支。PR、合入、tag 和对外发布须由本次或此前会话的用户授权覆盖；已授权时直接推进。
+7. **按依赖顺序发布。** 候选通过后，若核心资产改变，先按 fork 维护规则合入并发布不可移动的核心 tag，复核 Release 的资产、许可证、commit 与摘要；再把 runtime 的候选来源换成固定的 repository、tag、commit、asset 与 ABI。核心资产未变时沿用已有固定来源。运行 runtime 的 Provider/聚合门禁，合入并发布 runtime tag；最后用 Retrom 的 `runtime-provider-pin-release` 固定已发布 runtime tag，准备并导入正式 Provider，重跑同一产品 Case。Retrom 合并前核对 PR 的 `branch-image/build` 通过，不在本地为发布门禁重复构建双镜像；GHCR 分支镜像只供测试，生产镜像由 Retrom tag 流水线独立构建并发布。正式锁定中不得出现候选摘要、工作树路径或浮动分支。PR、合入、tag 和对外发布须由本次或此前会话的用户授权覆盖；已授权时直接推进。
 
 ## 正式复验与交付
 

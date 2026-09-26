@@ -51,9 +51,10 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 默认以 `PFB_SELECT=false` 启动，使用 PFB 专属的 `http://<actual-pfb-id>.localhost:3000` 地址，避免改变裸 `localhost:3000` 当前选中的 PFB。只有用户明确需要裸地址时才选择它。
 - 日常源码不触发PFB build或data generation：Web保存后等待HMR；Go保存后执行轻量`pfb-restart`；runtime adapter保存后等待`providerDevModuleSha256`变化，再执行一次`pfb-restart`让Go重新装载。只有Dockerfile/Compose/entrypoint、package lock、Go module或API生成输入变化时才停止app并显式运行一次`pfb-build`。
 - `pfb-build`只准备工具链、package依赖和生成代码，不能构建Provider archive、全量provider/core或production镜像。core仅在用户任务确实需要新core字节时由`pfb-core-build CORE=<id>`显式触发。
+- Retrom 发布场景中，PR 的 `branch-image/build` 在 GitHub runner 上验证双应用镜像可构建；同仓库 PR 的 GHCR 分支镜像只供测试，正式生产镜像由 Retrom tag 流水线单独构建并发布。本地正式 Provider 产品复验仍用 `runtime-provider-prepare`，不要为发布门禁在 PFB 或基线开发机运行 `make build-images` 下载第二份完整 Provider 包。
 - 新workspace在首次up前用`pfb-provider-import`显式导入一个已验证Provider基座；已有旧命名卷的PFB改为先执行一次`pfb-migrate-storage`，不要同时走两条路径。
 - 兼容数据库 migration 使用当前 `.pfb/workspace/` 原地升级。若当前分支明确引入不兼容开发数据变更，必须停止同一 PFB，并在启动前用 exact PFB ID 执行 `pfb-data-reset`；它可恢复地归档 `data/`、保留依赖/cache。若同时废弃旧 Provider 契约，使用当前 Retrom 支持的显式 `SOURCE_ROOT` 选项先验证新基座，再一并归档并替换 Provider 活动状态；不手改 `.pfb/` 绕过常规导入校验。禁止通过新分支、新 worktree 或新 PFB 规避数据清理。
-- 先运行各仓库 `AGENTS.md` 要求的针对性检查。首次执行PFB validate、基座导入或旧卷迁移、build、up；工具链变化执行down/build/up；日常迭代按HMR/restart路径；交付前执行status、verify和受影响的真实产品链。
+- 先运行各仓库 `AGENTS.md` 要求的针对性检查。需要运行产品的 PFB 首次执行 validate、基座导入或旧卷迁移、build、up；工具链变化执行down/build/up；日常迭代按HMR/restart路径，交付前执行status、verify和受影响的真实产品链。仅改 CI、发布文档或规范的 PFB 使用源码工作树、PFB init、工作区 catalog validate 和聚焦静态/工作流检查；`pfb-validate` 依赖浏览器工具链，只在本次任务需要启动或验证产品 PFB 时执行，不为取得 URL 而下载 Chrome 或启动容器。
 - 核心接入的标准手柄最低要求为方向移动和确认，取消可选。一个按钮在同一映射配置中只能对应一个具体目标输入，不得叠加原生 A/B 和 Enter/Escape 来满足菜单要求；保留真实键盘与已有正常取消。按当前 PFB 的 runtime 规范和 Retrom 产品 Case 验证，宿主菜单 B 返回不变。
 
 ## 权限与清理边界
