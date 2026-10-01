@@ -37,6 +37,12 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 - 缺少合适版本时，创建 `tools/` 并为当前任务下载到 `tools/<tool>/` 下按版本、平台和架构区分的目录；工具自带版本化缓存结构时沿用它的结构。手动下载或解压先放在 `tools/` 下的临时目录，确认完整且可用后再移入最终目录；不要覆盖其他 PFB 可能正在使用的版本。配置实际运行工具的进程使用该路径，避免其默认把相同工具重新下载到各 PFB。若进程在容器内，先确认共享路径在容器内可访问，不能直接使用仅在主机上存在的路径。
 - `tools/` 是被根 Git 忽略的工具缓存，不属于任何 PFB 的源码、构建输入或持久状态。不要在其中放浏览器用户配置、凭据、任务产物、仓库依赖或 PFB 数据；清理单个 PFB 时不要删除共享工具。交付时说明本次新增或复用的共享工具及其位置。
 
+## 共享 Provider 下载缓存
+
+- 正式 Provider 准备默认使用 `<retrom-project>/.cache/runtime-providers/`，基线和各 PFB 通过 Git owner checkout 定位同一目录；也可以从根工作区运行 `make runtime-provider-prepare PFB=<name>`。仅在需要独立缓存时显式覆盖 `RETROM_PROVIDER_CACHE_ROOT`。
+- 本机已有旧 checkout 下载时，用 `make runtime-provider-cache-import SOURCE_ROOT=<旧下载缓存>` 校验后汇入公共目录；来源需要包含 `releases/<tag>/provider-release.json` 和按 Provider ID/摘要命名的归档。导入不联网、不删除来源，也不改变 PFB 的安装或 active。
+- 公共缓存只共享 Release 描述和归档，按 tag/内容摘要区分并使用进程锁与原子发布。各 PFB 的固定版本、基座安装和开发覆盖层保持独立，日常 up/restart 不下载归档；单个 PFB 清理保留公共缓存。
+
 ## 执行工作流
 
 当任务涉及创建 worktree、初始化 PFB、运行或清理 PFB 时，先完整阅读 [PFB 操作手册](references/workflow.md)，再按其中对应阶段执行。

@@ -1,6 +1,7 @@
 /.worktree/
 /.pfb/
 /tools/
+/.cache/
 /.dev-data/*
 !/.dev-data/.gitkeep
 

@@ -9,10 +9,11 @@
 ```text
 retrom-project/
 ├── tools/                             # 被根 Git 忽略的跨 PFB 主机工具缓存
+├── .cache/runtime-providers/          # 被根 Git 忽略的跨 PFB Provider 下载缓存
 ├── .worktree/
 │   └── <pfb>/
 │       └── project/
-│           ├── retrom/                 # .pfb/workspace 保存该PFB全部持久数据/cache
+│           ├── retrom/                 # .pfb/workspace 保存该PFB运行数据和构建缓存
 │           ├── retrom-runtime/
 │           ├── retrom-core/<core-repository>/
 │           └── retrom-other/<support-repository>/
@@ -29,6 +30,8 @@ retrom-project/
 每个 PFB 的数据库/CAS/上传、已物化依赖和构建缓存物理位于 Retrom worktree 的 `.pfb/workspace/`，并与源码一起 bind mount 到开发容器。registry、锁和生成的网关配置位于当前根工作区被忽略的 `.pfb/`；共享网关容器、网络和工具链镜像仍属于主机资源。旧版 PFB 的 Docker 命名卷只作为待显式迁移/清理的兼容来源，不再是新运行实例的持久存储。
 
 浏览器等独立主机工具按主 Skill 的“共享主机工具”规则存放在根目录 `tools/`，可供后续 PFB 复用。它不是 PFB workspace，也不随单个 PFB 清理。
+
+正式 Provider 描述和归档按主 Skill 的“共享 Provider 下载缓存”规则存放在根 `.cache/runtime-providers/`，从 Retrom worktree 直接运行准备命令也会自动复用。根工作区的 `make runtime-provider-prepare PFB=<name>` 转发到选定 checkout 并显式传入公共缓存；已有下载用 `make runtime-provider-cache-import SOURCE_ROOT=<旧缓存>` 校验后导入。共享缓存使用逐文件进程锁，避免多个 PFB 同时下载同一文件；解压安装、active 和开发覆盖层仍归各自环境。清理单个 PFB 保留公共下载。
 
 `.worktree/` 必须放在支持 POSIX owner/mode、SQLite lock、同目录 hard-link 与 fsync 的 Linux 本地文件系统。WSL 用户不得把它放在 `/mnt/c` 等 Windows 文件系统挂载下。
 

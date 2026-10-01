@@ -57,6 +57,7 @@ The command first validates the PFB identity and every registered top-level work
 retrom-project/
 ├── .codex/             # AI skills and prompts
 ├── .pfb/               # ignored, shared PFB registry and gateway state
+├── .cache/runtime-providers/ # ignored, shared Provider downloads
 ├── .worktree/          # ignored, isolated PFB worktrees
 ├── project/            # ignored, baseline child repositories
 │   ├── retrom/
@@ -95,6 +96,20 @@ edges. Retrom is always included. Omit `REPOS` to prepare/check all catalog entr
 For development containers, include `retrom-runtime` and the core/supporting
 repositories needed by the task. `init` prepares source only; it does not initialize
 or start a PFB container. Follow the PFB skill for runtime setup and core builds.
+
+Provider preparation shares downloads under the root `.cache/runtime-providers/`.
+Baseline and linked Retrom worktrees resolve this location automatically; each
+environment keeps its own installed Providers and active selection. Per-file
+locks prevent concurrent duplicate downloads, and PFB removal preserves the cache.
+
+```bash
+make runtime-provider-prepare PFB=feat-example
+make runtime-provider-cache-import SOURCE_ROOT=/absolute/path/to/existing/.cache/runtime-providers
+```
+
+The import verifies existing Release metadata and archive digests without network
+access or changing the source cache. Override `RETROM_PROVIDER_CACHE_ROOT` when
+an independent download cache is needed.
 
 PFB initialization first creates the Retrom worktree, then reads **that worktree's**
 catalog. Each new source branch starts at the freshly fetched maintenance branch

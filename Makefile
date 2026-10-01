@@ -5,14 +5,16 @@ PYTHON ?= python3
 RETROM_DIR ?= $(if $(PFB),$(abspath .worktree/$(PFB)/project/retrom),$(abspath project/retrom))
 RUNTIME_DIR ?= $(abspath $(RETROM_DIR)/../retrom-runtime)
 RETROM_NODE_HOME ?= $(RETROM_DIR)/.cache/tools/node-v24.18.0-linux-x64
+RETROM_PROVIDER_CACHE_ROOT ?= $(abspath .cache/runtime-providers)
 WORKSPACE_ARGS = --retrom-dir "$(RETROM_DIR)" $(if $(PFB),--pfb "$(PFB)") $(if $(REPOS),--repos $(REPOS))
 
 PFB_TARGETS := pfb-init pfb-validate pfb-build pfb-up pfb-use pfb-restart \
 	pfb-down pfb-status pfb-logs pfb-verify pfb-destroy pfb-core-build \
 	pfb-provider-import pfb-migrate-storage pfb-data-reset \
 	pfb-gateway-up pfb-gateway-down
+PROVIDER_TARGETS := runtime-provider-prepare runtime-provider-pin-release runtime-provider-cache-import
 
-.PHONY: help validate init check update status install-deps dev pfb-list pfb-remove $(PFB_TARGETS)
+.PHONY: help validate init check update status install-deps dev pfb-list pfb-remove $(PFB_TARGETS) $(PROVIDER_TARGETS)
 
 help:
 	@echo 'Retrom development workspace'
@@ -27,6 +29,8 @@ help:
 	@echo '  make pfb-list      show all PFB development flows in this workspace'
 	@echo '  make pfb-remove    destroy one PFB and remove all of its clean worktrees'
 	@echo '  make pfb-<action>  pass a PFB action through to Retrom'
+	@echo '  make runtime-provider-prepare [PFB=name]  prepare Providers using the shared download cache'
+	@echo '  make runtime-provider-cache-import SOURCE_ROOT=path  import verified existing downloads'
 
 validate:
 	@$(PYTHON) scripts/workspace.py validate $(WORKSPACE_ARGS)
@@ -58,3 +62,6 @@ pfb-remove:
 
 $(PFB_TARGETS):
 	@$(MAKE) -C "$(RETROM_DIR)" $@
+
+$(PROVIDER_TARGETS):
+	@$(MAKE) -C "$(RETROM_DIR)" $@ RETROM_PROVIDER_CACHE_ROOT="$(RETROM_PROVIDER_CACHE_ROOT)"
