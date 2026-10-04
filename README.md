@@ -41,7 +41,7 @@ make RETROM_DIR="$PWD/.worktree/<name>/project/retrom" \
   pfb-migrate-storage PFB=<name> CONFIRM=<actual-pfb-id>
 ```
 
-The source volumes remain available after a verified, atomic copy. Compatible migrations continue in the same workspace. For an intentionally incompatible development database/data change, keep the same branch/worktree/PFB and run `pfb-data-reset PFB=<name> CONFIRM=<actual-pfb-id>` while stopped; it archives the old data under `.pfb/retired-data/` and preserves dependency/build caches.
+The source volumes remain available after a verified, atomic copy. Compatible migrations continue in the same workspace. For an intentionally incompatible development database/data change, keep the same branch/worktree/PFB and run `pfb-data-reset PFB=<name> CONFIRM=<actual-pfb-id>` while stopped; it archives the old data under `.pfb/workspace/reset-backups/<archive-name>/data/` and preserves dependency/build caches, PFB ID and URL.
 
 To retire a PFB and remove its source worktrees in one operation, run:
 
