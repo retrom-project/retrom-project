@@ -1,4 +1,4 @@
 interface:
   display_name: "破坏性重构"
-  short_description: "启用前确认，当前会话所有改造均不保留接口、数据兼容逻辑"
-  default_prompt: "使用 $breaking-change-refactor；若当前 session 尚未启用，请先确认，启用后所有改造统一不实现或保留旧接口、旧数据兼容逻辑，并完成清理与验证。"
+  short_description: "直接修改现有契约，不保留兼容逻辑、不升级协议代际、不专门拒绝旧数据"
+  default_prompt: "使用 $breaking-change-refactor；若当前 session 尚未启用，请先确认，启用后直接修改现有契约，不保留兼容逻辑、不升级协议代际、不专门识别或拒绝旧数据和旧调用，只验证目标行为。"
