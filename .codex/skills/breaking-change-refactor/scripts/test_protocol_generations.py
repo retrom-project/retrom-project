@@ -54,6 +54,16 @@ class ProtocolGateTests(unittest.TestCase):
         self.write("api/provider.json", '{"properties":{"schemaVersion":{"const":2}}}\n')
         self.assertEqual(check(self.root, self.base)["status"], "FAIL")
 
+    def test_prefixed_installer_constant_upgrade_fails(self):
+        self.write("installer.py", "SUPPORTED_PROVIDER_API_VERSION = 1\n")
+        self.git("add", "installer.py")
+        self.git("commit", "-qm", "installer authority")
+        base = self.git("rev-parse", "HEAD").strip()
+        self.write("installer.py", "SUPPORTED_PROVIDER_API_VERSION = 2\n")
+        result = check(self.root, base)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertTrue(any(item["identity"] == "field:providerapiversion" for item in result["findings"]))
+
     def test_parallel_generation_in_an_enum_or_type_union_fails(self):
         self.write("api/provider.json", '{"properties":{"schemaVersion":{"enum":[1,2]}}}\n')
         self.write("provider.ts", "export type ProviderApiVersionV1 = 1 | 2;\n")

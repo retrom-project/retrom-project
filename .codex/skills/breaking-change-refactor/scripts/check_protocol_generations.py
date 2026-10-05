@@ -20,7 +20,7 @@ VERSION_KEY = (
     r"protocol_?version|contract_?version|format_?version|wire_?version)"
 )
 FIELD = re.compile(
-    rf"\b(?P<key>{VERSION_KEY})(?:V[1-9][0-9]*)?[\"']?\]?\s*(?::|[=!<>]{{1,3}})\s*"
+    rf"\b[A-Za-z0-9_]*?(?P<key>{VERSION_KEY})(?:V[1-9][0-9]*)?[\"']?\]?\s*(?::|[=!<>]{{1,3}})\s*"
     r"(?:int(?:32|64)?\()?['\"]?[vV]?(?P<version>[1-9][0-9]*)\b(?!\.)"
     r"(?P<extra>(?:\s*\|\s*[1-9][0-9]*)*)",
     re.IGNORECASE,
