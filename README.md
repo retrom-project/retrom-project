@@ -56,6 +56,8 @@ The command first validates the PFB identity and every registered top-level work
 ```text
 retrom-project/
 ├── .codex/             # AI skills and prompts
+├── .claude/skills      # link to .codex/skills for Claude Code
+├── CLAUDE.md           # imports AGENTS.md for Claude Code
 ├── .pfb/               # ignored, shared PFB registry and gateway state
 ├── .cache/runtime-providers/ # ignored, shared Provider downloads
 ├── .worktree/          # ignored, isolated PFB worktrees

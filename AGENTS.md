@@ -2,7 +2,7 @@
 
 ## Purpose and ownership
 
-This repository manages the Retrom development environment, not the source history of Retrom or its dependencies. Root-level Git owns only the workspace metadata, documentation, scripts, and `.codex/` resources.
+This repository manages the Retrom development environment, not the source history of Retrom or its dependencies. Root-level Git owns only the workspace metadata, documentation, scripts, and `.codex/` resources. `CLAUDE.md` imports this file and `.claude/skills` links to `.codex/skills` so Claude Code shares the same rules and skills; keep a single source in `AGENTS.md` and `.codex/`. Start Claude Code from this workspace root: sessions started inside a child repository or `.worktree/` checkout do not load the root rules or linked skills.
 
 Everything cloned below `project/` is an independent Git repository and is ignored by root Git. Never stage child repositories in this repository, convert them to submodules, or use the root repository to commit child source changes. Commit, push, merge, tag, and inspect history from the relevant child repository.
 
@@ -59,7 +59,7 @@ Formal Provider downloads use the ignored root `.cache/runtime-providers/` acros
 
 For a legacy named-volume PFB, stop only that PFB and run its `pfb-migrate-storage` command with the exact PFB ID; migration must remain scoped to that PFB, verify the copy, publish atomically, and retain the old volumes. Compatible database migrations run in place. When a branch intentionally introduces an incompatible development database/data change, stop the existing PFB and use `pfb-data-reset` with the exact ID; it archives the old `data/` below `.pfb/workspace/reset-backups/` and preserves provider/dependency/build caches, ID and URL. Report the archive path.
 
-Use the `retrom-pfb-workflow` skill under `.codex/skills/` for the complete workflow. A new PFB imports an already verified Provider base explicitly; a legacy PFB migrates its old named volumes once. Neither daily lifecycle builds Provider archives. The isolation is a working-file boundary, not an access-control mechanism: a user may explicitly ask to edit a baseline checkout.
+Use the `retrom-pfb-workflow` skill under `.codex/skills/` (also exposed through `.claude/skills`) for the complete workflow. A new PFB imports an already verified Provider base explicitly; a legacy PFB migrates its old named volumes once. Neither daily lifecycle builds Provider archives. The isolation is a working-file boundary, not an access-control mechanism: a user may explicitly ask to edit a baseline checkout.
 
 Use `make pfb-list` for the initial PFB inventory. It combines `.worktree/` metadata with every top-level repository's Git status and each initialized PFB's read-only status command; any Retrom/runtime/core/supporting repository with working-tree changes or commits absent from all local remote-tracking refs makes the PFB status `DIRTY`. The check remains offline and never fetches implicitly. Do not infer current runtime state from directory presence or the workspace-local `.pfb/registry-v1.json` alone. The ignored root `.pfb/` also owns the generated shared gateway configuration; do not move those project-specific files back into a user-global state directory.
 
@@ -73,4 +73,4 @@ make RETROM_DIR="$PWD/.worktree/<pfb>/project/retrom" pfb-status PFB=<pfb>
 
 ## Change boundaries
 
-Changes to the Retrom bootstrap entry, root `Makefile`, root docs, bootstrap scripts, or `.codex/` belong to this root repository. Dependency catalog changes belong to Retrom’s `workspace/manifest.yaml` and must be reviewed and committed in that repository. Changes below `project/` or `.worktree/` belong exclusively to their child repositories. Verify both scopes independently before reporting or committing work.
+Changes to the Retrom bootstrap entry, root `Makefile`, root docs, bootstrap scripts, `.codex/`, `CLAUDE.md` or `.claude/` belong to this root repository. Dependency catalog changes belong to Retrom’s `workspace/manifest.yaml` and must be reviewed and committed in that repository. Changes below `project/` or `.worktree/` belong exclusively to their child repositories. Verify both scopes independently before reporting or committing work.

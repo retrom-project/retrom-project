@@ -21,3 +21,6 @@ __pycache__/
 /td
 /sample
 /output
+
+# Claude Code per-user settings
+/.claude/settings.local.json
