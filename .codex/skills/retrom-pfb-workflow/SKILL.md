@@ -49,6 +49,7 @@ description: 指导 AI Agent 在 retrom-project 的命名 PFB worktree 中组织
 
 遵循以下默认选择：
 
+- 修改API、schema、checkpoint格式或持久化布局前，先按根[开发期契约规则](../../../AGENTS.md#development-contracts)核对正式生效边界；PFB中间提交与测试数据不构成新版本或兼容迁移的依据。
 - 使用根命令 `make init PFB=<name> REPOS="<ids>"` 准备任务需要的源码 worktree；Retrom 始终包含在内。`REPOS` 精确选择、不自动展开依赖；启动容器时包含 `retrom-runtime`。该命令只准备源码，不启动容器。自定义分支可先手动创建 worktree。
 - 新增核心、依赖或维护基线调整只修改当前 PFB 的 `retrom/workspace/manifest.yaml`，随 Retrom 集成改动一起提交和评审。根引导清单不接收依赖条目，其他 PFB 不读取本分支清单。清单只记录长期维护分支，本次功能分支留在 PFB 状态中。
 - 老 PFB 缺少清单时，先将 Retrom 的清单迁移变更合入该分支；不得回退读取基线清单。运行状态查询和按 Git 所有权清理不要求先迁移清单。
