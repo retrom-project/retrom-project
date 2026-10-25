@@ -202,6 +202,8 @@ make -C .worktree/<pfb>/project/retrom pfb-migrate-storage \
 
 ## 7. 开发迭代
 
+调整API、schema、checkpoint或数据布局前，执行根[开发期契约规则](../../../../AGENTS.md#development-contracts)，再决定是否存在真正需要版本演进的正式消费者；不要把本PFB上一轮验收产物当作正式版本。
+
 源码可以保持未提交状态；每次编辑仍要确保目标绝对路径位于`.worktree/<pfb>/project/`。源码变化不产生候选锁或stale：
 
 - Web变化由Next HMR直接加载；

@@ -39,6 +39,14 @@ Nested Git submodules remain owned by their parent child repository. Root `manif
 
 Run development, PFB, and initialization commands as the current non-root user. Never use `sudo`; Retrom intentionally rejects root/sudo dev and PFB invocations.
 
+## Development contracts
+
+Before changing an API, protocol, schema, checkpoint format or persistent layout, identify whether that feature's contract has actually been released, used in production or explicitly promised to a consumer. A local commit, PFB checkpoint, branch image or test record is not a released contract; merging code alone does not establish production use.
+
+For a feature still under development without those consumers or data, edit its current contract in place and update its callers, tests and documentation together. Keep the selected version identifier: intermediate changes within the same PFB do not justify adding V2, parallel readers, version negotiation, legacy rejection or migration logic. Test current behavior rather than compatibility with earlier development snapshots. This is normal development and does not require activating the breaking-change-refactor skill.
+
+Apply this rule to the affected feature, not to unrelated contracts that are already in use. User instructions to preserve particular consumers or data take precedence. If development fixtures need rebuilding, follow the existing scoped PFB data procedures; this rule does not authorize deleting mounted sources, production data or another PFB. Software release numbers, immutable artifact tags and content digests still follow their release rules.
+
 ## PFB development
 
 PFB source isolation mirrors the baseline layout below `.worktree/<pfb>/project/`:
