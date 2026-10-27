@@ -1650,5 +1650,97 @@
       ]
     },
     "notes": "Existing local measurements and previous Actions records above are preserved. The earlier projected runtime release increase of 1-3 minutes no longer applies; the current workflow also removes 113 seconds of source checks from the previous recorded release workflow."
+  },
+  "duplicateGateMeasurements": {
+    "date": "2026-10-28",
+    "jscpdVersion": "5.4.2",
+    "policy": {
+      "minTokens": 120,
+      "minLines": 10,
+      "mode": "weak",
+      "ignoreIdentifiers": "consistent",
+      "crossFormats": "js-ts",
+      "allowedNewClones": 0
+    },
+    "web": {
+      "timings": [
+        {
+          "step": "duplicates-regressions",
+          "seconds": 0.325,
+          "exit": 0
+        },
+        {
+          "step": "duplicates-scan",
+          "seconds": 0.131,
+          "exit": 0
+        },
+        {
+          "step": "web-check",
+          "seconds": 102.745,
+          "exit": 0
+        }
+      ],
+      "statistics": {
+        "clones": 0,
+        "duplicatedLines": 0,
+        "duplicatedTokens": 0,
+        "lines": 21168,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.0,
+        "percentageTokens": 0.0,
+        "sources": 206,
+        "tokens": 171958
+      }
+    },
+    "runtime": {
+      "initialParallelTimings": [
+        {
+          "step": "npm-ci",
+          "seconds": 3.256,
+          "exit": 0
+        },
+        {
+          "step": "duplicates-regressions",
+          "seconds": 0.317,
+          "exit": 0
+        },
+        {
+          "step": "duplicates-scan",
+          "seconds": 0.156,
+          "exit": 0
+        },
+        {
+          "step": "ci-checks",
+          "seconds": 86.092,
+          "exit": 1
+        }
+      ],
+      "isolatedTimings": [
+        {
+          "step": "ci-checks",
+          "seconds": 68.076,
+          "exit": 0
+        },
+        {
+          "step": "package-check",
+          "seconds": 3.184,
+          "exit": 0
+        }
+      ],
+      "statistics": {
+        "clones": 22,
+        "duplicatedLines": 442,
+        "duplicatedTokens": 5344,
+        "lines": 38764,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 1.1402332060674853,
+        "percentageTokens": 1.198249264547607,
+        "sources": 412,
+        "tokens": 445984
+      }
+    },
+    "notes": "Reuses existing CI jobs and npm ci; no browser or release steps added. The first parallel full runtime run hit an existing checkpoint compression test 5s timeout. Its focused 11 tests and subsequent complete ci:checks passed unchanged when run separately. Cloud overhead including platform-package download is not yet measured."
   }
 }

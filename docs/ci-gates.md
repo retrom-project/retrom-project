@@ -9,15 +9,25 @@
 | retrom-project | `make test` | workspace Python 全套、协议代际检查器自身回归；PR 和 master push 执行 |
 | Retrom | `make backend-check` | service 的 `Repository.Count/Execute` 类型边界及反例、Go lint 配置回归 |
 | Retrom | `make integration-test` | 真实 PG 最终结构、精确表集合、全部 migration 登记、禁用对象和空目录关系；每条规则有违规反例 |
-| Retrom | `make web-check` | Web 有效 lint 规则和忽略范围回归 |
+| Retrom | `make web-check` | Web 有效 lint 规则、忽略范围回归及重复代码检测 |
 | Retrom | `make ci-contracts` | 补接 3 组 PFB/runtime Python 回归、离线 migration 摘要检查 |
 | Retrom | `make migration-check-released` | PR CI 对照最新已发布 GitHub stable release 的 tag SQL |
 | Retrom | `make pfb-gateway-test` | 独立 Docker 网关分流/隔离检查，纳入 quality 聚合 |
-| runtime | `npm run ci:checks` | 原 lint/type/Vitest/catalog 检查，加 Node script 与 lint 配置回归 |
+| runtime | `npm run ci:checks` | 原 lint/type/Vitest/catalog 检查，加 Node script、lint 配置回归及重复代码检测 |
 | runtime | `npm run test:content-io:ci` | 8 个公开 fixture 文件、25 个 Chromium 用例，无 PFB/私有游戏依赖 |
 | runtime | `npm run release:build` | 正式构建在下载前验证两个来源清单：stable 禁 RC core，正式发布禁 development inputs |
 
 Retrom 保持现有 PR 触发范围，复用 backend/integration/web/contracts，网关任务独立并行。runtime PR 将公开浏览器与原有 Provider candidate 构建并行，`quality` 聚合要求两者成功。migration 历史比对、lint/type/unit/script、支持目录同步及公开浏览器测试均在 PR 阶段完成。tag release 负责 tag 身份/来源约束、正式构建和产物校验；Retrom 同时记录当前 migration 摘要。产品真实游戏验收继续使用原入口。
+
+## Web/runtime 重复代码检测
+
+两个项目锁定 jscpd 5.4.2，使用 `npm run check:duplicates` 扫描各自项目内的 JS/JSX/TS/TSX，包含新目录、生产脚本及 bridge 源码。重复片段至少 120 token、10 行；忽略注释/空白，识别一致的标识符改名，并跨 JS/TS 格式比较。排除测试、声明文件、依赖及构建缓存；Web 额外排除生成 API，runtime 精确排除两个生成的 isolated bridge 输出，保留其源码。
+
+使用 jscpd 的[原生基线](https://github.com/kucherenko/jscpd/blob/master/docs/rust.md#baseline)记录当前内容指纹与副本数量；Web 空基线，runtime 接受 22 组存量重复（扫描行数约 1.14%）。检查允许 0 组新增重复，也拒绝对同一存量片段再增加副本。日常 CI 不更新基线；有明确理由接受新增重复时，基线变更通过普通 PR 一起审阅。
+
+Web 接入现有 `web-lint/web-check`，runtime 接入现有 `ci:checks`；回归使用真实检测器验证新增/改名/同文件/跨文件复制、行号移动、额外副本、豁免及空扫描失败。现有作业在成功/失败后上传 `.artifacts/duplicates/web/` 或 `.artifacts/duplicates/` JSON 报告，显示文件与行号。检测不新增 runner job、浏览器准备或 release 步骤。
+
+本地完整扫描 Web 约 0.13 秒、runtime 约 0.16 秒，各自检测器回归约 0.32 秒；新增工具通过原有 `npm ci` 安装，冷安装仍包含平台二进制下载。云端增量待首轮 PR 复核。
 
 ## 合入保护配置
 
