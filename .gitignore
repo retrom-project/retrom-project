@@ -2,6 +2,7 @@
 /.pfb/
 /tools/
 /.cache/
+/fixture/
 /.dev-data/*
 !/.dev-data/.gitkeep
 
