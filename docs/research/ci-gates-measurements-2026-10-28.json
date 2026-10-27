@@ -1,0 +1,1616 @@
+{
+  "measuredAt": "2026-10-27T16:51:42.579438+00:00",
+  "environment": {
+    "platform": "Linux-6.12.101+deb13-amd64-x86_64-with-glibc2.41",
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "go": "1.26.5",
+    "postgres": "18.3",
+    "notes": "Local dependencies and shared Chrome already installed; some independent verification ran concurrently. These are local command times, not a run of the new Actions workflows."
+  },
+  "developmentBases": {
+    "retrom": "0c7fb3b4fc2f5e92b8f2733d88eed5fd698ea2ae",
+    "runtime": "14734033101d941bcea73456ab62474922cb3457"
+  },
+  "localMeasurements": {
+    "workspace": {
+      "step": "workspace tests",
+      "seconds": 5.489,
+      "exit": 0
+    },
+    "added-tests": [
+      {
+        "step": "new-pfb-runtime-tool",
+        "seconds": 0.063,
+        "exit": 0
+      },
+      {
+        "step": "new-pfb-server-data",
+        "seconds": 0.08,
+        "exit": 0
+      },
+      {
+        "step": "new-runtime-origin-topology",
+        "seconds": 0.044,
+        "exit": 0
+      },
+      {
+        "step": "go-new-gates",
+        "seconds": 2.076,
+        "exit": 0
+      },
+      {
+        "step": "go-sql-check",
+        "seconds": 1.625,
+        "exit": 0
+      },
+      {
+        "step": "pfb-gateway",
+        "seconds": 1.82,
+        "exit": 0
+      }
+    ],
+    "schema-policy": {
+      "step": "schema-policy",
+      "seconds": 1.215,
+      "exit": 0
+    },
+    "web": [
+      {
+        "step": "retrom web lint policy",
+        "seconds": 1.145,
+        "exit": 0
+      }
+    ],
+    "runtime-final": [
+      {
+        "step": "runtime-typecheck",
+        "seconds": 7.542,
+        "exit": 0
+      },
+      {
+        "step": "runtime-unit",
+        "seconds": 52.883,
+        "exit": 0
+      },
+      {
+        "step": "runtime-scripts",
+        "seconds": 2.45,
+        "exit": 0
+      }
+    ],
+    "runtime-browser": {
+      "step": "runtime public browser",
+      "seconds": 27.807,
+      "exit": 0
+    },
+    "runtime-extras": [
+      {
+        "step": "runtime-lint",
+        "seconds": 7.082,
+        "exit": 0
+      },
+      {
+        "step": "runtime-docs",
+        "seconds": 4.32,
+        "exit": 0
+      },
+      {
+        "step": "runtime-package",
+        "seconds": 3.294,
+        "exit": 0
+      }
+    ],
+    "release-manifest": [
+      {
+        "step": "migration-snapshot",
+        "seconds": 0.041,
+        "exit": 0
+      }
+    ],
+    "backend": [
+      {
+        "step": "backend-check",
+        "seconds": 75.542,
+        "exit": 0
+      }
+    ],
+    "web-check": [
+      {
+        "step": "web-lint",
+        "seconds": 19.21,
+        "exit": 0
+      },
+      {
+        "step": "web-typecheck",
+        "seconds": 8.163,
+        "exit": 0
+      },
+      {
+        "step": "web-tests",
+        "seconds": 18.669,
+        "exit": 0
+      },
+      {
+        "step": "web-build",
+        "seconds": 15.022,
+        "exit": 0
+      }
+    ],
+    "contracts": [
+      {
+        "step": "contracts-data",
+        "seconds": 14.724,
+        "exit": 0
+      },
+      {
+        "step": "api-check",
+        "seconds": 7.771,
+        "exit": 0
+      }
+    ],
+    "published-migrations": [
+      {
+        "step": "migrations-local",
+        "seconds": 0.112,
+        "exit": 0
+      },
+      {
+        "step": "migrations-released",
+        "seconds": 3.765,
+        "exit": 0
+      }
+    ]
+  },
+  "previousActionsRuns": {
+    "retrom-pr": {
+      "url": "https://github.com/retrom-project/retrom/actions/runs/40525269923",
+      "jobs": [
+        {
+          "completed_at": "2026-10-27T14:53:29Z",
+          "name": "contracts",
+          "started_at": "2026-10-27T14:52:05Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:07Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:07Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:21Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:21Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:33Z",
+              "conclusion": "success",
+              "name": "Enforce REPEATABLE READ isolation ceiling",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:35Z",
+              "conclusion": "success",
+              "name": "Cache the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:33Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:51Z",
+              "conclusion": "success",
+              "name": "Prepare native PostgreSQL build prerequisites",
+              "started_at": "2026-10-27T14:52:35Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:53Z",
+              "conclusion": "success",
+              "name": "Cache native PostgreSQL tools",
+              "started_at": "2026-10-27T14:52:51Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Check workspace, structure, API and data contracts",
+              "started_at": "2026-10-27T14:52:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Post Cache native PostgreSQL tools",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Post Cache the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:23Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:24Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:53:23Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:24Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:53:24Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:54:34Z",
+          "name": "backend",
+          "started_at": "2026-10-27T14:52:04Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:06Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:15Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:15Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:30Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:30Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Cache materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:30Z",
+              "conclusion": "success",
+              "name": "Check Go formatting, build, tests and lint",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:30Z",
+              "conclusion": "success",
+              "name": "Post Cache materialized runtime dependencies",
+              "started_at": "2026-10-27T14:54:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:30Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:54:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:30Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:54:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:31Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:54:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:31Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:54:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:31Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:54:31Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:52:11Z",
+          "name": "change-scope",
+          "started_at": "2026-10-27T14:52:05Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:06Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Check out the merge commit and its base parent",
+              "started_at": "2026-10-27T14:52:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Classify whether product files changed",
+              "started_at": "2026-10-27T14:52:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Post Check out the merge commit and its base parent",
+              "started_at": "2026-10-27T14:52:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:09Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:52:08Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:54:19Z",
+          "name": "web",
+          "started_at": "2026-10-27T14:52:04Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:06Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:18Z",
+              "conclusion": "success",
+              "name": "Restore the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:16Z",
+              "conclusion": "success",
+              "name": "Check Web styles, lint, types, tests and build",
+              "started_at": "2026-10-27T14:52:18Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:16Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:54:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:16Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:54:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:16Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:54:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:54:16Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:54:16Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:53:58Z",
+          "name": "integration",
+          "started_at": "2026-10-27T14:52:04Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:07Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:07Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:19Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:30Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:19Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:30Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Restore materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:42Z",
+              "conclusion": "success",
+              "name": "Set up Node.js for runtime integration tests",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:00Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:52:42Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:07Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:53:00Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:53Z",
+              "conclusion": "success",
+              "name": "Run Go integration tests",
+              "started_at": "2026-10-27T14:53:07Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js for runtime integration tests",
+              "started_at": "2026-10-27T14:53:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:53:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:53:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:54Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:53:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:54Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:53:54Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:54Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:53:54Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:59:32Z",
+          "name": "browser-ui (chrome-1440p)",
+          "started_at": "2026-10-27T14:52:14Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:26Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:26Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:26Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:27Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:26Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:38Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:27Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:44Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:38Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:44Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:45Z",
+              "conclusion": "success",
+              "name": "Restore the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:46Z",
+              "conclusion": "success",
+              "name": "Restore materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:45Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:47Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:46Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:50Z",
+              "conclusion": "success",
+              "name": "Prepare fixed Latin and CJK fonts for browser checks",
+              "started_at": "2026-10-27T14:52:47Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:59Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:52:50Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:05Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:52:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:09Z",
+              "conclusion": "success",
+              "name": "Prepare the development application before acceptance timing",
+              "started_at": "2026-10-27T14:53:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:28Z",
+              "conclusion": "success",
+              "name": "Verify UI consistency in the product browser",
+              "started_at": "2026-10-27T14:53:09Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:29Z",
+              "conclusion": "success",
+              "name": "Upload UI review evidence",
+              "started_at": "2026-10-27T14:59:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:29Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:59:29Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:29Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:59:29Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:30Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:59:29Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:30Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:59:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:30Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:59:30Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:30Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:59:30Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:58:52Z",
+          "name": "browser-ui (chrome-mobile)",
+          "started_at": "2026-10-27T14:52:14Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:24Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:24Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:24Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:25Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:24Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:36Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:25Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:42Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:42Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:42Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:44Z",
+              "conclusion": "success",
+              "name": "Restore the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:42Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:44Z",
+              "conclusion": "success",
+              "name": "Restore materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:44Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:46Z",
+              "conclusion": "success",
+              "name": "Prepare fixed Latin and CJK fonts for browser checks",
+              "started_at": "2026-10-27T14:52:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:57Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:52:46Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:03Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:52:57Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:07Z",
+              "conclusion": "success",
+              "name": "Prepare the development application before acceptance timing",
+              "started_at": "2026-10-27T14:53:03Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:47Z",
+              "conclusion": "success",
+              "name": "Verify UI consistency in the product browser",
+              "started_at": "2026-10-27T14:53:07Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:49Z",
+              "conclusion": "success",
+              "name": "Upload UI review evidence",
+              "started_at": "2026-10-27T14:58:47Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:49Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:58:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:49Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:58:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:49Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:58:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:49Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:58:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:50Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:58:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:50Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:58:50Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:59:03Z",
+          "name": "browser-ui (chrome-1280)",
+          "started_at": "2026-10-27T14:52:14Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:31Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:33Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:45Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:33Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:52Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:45Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:53Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:52Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:54Z",
+              "conclusion": "success",
+              "name": "Restore the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:55Z",
+              "conclusion": "success",
+              "name": "Restore materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:54Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:58Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:55Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:00Z",
+              "conclusion": "success",
+              "name": "Prepare fixed Latin and CJK fonts for browser checks",
+              "started_at": "2026-10-27T14:52:58Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:18Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:53:00Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:28Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:53:18Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:31Z",
+              "conclusion": "success",
+              "name": "Prepare the development application before acceptance timing",
+              "started_at": "2026-10-27T14:53:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:57Z",
+              "conclusion": "success",
+              "name": "Verify UI consistency in the product browser",
+              "started_at": "2026-10-27T14:53:31Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Upload UI review evidence",
+              "started_at": "2026-10-27T14:58:57Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:58:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:58:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:58:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:58:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:58:59Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:58:59Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:58:59Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T14:59:57Z",
+          "name": "browser-ui (chrome-4k-150)",
+          "started_at": "2026-10-27T14:52:15Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:17Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:25Z",
+              "conclusion": "success",
+              "name": "Initialize containers",
+              "started_at": "2026-10-27T14:52:17Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:25Z",
+              "conclusion": "success",
+              "name": "Use runner disk for upload temporary storage",
+              "started_at": "2026-10-27T14:52:25Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:27Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T14:52:25Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:40Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:27Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:49Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:40Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:49Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:51Z",
+              "conclusion": "success",
+              "name": "Restore the repository Node.js toolchain",
+              "started_at": "2026-10-27T14:52:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:52Z",
+              "conclusion": "success",
+              "name": "Restore materialized runtime dependencies",
+              "started_at": "2026-10-27T14:52:51Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:53Z",
+              "conclusion": "success",
+              "name": "Prepare pinned runtime dependencies",
+              "started_at": "2026-10-27T14:52:52Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:55Z",
+              "conclusion": "success",
+              "name": "Prepare fixed Latin and CJK fonts for browser checks",
+              "started_at": "2026-10-27T14:52:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:09Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:52:55Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:16Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:53:09Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:20Z",
+              "conclusion": "success",
+              "name": "Prepare the development application before acceptance timing",
+              "started_at": "2026-10-27T14:53:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:50Z",
+              "conclusion": "success",
+              "name": "Verify UI consistency in the product browser",
+              "started_at": "2026-10-27T14:53:20Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:52Z",
+              "conclusion": "success",
+              "name": "Upload UI review evidence",
+              "started_at": "2026-10-27T14:59:50Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:59:52Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:59:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:59:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T14:59:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Stop containers",
+              "started_at": "2026-10-27T14:59:53Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:59:53Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:59:53Z"
+            }
+          ]
+        },
+        {
+          "completed_at": "2026-10-27T15:00:04Z",
+          "name": "quality",
+          "started_at": "2026-10-27T15:00:01Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T15:00:02Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T15:00:02Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:00:02Z",
+              "conclusion": "success",
+              "name": "Require every quality check to pass",
+              "started_at": "2026-10-27T15:00:02Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:00:02Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T15:00:02Z"
+            }
+          ]
+        }
+      ]
+    },
+    "retrom-branch-image": {
+      "url": "https://github.com/retrom-project/retrom/actions/runs/40525270036",
+      "jobs": [
+        {
+          "completed_at": "2026-10-27T14:56:43Z",
+          "name": "build",
+          "started_at": "2026-10-27T14:52:05Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:52:08Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:52:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:10Z",
+              "conclusion": "success",
+              "name": "Check out the pull request merge commit",
+              "started_at": "2026-10-27T14:52:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:14Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T14:52:10Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:28Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T14:52:14Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:28Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T14:52:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:28Z",
+              "conclusion": "success",
+              "name": "Name the branch images",
+              "started_at": "2026-10-27T14:52:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:32Z",
+              "conclusion": "success",
+              "name": "Prepare pinned password blocklist",
+              "started_at": "2026-10-27T14:52:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:52:58Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T14:52:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:53:09Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T14:52:58Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:05Z",
+              "conclusion": "success",
+              "name": "Build and verify both branch images",
+              "started_at": "2026-10-27T14:53:09Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:26Z",
+              "conclusion": "success",
+              "name": "Verify both images and their deployment connection",
+              "started_at": "2026-10-27T14:56:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Publish branch images to GHCR",
+              "started_at": "2026-10-27T14:56:26Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Report branch image identities",
+              "started_at": "2026-10-27T14:56:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T14:56:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T14:56:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T14:56:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Post Check out the pull request merge commit",
+              "started_at": "2026-10-27T14:56:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:56:36Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:56:36Z"
+            }
+          ]
+        }
+      ]
+    },
+    "retrom-release": {
+      "url": "https://github.com/retrom-project/retrom/actions/runs/40527351936",
+      "jobs": [
+        {
+          "completed_at": "2026-10-27T15:08:40Z",
+          "name": "build-and-push",
+          "started_at": "2026-10-27T15:04:34Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T15:04:36Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T15:04:35Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:38Z",
+              "conclusion": "success",
+              "name": "Check out the repository",
+              "started_at": "2026-10-27T15:04:36Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:38Z",
+              "conclusion": "success",
+              "name": "Validate the image tag",
+              "started_at": "2026-10-27T15:04:38Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:38Z",
+              "conclusion": "success",
+              "name": "Validate Docker Hub credentials",
+              "started_at": "2026-10-27T15:04:38Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:38Z",
+              "conclusion": "success",
+              "name": "Set up Node.js",
+              "started_at": "2026-10-27T15:04:38Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:49Z",
+              "conclusion": "success",
+              "name": "Set up Go",
+              "started_at": "2026-10-27T15:04:38Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:49Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "started_at": "2026-10-27T15:04:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:04:51Z",
+              "conclusion": "success",
+              "name": "Prepare pinned password blocklist",
+              "started_at": "2026-10-27T15:04:49Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:05:03Z",
+              "conclusion": "success",
+              "name": "Restore verified Provider chunks",
+              "started_at": "2026-10-27T15:04:51Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:05:08Z",
+              "conclusion": "success",
+              "name": "Materialize repository-pinned runtime inputs",
+              "started_at": "2026-10-27T15:05:03Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:06Z",
+              "conclusion": "success",
+              "name": "Build and verify both images",
+              "started_at": "2026-10-27T15:05:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:20Z",
+              "conclusion": "success",
+              "name": "Verify both images and their deployment connection",
+              "started_at": "2026-10-27T15:08:06Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:20Z",
+              "conclusion": "success",
+              "name": "Log in to Docker Hub",
+              "started_at": "2026-10-27T15:08:20Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:28Z",
+              "conclusion": "success",
+              "name": "Push versioned images",
+              "started_at": "2026-10-27T15:08:20Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:32Z",
+              "conclusion": "success",
+              "name": "Push latest images for a stable tag",
+              "started_at": "2026-10-27T15:08:28Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:32Z",
+              "conclusion": "success",
+              "name": "Post Log in to Docker Hub",
+              "started_at": "2026-10-27T15:08:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:32Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "started_at": "2026-10-27T15:08:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:32Z",
+              "conclusion": "success",
+              "name": "Post Set up Go",
+              "started_at": "2026-10-27T15:08:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:32Z",
+              "conclusion": "success",
+              "name": "Post Set up Node.js",
+              "started_at": "2026-10-27T15:08:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:33Z",
+              "conclusion": "success",
+              "name": "Post Check out the repository",
+              "started_at": "2026-10-27T15:08:32Z"
+            },
+            {
+              "completed_at": "2026-10-27T15:08:33Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T15:08:33Z"
+            }
+          ]
+        }
+      ]
+    },
+    "runtime-pr": {
+      "url": "https://github.com/retrom-project/retrom-runtime/actions/runs/40522179736",
+      "jobs": [
+        {
+          "completed_at": "2026-10-27T14:37:29Z",
+          "name": "quality",
+          "started_at": "2026-10-27T14:33:08Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:33:10Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:33:09Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:33:11Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "started_at": "2026-10-27T14:33:10Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:33:13Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-node@v4",
+              "started_at": "2026-10-27T14:33:11Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:33:15Z",
+              "conclusion": "success",
+              "name": "Run npm ci",
+              "started_at": "2026-10-27T14:33:13Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:33:21Z",
+              "conclusion": "success",
+              "name": "Run npm run lint",
+              "started_at": "2026-10-27T14:33:15Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:33:27Z",
+              "conclusion": "success",
+              "name": "Run npm run typecheck",
+              "started_at": "2026-10-27T14:33:21Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:35:12Z",
+              "conclusion": "success",
+              "name": "Run npm test",
+              "started_at": "2026-10-27T14:33:27Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:35:16Z",
+              "conclusion": "success",
+              "name": "Run npm run docs:platforms:check",
+              "started_at": "2026-10-27T14:35:12Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:37:24Z",
+              "conclusion": "success",
+              "name": "Run npm run release:build",
+              "started_at": "2026-10-27T14:35:16Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:37:26Z",
+              "conclusion": "success",
+              "name": "Run npm run package:check",
+              "started_at": "2026-10-27T14:37:24Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:37:27Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-node@v4",
+              "started_at": "2026-10-27T14:37:26Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:37:27Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "started_at": "2026-10-27T14:37:27Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:37:27Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:37:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    "runtime-release": {
+      "url": "https://github.com/retrom-project/retrom-runtime/actions/runs/40523465599",
+      "jobs": [
+        {
+          "completed_at": "2026-10-27T14:45:46Z",
+          "name": "release",
+          "started_at": "2026-10-27T14:41:04Z",
+          "steps": [
+            {
+              "completed_at": "2026-10-27T14:41:05Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "started_at": "2026-10-27T14:41:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:08Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "started_at": "2026-10-27T14:41:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:09Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-node@v4",
+              "started_at": "2026-10-27T14:41:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:11Z",
+              "conclusion": "success",
+              "name": "Run npm ci",
+              "started_at": "2026-10-27T14:41:09Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:12Z",
+              "conclusion": "success",
+              "name": "Validate release identity",
+              "started_at": "2026-10-27T14:41:11Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:18Z",
+              "conclusion": "success",
+              "name": "Run npm run lint",
+              "started_at": "2026-10-27T14:41:12Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:41:24Z",
+              "conclusion": "success",
+              "name": "Run npm run typecheck",
+              "started_at": "2026-10-27T14:41:18Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:43:05Z",
+              "conclusion": "success",
+              "name": "Run npm test",
+              "started_at": "2026-10-27T14:41:24Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:45:08Z",
+              "conclusion": "success",
+              "name": "Run npm run release:build",
+              "started_at": "2026-10-27T14:43:05Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:45:44Z",
+              "conclusion": "success",
+              "name": "Publish GitHub Release",
+              "started_at": "2026-10-27T14:45:08Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:45:44Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-node@v4",
+              "started_at": "2026-10-27T14:45:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:45:45Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "started_at": "2026-10-27T14:45:44Z"
+            },
+            {
+              "completed_at": "2026-10-27T14:45:45Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "started_at": "2026-10-27T14:45:45Z"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
