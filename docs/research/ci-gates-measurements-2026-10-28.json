@@ -1612,5 +1612,43 @@
         }
       ]
     }
+  },
+  "releaseStageRevision": {
+    "date": "2026-10-28",
+    "policy": "Source quality, migration-history comparisons and browser tests run in PR quality workflows. Release runs tag/source checks, builds and validates artifacts, and publishes them.",
+    "newActionsWorkflowsMeasured": false,
+    "retrom": {
+      "removedReleaseCommands": [
+        "make migration-check migration-check-released"
+      ],
+      "retainedArtifactRecord": "make migration-manifest TAG=<tag>",
+      "estimatedChangeFromPreviousActionsSeconds": [
+        2,
+        10
+      ]
+    },
+    "runtime": {
+      "removedReleaseCommands": [
+        "npm run ci:checks",
+        "npx playwright install --with-deps chromium",
+        "npm run test:content-io:ci"
+      ],
+      "previousActionsSourceCheckSeconds": {
+        "npm run lint": 6,
+        "npm run typecheck": 6,
+        "npm test": 101
+      },
+      "retainedArtifactChecks": [
+        "release identity",
+        "formal core source policy",
+        "npm run release:build",
+        "npm run package:check"
+      ],
+      "estimatedChangeFromPreviousActionsSeconds": [
+        -120,
+        -60
+      ]
+    },
+    "notes": "Existing local measurements and previous Actions records above are preserved. The earlier projected runtime release increase of 1-3 minutes no longer applies; the current workflow also removes 113 seconds of source checks from the previous recorded release workflow."
   }
 }
