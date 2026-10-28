@@ -23,7 +23,7 @@ Retrom 保持现有 PR 触发范围，复用 backend/integration/web/contracts�
 
 两个项目锁定 jscpd 5.4.2，使用 `npm run check:duplicates` 扫描各自项目内的 JS/JSX/TS/TSX，包含新目录、生产脚本及 bridge 源码。重复片段至少 120 token、10 行；忽略注释/空白，识别一致的标识符改名，并跨 JS/TS 格式比较。排除测试、声明文件、依赖及构建缓存；Web 额外排除生成 API，runtime 精确排除两个生成的 isolated bridge 输出，保留其源码。
 
-使用 jscpd 的[原生基线](https://github.com/kucherenko/jscpd/blob/master/docs/rust.md#baseline)记录当前内容指纹与副本数量；Web 空基线，runtime 接受 22 组存量重复（扫描行数约 1.14%）。检查允许 0 组新增重复，也拒绝对同一存量片段再增加副本。日常 CI 不更新基线；有明确理由接受新增重复时，基线变更通过普通 PR 一起审阅。
+Web 和 runtime 的 jscpd 基线均为空，任何达到阈值的重复都会阻断。runtime 原有 22 组重复已抽取为公共音频队列、输入映射、存档封包、生命周期及构建校验逻辑；检测阈值和排除项保持不变。日常 CI 不更新基线；有明确理由接受新增重复时，使用 jscpd 的[原生基线](https://github.com/kucherenko/jscpd/blob/master/docs/rust.md#baseline)并将变更及理由通过普通 PR 一起审阅。
 
 Web 接入现有 `web-lint/web-check`，runtime 接入现有 `ci:checks`；回归使用真实检测器验证新增/改名/同文件/跨文件复制、行号移动、额外副本、豁免及空扫描失败。现有作业在成功/失败后上传 `.artifacts/duplicates/web/` 或 `.artifacts/duplicates/` JSON 报告，显示文件与行号。检测不新增 runner job、浏览器准备或 release 步骤。
 
@@ -87,3 +87,5 @@ gh api --method PUT repos/retrom-project/retrom-runtime/branches/master/protecti
 首个合入后的正常 PR 和下一次常规 tag release 应复核该估计；无需为计时额外发布版本。首次耗时测量未运行私有游戏验收、完整 Provider/core 下载打包或生产双镜像构建。
 
 合入最新远端主线后，已追加完整 Provider 聚合、Go integration 全套和四视口产品浏览器验证；当前本地失败为 0，Retrom 双镜像门禁仍待 PR runner 执行。详细用例、代码快照、临时目录环境复跑及浏览器报告路径修正见 [合入后 CI 复跑记录](research/ci-gates-post-merge-2026-10-28.md)。
+
+随后已在同一 runtime 分支消除全部 22 组存量重复并清空基线，重跑源码、公开浏览器、完整 Provider candidate 及受影响核心产品链。最新结果与覆盖边界见 [存量重复代码重构验证](research/ci-gates-duplication-refactor-2026-10-28.md)。
