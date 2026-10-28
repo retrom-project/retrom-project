@@ -14,7 +14,7 @@ PFB_TARGETS := pfb-init pfb-validate pfb-build pfb-up pfb-use pfb-restart \
 	pfb-gateway-up pfb-gateway-down
 PROVIDER_TARGETS := runtime-provider-prepare runtime-provider-pin-release runtime-provider-cache-import
 
-.PHONY: help validate init check update status test install-deps dev pfb-list pfb-remove $(PFB_TARGETS) $(PROVIDER_TARGETS)
+.PHONY: help validate init check update status install-deps dev pfb-list pfb-remove $(PFB_TARGETS) $(PROVIDER_TARGETS)
 
 help:
 	@echo 'Retrom development workspace'
@@ -46,10 +46,6 @@ update:
 
 status:
 	@$(PYTHON) scripts/workspace.py status $(WORKSPACE_ARGS)
-
-test:
-	@$(PYTHON) -m unittest discover -s scripts -p 'test_*.py'
-	@$(PYTHON) .codex/skills/breaking-change-refactor/scripts/test_protocol_generations.py
 
 install-deps: init
 	@$(MAKE) -C "$(RETROM_DIR)" install-deps

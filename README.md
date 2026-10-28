@@ -2,8 +2,6 @@
 
 This repository bootstraps a complete Retrom development workspace. It first downloads Retrom from the bootstrap manifest, then reads that Retrom checkout’s dependency catalog to prepare the other repositories, install common dependencies, and forward development commands.
 
-Run `make test` for workspace regression tests. See [CI gates and timing](docs/ci-gates.md) for the workspace, Retrom and runtime checks and their required-check configuration.
-
 The source repositories under `project/` remain independent Git repositories. They are ignored by this repository and are never added as submodules or Git index gitlinks.
 
 ## Quick start
