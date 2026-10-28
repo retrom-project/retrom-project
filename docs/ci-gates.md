@@ -84,4 +84,6 @@ gh api --method PUT repos/retrom-project/retrom-runtime/branches/master/protecti
 
 原有线上证据：[Retrom CI](https://github.com/retrom-project/retrom/actions/runs/40525269923)、[branch-image](https://github.com/retrom-project/retrom/actions/runs/40525270036)、[镜像 release](https://github.com/retrom-project/retrom/actions/runs/40527351936)、[runtime PR](https://github.com/retrom-project/retrom-runtime/actions/runs/40522179736)、[runtime release](https://github.com/retrom-project/retrom-runtime/actions/runs/40523465599)。本地命令、环境和线上逐 job/step 时间保存在 [原始测量数据](research/ci-gates-measurements-2026-10-28.json)。
 
-首个合入后的正常 PR 和下一次常规 tag release 应复核该估计；无需为计时额外发布版本。本轮未运行私有游戏验收、完整 Provider/core 下载打包或生产双镜像构建。
+首个合入后的正常 PR 和下一次常规 tag release 应复核该估计；无需为计时额外发布版本。首次耗时测量未运行私有游戏验收、完整 Provider/core 下载打包或生产双镜像构建。
+
+合入最新远端主线后，已追加完整 Provider 聚合、Go integration 全套和四视口产品浏览器验证；当前本地失败为 0，Retrom 双镜像门禁仍待 PR runner 执行。详细用例、代码快照、临时目录环境复跑及浏览器报告路径修正见 [合入后 CI 复跑记录](research/ci-gates-post-merge-2026-10-28.md)。
